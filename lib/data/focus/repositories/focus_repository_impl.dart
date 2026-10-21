@@ -53,6 +53,20 @@ class FocusRepositoryImpl implements FocusRepository {
   }
 
   @override
+  Future<FocusEntity> uncompleteToday() async {
+    final key = DateUtilsX.keyOf(_now());
+    final existing = await _adapter.getByKey(key);
+    if (existing == null) throw const AppFailure('Não há foco para desfazer.');
+    final model = FocusModel(
+      dateKey: key,
+      title: existing.title,
+      completed: false,
+    );
+    await _adapter.upsert(model);
+    return model.toEntity();
+  }
+
+  @override
   Future<List<FocusEntity>> entriesBetween(DateTime start, DateTime end) async {
     final models = await _adapter.range(
       DateUtilsX.keyOf(start),

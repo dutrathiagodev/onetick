@@ -4,14 +4,16 @@ import '../../core/failures.dart';
 import '../../domain/focus/usecases/complete_today_focus_use_case.dart';
 import '../../domain/focus/usecases/get_streak_use_case.dart';
 import '../../domain/focus/usecases/get_today_focus_use_case.dart';
+import '../../domain/focus/usecases/uncomplete_today_focus_use_case.dart';
 import 'today_state.dart';
 
 class TodayCubit extends Cubit<TodayState> {
-  TodayCubit(this._getToday, this._complete, this._getStreak)
+  TodayCubit(this._getToday, this._complete, this._uncomplete, this._getStreak)
     : super(const TodayLoading());
 
   final GetTodayFocusUseCase _getToday;
   final CompleteTodayFocusUseCase _complete;
+  final UncompleteTodayFocusUseCase _uncomplete;
   final GetStreakUseCase _getStreak;
 
   Future<void> load() async {
@@ -67,6 +69,44 @@ class TodayCubit extends Cubit<TodayState> {
             focus: current.focus,
             streak: current.streak,
             notice: 'Não foi possível concluir. Tente novamente.',
+          ),
+        );
+      }
+    }
+  }
+
+  /// "Desfazer conclusão": goes back to the pending state of today's focus.
+  Future<void> undoCompletion() async {
+    final current = state;
+    if (current is! TodayCompleted || current.isUndoing) return;
+    emit(
+      TodayCompleted(
+        focus: current.focus,
+        streak: current.streak,
+        isUndoing: true,
+      ),
+    );
+    try {
+      final focus = await _uncomplete();
+      final streak = await _getStreak();
+      if (!isClosed) emit(TodayPending(focus: focus, streak: streak));
+    } on AppFailure catch (e) {
+      if (!isClosed) {
+        emit(
+          TodayCompleted(
+            focus: current.focus,
+            streak: current.streak,
+            notice: e.message,
+          ),
+        );
+      }
+    } catch (_) {
+      if (!isClosed) {
+        emit(
+          TodayCompleted(
+            focus: current.focus,
+            streak: current.streak,
+            notice: 'Não foi possível desfazer. Tente novamente.',
           ),
         );
       }

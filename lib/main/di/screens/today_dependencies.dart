@@ -3,6 +3,7 @@ import '../../../data/focus/repositories/focus_repository_impl.dart';
 import '../../../domain/focus/repositories/focus_repository.dart';
 import '../../../domain/focus/usecases/complete_today_focus_use_case.dart';
 import '../../../domain/focus/usecases/get_streak_use_case.dart';
+import '../../../domain/focus/usecases/uncomplete_today_focus_use_case.dart';
 import '../../../domain/focus/usecases/get_today_focus_use_case.dart';
 import '../../../infra/adapters/focus/focus_remote_adapter.dart';
 import '../../../presenter/today/today_cubit.dart';
@@ -25,6 +26,9 @@ void setupTodayDependencies() {
       () => CompleteTodayFocusUseCase(getIt<FocusRepository>()),
     );
     getIt.registerFactory(
+      () => UncompleteTodayFocusUseCase(getIt<FocusRepository>()),
+    );
+    getIt.registerFactory(
       () => GetStreakUseCase(getIt<FocusRepository>(), getIt<AppClock>().now),
     );
   }
@@ -33,6 +37,7 @@ void setupTodayDependencies() {
       () => TodayCubit(
         getIt<GetTodayFocusUseCase>(),
         getIt<CompleteTodayFocusUseCase>(),
+        getIt<UncompleteTodayFocusUseCase>(),
         getIt<GetStreakUseCase>(),
       ),
     );

@@ -8,5 +8,8 @@ abstract interface class FocusRepository {
 
   Future<FocusEntity> completeToday();
 
+  /// Undoes today's completion (the focus text is kept).
+  Future<FocusEntity> uncompleteToday();
+
   Future<List<FocusEntity>> entriesBetween(DateTime start, DateTime end);
 }

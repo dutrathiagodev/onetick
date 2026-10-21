@@ -52,11 +52,18 @@ class TodayPending extends TodayState {
 
 /// Focus completed ("Hoje - Foco Concluído - OneTick").
 class TodayCompleted extends TodayState {
-  const TodayCompleted({required this.focus, required this.streak});
+  const TodayCompleted({
+    required this.focus,
+    required this.streak,
+    this.isUndoing = false,
+    this.notice,
+  });
 
   final FocusEntity focus;
   final int streak;
+  final bool isUndoing;
+  final String? notice;
 
   @override
-  List<Object?> get props => [focus, streak];
+  List<Object?> get props => [focus, streak, isUndoing, notice];
 }
