@@ -5,7 +5,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/app_icon.dart';
 
-/// "Ritmo Sereno" progress summary: 0% while pending, 100% once completed.
+/// Daily progress summary. Pending: "Ritmo Sereno" 0%. Completed (Stitch):
+/// "Ritmo Impecável" with "1 de 1 foco (100%)".
 class RhythmCard extends StatelessWidget {
   const RhythmCard({super.key, required this.completed});
 
@@ -14,6 +15,7 @@ class RhythmCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    if (completed) return _buildCompleted(colors);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -73,6 +75,69 @@ class RhythmCard extends StatelessWidget {
                 style: AppTextStyles.caption.copyWith(color: colors.textMuted),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCompleted(AppColors colors) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colors.surfaceMuted,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: colors.mint,
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: AppIcon(AppAssets.ritmo, tint: colors.brand),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Ritmo Impecável',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.labelSemi.copyWith(
+                          color: colors.text,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        '1 de 1 foco (100%)',
+                        key: const Key('today_rhythm_percent'),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.caption.copyWith(
+                          color: colors.brand,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Você está construindo consistência silenciosa dia após dia.',
+                  style: AppTextStyles.label.copyWith(color: colors.textMuted),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/app_clock.dart';
 import '../../../main/di/screens/today_dependencies.dart';
 import '../../../main/di/service_locator.dart';
+import '../../../presenter/shell/shell_cubit.dart';
 import '../../../presenter/today/today_cubit.dart';
 import '../../../presenter/today/today_state.dart';
 import '../../define_focus/page/define_focus_page.dart';
@@ -25,6 +26,12 @@ class TodayPage extends StatelessWidget {
     }
   }
 
+  static String? _noticeOf(TodayState state) => switch (state) {
+    TodayPending(:final notice) => notice,
+    TodayCompleted(:final notice) => notice,
+    _ => null,
+  };
+
   @override
   Widget build(BuildContext context) {
     setupTodayDependencies();
@@ -33,14 +40,14 @@ class TodayPage extends StatelessWidget {
       create: (_) => getIt<TodayCubit>()..load(),
       child: BlocConsumer<TodayCubit, TodayState>(
         listenWhen: (previous, current) =>
-            current is TodayPending &&
-            current.notice != null &&
-            (previous is! TodayPending || previous.notice != current.notice),
+            _noticeOf(current) != null &&
+            _noticeOf(previous) != _noticeOf(current),
         listener: (context, state) {
-          if (state is TodayPending && state.notice != null) {
+          final notice = _noticeOf(state);
+          if (notice != null) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text(state.notice!)));
+              ..showSnackBar(SnackBar(content: Text(notice)));
           }
         },
         builder: (context, state) {
@@ -68,6 +75,10 @@ class TodayPage extends StatelessWidget {
               today: today,
               focus: state.focus,
               streak: state.streak,
+              isUndoing: state.isUndoing,
+              onSeeHistory: () =>
+                  context.read<ShellCubit>().select(HomeTab.history),
+              onUndo: cubit.undoCompletion,
             ),
           };
         },

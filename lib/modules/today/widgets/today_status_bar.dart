@@ -9,10 +9,18 @@ import '../../../core/widgets/dot_pill.dart';
 
 /// "HOJE • 24 OUT" date pill on the left, streak pill on the right.
 class TodayStatusBar extends StatelessWidget {
-  const TodayStatusBar({super.key, required this.today, required this.streak});
+  const TodayStatusBar({
+    super.key,
+    required this.today,
+    required this.streak,
+    this.highlightStreak = false,
+  });
 
   final DateTime today;
   final int streak;
+
+  /// Mint streak pill used on the completed-day screen.
+  final bool highlightStreak;
 
   static String streakLabel(int streak) =>
       streak == 1 ? '1 dia seguido' : '$streak dias seguidos';
@@ -44,7 +52,7 @@ class TodayStatusBar extends StatelessWidget {
               key: const Key('today_streak_pill'),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: ShapeDecoration(
-                color: colors.surfaceMuted,
+                color: highlightStreak ? colors.mint : colors.surfaceMuted,
                 shape: const StadiumBorder(),
                 shadows: const [
                   BoxShadow(
@@ -57,7 +65,10 @@ class TodayStatusBar extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AppIcon(AppAssets.flameDark, tint: colors.brand),
+                  AppIcon(
+                    AppAssets.flameDark,
+                    tint: highlightStreak ? colors.onMint : colors.brand,
+                  ),
                   const SizedBox(width: 6),
                   Flexible(
                     child: Text(
@@ -65,7 +76,7 @@ class TodayStatusBar extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.caption.copyWith(
-                        color: colors.text,
+                        color: highlightStreak ? colors.onMint : colors.text,
                         letterSpacing: 0.275,
                       ),
                     ),
