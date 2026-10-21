@@ -1,0 +1,68 @@
+/// Paths of the assets exported from Figma (see `assets/`).
+abstract final class AppAssets {
+  static const _i = 'assets/icons';
+  static const _img = 'assets/images';
+
+  static const onboardingPhoto = '$_img/onboarding_photo.png';
+
+  static const arrowRight = '$_i/arrow_right.svg';
+  static const backArrow = '$_i/back_arrow.svg';
+  static const userWhite = '$_i/user_white.svg';
+  static const checkDarkSmall = '$_i/check_dark_small.svg';
+  static const checkCircleMini = '$_i/check_circle_mini.svg';
+  static const checkWhite12 = '$_i/check_white_12.svg';
+  static const checkWhite9 = '$_i/check_white_9.svg';
+  static const checkWhite8 = '$_i/check_white_8.svg';
+  static const checkDark8 = '$_i/check_dark_8.svg';
+  static const checkWhite13 = '$_i/check_white_13.svg';
+  static const checkWhite14 = '$_i/check_white_14.svg';
+  static const checkWhiteCheckbox = '$_i/check_white_checkbox.svg';
+  static const checkGreen13 = '$_i/check_green_13.svg';
+  static const checkCircle = '$_i/check_circle.svg';
+  static const logoCheckRegister = '$_i/logo_check_register.svg';
+  static const logoCheckLogin = '$_i/logo_check_login.svg';
+  static const userField = '$_i/user_field.svg';
+  static const mailRegister = '$_i/mail_register.svg';
+  static const lockRegister = '$_i/lock_register.svg';
+  static const eyeRegister = '$_i/eye_register.svg';
+  static const mailLogin = '$_i/mail_login.svg';
+  static const lockLogin = '$_i/lock_login.svg';
+  static const eyeLogin = '$_i/eye_login.svg';
+  static const google16 = '$_i/google_16.svg';
+  static const google20 = '$_i/google_20.svg';
+  static const sparkles = '$_i/sparkles.svg';
+  static const ideaBook = '$_i/idea_book.svg';
+  static const ideaWalk = '$_i/idea_walk.svg';
+  static const ideaMeditate = '$_i/idea_meditate.svg';
+  static const bulb = '$_i/bulb.svg';
+  static const plant = '$_i/plant.svg';
+  static const flameDark = '$_i/flame_dark.svg';
+  static const flameGreen = '$_i/flame_green.svg';
+  static const ritmo = '$_i/ritmo.svg';
+  static const seed = '$_i/seed.svg';
+  static const drop = '$_i/drop.svg';
+  static const tap = '$_i/tap.svg';
+  static const swap = '$_i/swap.svg';
+  static const successRing = '$_i/success_ring.svg';
+  static const chevronLeft = '$_i/chevron_left.svg';
+  static const chevronRightSmall = '$_i/chevron_right_small.svg';
+  static const dash = '$_i/dash.svg';
+  static const leaf = '$_i/leaf.svg';
+  static const settingsLeaf = '$_i/settings_leaf.svg';
+  static const bell = '$_i/bell.svg';
+  static const clock = '$_i/clock.svg';
+  static const chevronDown = '$_i/chevron_down.svg';
+  static const palette = '$_i/palette.svg';
+  static const cloudUpload = '$_i/cloud_upload.svg';
+  static const chevronRight = '$_i/chevron_right.svg';
+  static const trashRed = '$_i/trash_red.svg';
+  static const chevronRightRed = '$_i/chevron_right_red.svg';
+  static const aboutCheck = '$_i/about_check.svg';
+
+  static const navTodayActive = '$_i/nav_today_active.svg';
+  static const navTodayInactive = '$_i/nav_today_inactive.svg';
+  static const navHistoryActive = '$_i/nav_history_active.svg';
+  static const navHistoryInactive = '$_i/nav_history_inactive.svg';
+  static const navSettingsActive = '$_i/nav_settings_active.svg';
+  static const navSettingsInactive = '$_i/nav_settings_inactive.svg';
+}
