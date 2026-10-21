@@ -28,4 +28,8 @@ Future<void> loadTestFonts() async {
     loader.addFont(rootBundle.load('assets/fonts/Inter-$name.ttf'));
   }
   await loader.load();
+  // Material icons render as squares in tests unless the icon font is loaded.
+  final icons = FontLoader('MaterialIcons')
+    ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'));
+  await icons.load();
 }

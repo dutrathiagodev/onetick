@@ -88,8 +88,8 @@ void main() {
       // Complete
       await tester.tap(find.byKey(const Key('today_complete_button')));
       await settle(tester);
-      expect(find.text('Dia concluído em paz'), findsOneWidget);
-      expect(find.text('100%'), findsOneWidget);
+      expect(find.text('Foco de hoje concluído!'), findsOneWidget);
+      expect(find.text('1 de 1 foco (100%)'), findsOneWidget);
       expect(find.text('1 dia seguido'), findsOneWidget);
       expect(find.byKey(const Key('today_change_focus')), findsNothing);
 
@@ -192,7 +192,7 @@ void main() {
     expect(find.text('Ler'), findsOneWidget);
     await tester.tap(find.byKey(const Key('today_complete_button')));
     await settle(tester);
-    expect(find.text('Dia concluído em paz'), findsOneWidget);
+    expect(find.text('Foco de hoje concluído!'), findsOneWidget);
   });
 
   testWidgets('history month navigation', (tester) async {
@@ -254,6 +254,51 @@ void main() {
       tester.getSemantics(switchFinder).flagsCollection.isToggled,
       Tristate.isFalse,
     );
+  });
+
+  testWidgets(
+    'completed: shows time, undo goes back to pending and updates history',
+    (tester) async {
+      await pumpApp(
+        tester,
+        signedIn: true,
+        focus: [focusOn(testNow, 'Ler 10 páginas', completed: false)],
+      );
+      await tester.tap(find.byKey(const Key('today_complete_button')));
+      await settle(tester);
+      expect(find.text('Foco de hoje concluído!'), findsOneWidget);
+      expect(find.text('Ler 10 páginas'), findsOneWidget);
+      expect(find.textContaining('Feito às'), findsOneWidget);
+      expect(find.text('Ver no Histórico'), findsOneWidget);
+
+      await tester.tap(find.byKey(const Key('today_undo_completion')));
+      await settle(tester);
+      expect(find.text('Foco de hoje concluído!'), findsNothing);
+      expect(find.byKey(const Key('today_complete_button')), findsOneWidget);
+      expect(find.text('0%'), findsOneWidget);
+      expect(find.text('0 dias seguidos'), findsOneWidget);
+
+      await tester.tap(find.text('Histórico').last);
+      await settle(tester);
+      expect(
+        tester
+            .widget<Text>(find.byKey(const Key('history_completed_count')))
+            .data,
+        '0',
+      );
+      expect(find.text('Pendente'), findsOneWidget);
+    },
+  );
+
+  testWidgets('completed: Ver no Histórico opens the history tab', (
+    tester,
+  ) async {
+    await pumpApp(tester, signedIn: true, focus: [focusOn(testNow, 'Meditar')]);
+    expect(find.text('Foco de hoje concluído!'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('today_see_history')));
+    await settle(tester);
+    expect(find.text('Outubro 2024'), findsOneWidget);
+    expect(find.text('Histórico de Foco'), findsOneWidget);
   });
 
   tearDownAll(() => getIt.reset());
