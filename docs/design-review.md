@@ -2,9 +2,7 @@
 
 Frames lidos via Figma MCP (9 de 10; ver item 1).
 
-1. **"Hoje - Foco Concluído" (4:524) não foi lido em detalhe**: o plano Starter do Figma MCP atingiu o limite de chamadas.
-   Textos/hierarquia foram inferidos do metadata (estrutura + o texto "Você está construindo consistência silenciosa dia após dia.").
-   → Revisar essa tela contra o Figma quando o limite resetar (OT-0031).
+1. **"Hoje - Foco Concluído" (4:524)**: o Figma MCP atingiu o limite do plano Starter, então a primeira versão foi inferida. Depois conferida diretamente no projeto do Google Stitch e reimplementada fiel (OT-0027): selo, check duplo, "Foco de hoje concluído!", tarefa riscada com horário, "Ver no Histórico", "Desfazer conclusão" e card "Ritmo Impecável".
 2. **Login**: typo no rodapé — "Sem anùncios" (acento errado). Corrigido no app: "anúncios".
 3. **Cadastro**: dica da senha diz "Mínimo 8 **dígitos**" e o placeholder "Mínimo 8 **caracteres**". Padronizado em "caracteres".
 4. **Hoje (pendente)** mostra "100% · 1 de 1 foco" mesmo sem concluir. No app: 0% / "0 de 1 foco" até concluir.

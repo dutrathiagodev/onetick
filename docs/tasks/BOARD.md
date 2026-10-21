@@ -31,7 +31,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0024 ] | Login (+ recuperar senha) | 4:717 | ✅ |
 | [ OT-0025 ] | Definir Foco | 4:629 | ✅ |
 | [ OT-0026 ] | Hoje (foco pendente) | 4:421 | ✅ |
-| [ OT-0027 ] | Hoje — Foco Concluído | 4:524 | 🟡 inferida; conferir no Figma |
+| [ OT-0027 ] | Hoje — Foco Concluído (fiel ao Stitch: tarefa riscada, Ver no Histórico, Desfazer conclusão) | 4:524 | ✅ |
 | [ OT-0028 ] | Histórico | 4:2 | ✅ |
 | [ OT-0029 ] | Configurações | 4:281 | ✅ |
 
@@ -40,7 +40,6 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | ID | Demanda | Status |
 | --- | --- | --- |
 | [ OT-0030 ] | Agendar notificação local do lembrete diário (hoje só salva a preferência) | ⬜ |
-| [ OT-0031 ] | Conferir "Foco Concluído" contra o Figma quando o limite do MCP resetar | 🟡 |
 | [ OT-0032 ] | Páginas de Privacidade e Termos (links só texto no design) | ⬜ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |

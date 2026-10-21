@@ -31,7 +31,8 @@ Aplicativo de foco diário. Em vez de listas intermináveis, o usuário define *
 |---|---|
 | Android | Google Play — em breve (por enquanto, rodar via `flutter run`) |
 | iOS | App Store — em breve (por enquanto, rodar via `flutter run`) |
-| Design no Figma (criado no Google Stitch) | [onetick](https://www.figma.com/design/VkOOGKJqZLH9TUwbwAQUUE/onetick) |
+| Design no Google Stitch | [OneTick — Stitch](https://stitch.withgoogle.com/projects/3290547221674662054) |
+| Design no Figma (levado do Stitch) | [onetick](https://www.figma.com/design/VkOOGKJqZLH9TUwbwAQUUE/onetick) |
 | Tarefas | [`docs/tasks/BOARD.md`](docs/tasks/BOARD.md) |
 | Revisão do design | [`docs/design-review.md`](docs/design-review.md) |
 | Configurar o Firebase | [`docs/setup/firebase.md`](docs/setup/firebase.md) |
