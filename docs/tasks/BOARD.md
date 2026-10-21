@@ -18,6 +18,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0010 ] | Sessão/rotas: gate de autenticação, fluxo onboarding → cadastro/login → shell | ✅ |
 | [ OT-0011 ] | Testes: helpers, domínio, dados, widgets, fluxo completo, goldens | ✅ |
 | [ OT-0012 ] | Repositório GitHub `dutrathiagodev/onetick` | ✅ |
+| [ OT-0035 ] | Logo OneTick, ícone do app (Android, iOS, web) e favicon.ico | ✅ |
 
 ## Telas (uma por frame do Figma)
 
@@ -42,6 +43,6 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0031 ] | Conferir "Foco Concluído" contra o Figma quando o limite do MCP resetar | 🟡 |
 | [ OT-0032 ] | Páginas de Privacidade e Termos (links só texto no design) | ⬜ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
-| [ OT-0034 ] | Revisar paleta do tema escuro com o designer (derivada, não existe no Figma) | ⬜ |
+| [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |
 
 Achados do design: [`../design-review.md`](../design-review.md).
