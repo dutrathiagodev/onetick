@@ -14,7 +14,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0006 ] | DI com get_it por tela + injeção de adapters (Firebase ou em memória) | ✅ |
 | [ OT-0007 ] | Componentes compartilhados (botão pill, cards, pills, top bar, bottom nav, estados) | ✅ |
 | [ OT-0008 ] | Firebase: Auth (e-mail + Google) e Firestore (adapters + regras `firestore.rules`) | ✅ código |
-| [ OT-0009 ] | Firebase: `flutterfire configure`, habilitar provedores, publicar regras (`docs/setup/firebase.md`) | 🟡 |
+| [ OT-0009 ] | Firebase: `flutterfire configure`, habilitar provedores, publicar regras (`docs/setup/firebase.md`) | ✅ |
 | [ OT-0010 ] | Sessão/rotas: gate de autenticação, fluxo onboarding → cadastro/login → shell | ✅ |
 | [ OT-0011 ] | Testes: helpers, domínio, dados, widgets, fluxo completo, goldens | ✅ |
 | [ OT-0012 ] | Repositório GitHub `dutrathiagodev/onetick` | ✅ |

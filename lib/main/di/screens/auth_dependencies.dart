@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../core/failures.dart';
 import '../../../data/auth/repositories/auth_repository_impl.dart';
 import '../../../domain/auth/repositories/auth_repository.dart';
@@ -13,6 +15,7 @@ import '../../../infra/adapters/auth/in_memory_auth_adapter.dart';
 import '../../../presenter/login/login_cubit.dart';
 import '../../../presenter/register/register_cubit.dart';
 import '../../../presenter/session/session_cubit.dart';
+import '../../firebase_options.dart';
 import '../service_locator.dart';
 
 /// Used by the other feature DIs to scope data to the signed in user.
@@ -28,7 +31,12 @@ void setupAuthDependencies() {
   if (!getIt.isRegistered<AuthRemoteAdapter>()) {
     getIt.registerLazySingleton<AuthRemoteAdapter>(
       () => getIt<AppConfig>().useFirebase
-          ? FirebaseAuthAdapter()
+          ? FirebaseAuthAdapter(
+              googleClientId: defaultTargetPlatform == TargetPlatform.iOS
+                  ? DefaultFirebaseOptions.ios.iosClientId
+                  : null,
+              googleServerClientId: DefaultFirebaseOptions.googleServerClientId,
+            )
           : InMemoryAuthAdapter(),
     );
   }

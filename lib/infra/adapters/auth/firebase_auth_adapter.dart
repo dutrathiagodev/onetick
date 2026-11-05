@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/failures.dart';
@@ -8,12 +9,18 @@ import '../../../data/auth/models/auth_user_model.dart';
 import 'auth_remote_adapter.dart';
 
 class FirebaseAuthAdapter implements AuthRemoteAdapter {
-  FirebaseAuthAdapter({FirebaseAuth? auth, GoogleSignIn? googleSignIn})
-    : _auth = auth ?? FirebaseAuth.instance,
-      _google = googleSignIn ?? GoogleSignIn.instance;
+  FirebaseAuthAdapter({
+    FirebaseAuth? auth,
+    GoogleSignIn? googleSignIn,
+    this._googleClientId,
+    this._googleServerClientId,
+  }) : _auth = auth ?? FirebaseAuth.instance,
+       _google = googleSignIn ?? GoogleSignIn.instance;
 
   final FirebaseAuth _auth;
   final GoogleSignIn _google;
+  final String? _googleClientId;
+  final String? _googleServerClientId;
   Future<void>? _googleInit;
 
   @override
@@ -57,7 +64,10 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
   @override
   Future<AuthUserModel> signInWithGoogle() {
     return _guard(() async {
-      await (_googleInit ??= _google.initialize());
+      await (_googleInit ??= _google.initialize(
+        clientId: _googleClientId,
+        serverClientId: _googleServerClientId,
+      ));
       final account = await _google.authenticate();
       final idToken = account.authentication.idToken;
       final cred = await _auth.signInWithCredential(
@@ -109,8 +119,17 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
     } on FirebaseAuthException catch (e) {
       throw AppFailure(_message(e.code));
     } on GoogleSignInException catch (e) {
+      debugPrint('Google Sign-In falhou: ${e.code} ${e.description}');
       if (e.code == GoogleSignInExceptionCode.canceled) {
         throw const AppFailure('Login com Google cancelado.');
+      }
+      // Android reports this when the Google sheet can't be shown: no account
+      // on the device or an outdated Google Play Services.
+      if (e.description?.startsWith('No credential') ?? false) {
+        throw const AppFailure(
+          'Login com Google indisponível neste aparelho. Verifique a conta '
+          'Google e atualize o Google Play Services.',
+        );
       }
       throw const AppFailure('Não foi possível entrar com o Google.');
     } catch (_) {
