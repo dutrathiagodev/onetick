@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../routes/app_routes.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_text_styles.dart';
 
@@ -49,19 +50,66 @@ class AuthFooter extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: emphasized ? 8 : 4),
+        // The links' own touch area provides the gap below the tagline.
         Wrap(
           alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8,
           children: [
-            Text('Privacidade', style: links),
+            _FooterLink(
+              key: const Key('footer_privacy'),
+              label: 'Privacidade',
+              style: links,
+              route: AppRoutes.privacy,
+            ),
             Text('•', style: links),
-            Text('Termos', style: links),
+            _FooterLink(
+              key: const Key('footer_terms'),
+              label: 'Termos',
+              style: links,
+              route: AppRoutes.terms,
+            ),
             Text('•', style: links),
             Text('v1.0', style: links),
           ],
         ),
       ],
+    );
+  }
+}
+
+/// Footer text link with a taller touch target than the 11px text, kept
+/// at 36px so the footer stays as compact as in the design.
+class _FooterLink extends StatelessWidget {
+  const _FooterLink({
+    super.key,
+    required this.label,
+    required this.style,
+    required this.route,
+  });
+
+  final String label;
+  final TextStyle style;
+  final String route;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      link: true,
+      label: label,
+      excludeSemantics: true,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.of(context).pushNamed(route),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 36),
+          child: Center(
+            widthFactor: 1,
+            // Plain text, as in the design; the area around it is tappable.
+            child: Text(label, style: style),
+          ),
+        ),
+      ),
     );
   }
 }

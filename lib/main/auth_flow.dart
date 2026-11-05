@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../core/routes/app_routes.dart';
+import '../modules/legal/legal_documents.dart';
+import '../modules/legal/page/legal_page.dart';
 import '../modules/login/page/login_page.dart';
 import '../modules/onboarding/page/onboarding_page.dart';
 import '../modules/register/page/register_page.dart';
@@ -18,6 +20,12 @@ class AuthFlow extends StatelessWidget {
           AppRoutes.login => (BuildContext c) => LoginPage(
             onGoToRegister: () =>
                 Navigator.of(c).pushReplacementNamed(AppRoutes.register),
+          ),
+          AppRoutes.privacy => (BuildContext c) => const LegalPage(
+            document: LegalDocument.privacy,
+          ),
+          AppRoutes.terms => (BuildContext c) => const LegalPage(
+            document: LegalDocument.terms,
           ),
           AppRoutes.register => (BuildContext c) => RegisterPage(
             onGoToLogin: () =>
