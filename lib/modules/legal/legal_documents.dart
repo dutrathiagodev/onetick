@@ -43,14 +43,16 @@ enum LegalDocument {
       (
         'Seus direitos',
         'Você pode acessar e corrigir seus dados, apagar todo o histórico em '
-            'Configurações > Limpar histórico e hábitos e pedir a exclusão da '
-            'conta pelo contato abaixo. Também pode revogar o login com Google '
-            'nas configurações da sua Conta Google.',
+            'Configurações > Limpar histórico e hábitos e excluir a conta com '
+            'todos os dados em Configurações > Excluir conta. Também pode '
+            'pedir a exclusão sem o app pelo contato abaixo e revogar o login '
+            'com Google nas configurações da sua Conta Google.',
       ),
       (
         'Contato',
-        'Dúvidas ou pedidos sobre seus dados: abra uma solicitação em '
-            'github.com/dutrathiagodev/onetick.',
+        'Dúvidas ou pedidos sobre seus dados, inclusive a exclusão da conta '
+            'sem o app: abra uma solicitação em '
+            'github.com/dutrathiagodev/onetick/issues.',
       ),
     ],
   ),
@@ -73,7 +75,8 @@ enum LegalDocument {
         'Sua conta',
         'Você é responsável por manter sua senha em segredo e pelas '
             'informações que registra. Use um e-mail válido para poder '
-            'recuperar o acesso.',
+            'recuperar o acesso. Você pode excluir sua conta a qualquer '
+            'momento em Configurações > Excluir conta.',
       ),
       (
         'Uso adequado',

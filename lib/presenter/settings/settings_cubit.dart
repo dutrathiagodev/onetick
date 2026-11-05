@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/failures.dart';
 import '../../domain/settings/entities/app_settings.dart';
 import '../../domain/settings/usecases/clear_history_use_case.dart';
+import '../../domain/settings/usecases/delete_account_use_case.dart';
 import '../../domain/settings/usecases/get_settings_use_case.dart';
 import '../../domain/settings/usecases/save_settings_use_case.dart';
 import '../../domain/settings/usecases/sync_reminder_use_case.dart';
@@ -16,6 +17,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     this._clear,
     this._themeCubit,
     this._syncReminder,
+    this._deleteAccount,
   ) : super(const SettingsLoading());
 
   final GetSettingsUseCase _get;
@@ -23,6 +25,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   final ClearHistoryUseCase _clear;
   final AppThemeCubit _themeCubit;
   final SyncReminderUseCase _syncReminder;
+  final DeleteAccountUseCase _deleteAccount;
 
   Future<void> load() async {
     emit(const SettingsLoading());
@@ -81,6 +84,21 @@ class SettingsCubit extends Cubit<SettingsState> {
           ),
         );
       }
+    }
+  }
+
+  /// On success the session ends and the app returns to onboarding, so only
+  /// failures are reported here.
+  Future<void> deleteAccount() async {
+    final current = state;
+    if (current is! SettingsLoaded || current.isBusy) return;
+    emit(current.copyWith(isBusy: true));
+    try {
+      await _deleteAccount();
+    } on AppFailure catch (e) {
+      _notify(current, e.message);
+    } catch (_) {
+      _notify(current, 'Não foi possível excluir a conta. Tente novamente.');
     }
   }
 

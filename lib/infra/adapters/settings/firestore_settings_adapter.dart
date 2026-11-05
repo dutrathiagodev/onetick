@@ -40,6 +40,17 @@ class FirestoreSettingsAdapter implements SettingsRemoteAdapter {
   }
 
   @override
+  Future<void> delete() async {
+    try {
+      await _doc.delete().timeout(const Duration(seconds: 4));
+    } on TimeoutException {
+      // Removed from the local cache; synced when the connection returns.
+    } on FirebaseException {
+      throw const AppFailure('Não foi possível apagar suas configurações.');
+    }
+  }
+
+  @override
   Future<void> write(SettingsModel model) async {
     try {
       // Offline writes only complete on server ack; the local cache already

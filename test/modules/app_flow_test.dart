@@ -154,6 +154,65 @@ void main() {
     },
   );
 
+  testWidgets('delete account erases data and returns to onboarding', (
+    tester,
+  ) async {
+    final focus = await setUpTestDependencies(
+      signedInUser: testUser,
+      focus: [focusOn(testNow, 'Ler 10 páginas')],
+    );
+    useFigmaViewport(tester);
+    await tester.pumpWidget(const OneTickApp(showLocalModeStrip: false));
+    await precacheAppImages(tester);
+    await settle(tester);
+
+    await tester.tap(find.text('Configurações').last);
+    await settle(tester);
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('settings_delete_account_row')),
+      200,
+    );
+    await tester.tap(find.byKey(const Key('settings_delete_account_row')));
+    await settle(tester);
+    expect(find.text('Excluir sua conta?'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('delete_account_confirm')));
+    await settle(tester);
+
+    expect(find.text('Menos ruído, mais foco'), findsOneWidget);
+    expect(await focus.range('0000-01-01', '9999-12-31'), isEmpty);
+  });
+
+  testWidgets('privacy and terms open from Settings', (tester) async {
+    await pumpApp(tester, signedIn: true);
+    await tester.tap(find.text('Configurações').last);
+    await settle(tester);
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('settings_terms_row')),
+      200,
+    );
+    await tester.tap(find.byKey(const Key('settings_terms_row')));
+    await settle(tester);
+    expect(find.text('Termos de Uso'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('legal_back')));
+    await settle(tester);
+    await tester.tap(find.byKey(const Key('settings_privacy_row')));
+    await settle(tester);
+    expect(find.text('Política de Privacidade'), findsOneWidget);
+  });
+
+  testWidgets('sign-up shows the terms before the account is created', (
+    tester,
+  ) async {
+    await pumpApp(tester);
+    await tester.tap(find.text('Pular'));
+    await settle(tester);
+    expect(find.byKey(const Key('terms_notice')), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const Key('terms_notice')));
+    await tester.tapOnText(find.textRange.ofSubstring('Termos de Uso'));
+    await settle(tester);
+    expect(find.textContaining('Atualizado em'), findsOneWidget);
+  });
+
   testWidgets('theme preference is restored after signing in again', (
     tester,
   ) async {

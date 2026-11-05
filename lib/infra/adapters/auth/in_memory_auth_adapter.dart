@@ -78,6 +78,20 @@ class InMemoryAuthAdapter implements AuthRemoteAdapter {
     _controller.add(null);
   }
 
+  @override
+  Future<void> ensureCanDeleteAccount() async {
+    if (_current == null) {
+      throw const AppFailure('Sua sessão expirou. Entre novamente.');
+    }
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    final id = _current?.id;
+    _accounts.removeWhere((_, account) => account.user.id == id);
+    await signOut();
+  }
+
   AuthUserModel _emit(AuthUserModel user) {
     _current = user;
     _controller.add(user);

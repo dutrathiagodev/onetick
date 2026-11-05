@@ -9,4 +9,7 @@ class InMemorySettingsAdapter implements SettingsRemoteAdapter {
 
   @override
   Future<void> write(SettingsModel model) async => _model = model;
+
+  @override
+  Future<void> delete() async => _model = null;
 }

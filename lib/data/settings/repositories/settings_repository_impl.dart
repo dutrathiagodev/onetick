@@ -20,4 +20,7 @@ class SettingsRepositoryImpl implements SettingsRepository {
 
   @override
   Future<void> clearHistory() => _focus.clearAll();
+
+  @override
+  Future<void> deletePreferences() => _settings.delete();
 }

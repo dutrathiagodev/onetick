@@ -42,4 +42,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> signOut() => _adapter.signOut();
+
+  @override
+  Future<void> ensureCanDeleteAccount() => _adapter.ensureCanDeleteAccount();
+
+  @override
+  Future<void> deleteAccount() => _adapter.deleteAccount();
 }

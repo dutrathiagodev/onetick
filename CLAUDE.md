@@ -47,14 +47,14 @@ Features: onboarding, login, register, today (Hoje + Foco Concluído), define_fo
 flutter pub get
 flutter run -t lib/main/main.dart        # emulador "bigz_pixel" (Android) já existe na máquina
 flutter analyze                          # deve ficar sem avisos
-flutter test                             # 133 testes
+flutter test                             # 136 testes
 flutter test --update-goldens test/goldens   # regenera os prints das telas (440x890)
 python3 tool/generate_brand_assets.py    # regenera ícones/marca
 ```
 
 ## Estado atual
 
-Feito (ver `docs/tasks/BOARD.md`): as 10 telas (todas conferidas com o Stitch, ver `docs/design-review.md`), Firebase real (projeto `onetick-1d336`, `docs/setup/firebase.md`), login com Google, modo offline do Firestore, lembrete diário por notificação local, foto de perfil do Google, páginas de Privacidade e Termos, tema claro/escuro, logo e ícone, README e testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens).
+Feito (ver `docs/tasks/BOARD.md`): as 10 telas (todas conferidas com o Stitch, ver `docs/design-review.md`), Firebase real (projeto `onetick-1d336`, `docs/setup/firebase.md`), login com Google, modo offline do Firestore, lembrete diário por notificação local, foto de perfil do Google, páginas de Privacidade e Termos (aviso no cadastro e links em Configurações), excluir conta no app (exigência da Google Play e da Apple), tema claro/escuro, logo e ícone, README e testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens).
 
 Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa vermelha em debug). Em **release** sem Firebase mostra tela de erro de propósito. Push via servidor (FCM) e e-mail foram descartados (exigem o plano Blaze).
 

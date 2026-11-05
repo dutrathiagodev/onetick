@@ -4,4 +4,6 @@ abstract interface class SettingsRemoteAdapter {
   Future<SettingsModel?> read();
 
   Future<void> write(SettingsModel model);
+
+  Future<void> delete();
 }

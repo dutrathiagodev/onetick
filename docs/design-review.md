@@ -22,3 +22,11 @@ As 10 telas foram comparadas com o projeto do Stitch (referência da avaliação
 - **Iguais ao Stitch**: Onboarding 1, 2 e 3, Cadastro, Login, Hoje (pendente), Hoje (concluído), Histórico e Configurações (textos, ordem, componentes e hierarquia).
 - **Corrigido**: em **Definir Foco** o card de dica ficava preso no rodapé, longe das ideias; agora fica logo abaixo das "Ideias intencionais", como no Stitch.
 - **Diferenças intencionais**: o Stitch usa um check genérico no topo de Login/Cadastro e no card Sobre; o app usa a logo OneTick (OT-0035). "Backup local & Nuvem" mostra "Sincronização automática ativa" em vez de um horário fixo de exemplo. Os números e datas vêm dos dados reais (itens 4 a 6).
+
+## Revisão profissional (OT-0039 e OT-0040)
+
+Referências: política de exclusão de conta da Google Play, diretriz 5.1.1(v) da App Store e boas práticas de aceite de termos no cadastro.
+
+- **Termos antes da conta existir**: Cadastro mostra "Ao criar sua conta ou continuar com o Google, você concorda com os Termos de Uso e a Política de Privacidade", com links. O Login mostra o mesmo aviso para o Google, que também cria conta.
+- **Privacidade e Termos com a conta aberta**: Configurações > Sobre tem os dois links (antes só existiam no rodapé de quem não estava logado).
+- **Excluir conta**: Configurações > Conta > Excluir conta, com confirmação. Apaga histórico, preferências e a conta. Se o login for antigo, o Firebase recusa a exclusão; o app avisa antes de apagar qualquer dado e pede para entrar de novo.

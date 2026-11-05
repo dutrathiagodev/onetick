@@ -21,4 +21,8 @@ abstract interface class AuthRemoteAdapter {
   Future<void> sendPasswordReset({required String email});
 
   Future<void> signOut();
+
+  Future<void> ensureCanDeleteAccount();
+
+  Future<void> deleteAccount();
 }
