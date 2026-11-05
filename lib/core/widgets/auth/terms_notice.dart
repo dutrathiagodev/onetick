@@ -57,13 +57,13 @@ class _TermsNoticeState extends State<TermsNotice> {
           TextSpan(text: widget.lead),
           // Non-breaking spaces keep each link on a single line.
           TextSpan(
-            text: 'Termos de Uso',
+            text: 'Termos\u00A0de\u00A0Uso',
             style: link,
             recognizer: _terms,
           ),
           const TextSpan(text: ' e a '),
           TextSpan(
-            text: 'Política de Privacidade',
+            text: 'Política\u00A0de\u00A0Privacidade',
             style: link,
             recognizer: _privacy,
           ),

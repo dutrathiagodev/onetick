@@ -4,6 +4,7 @@ import '../../../../core/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_icon.dart';
+import '../../../../core/widgets/feedback.dart';
 import '../../../../domain/settings/entities/app_settings.dart';
 import '../../../legal/legal_documents.dart';
 import '../../widgets/about_card.dart';
@@ -52,7 +53,7 @@ class SettingsView extends StatelessWidget {
   }
 
   Future<void> _confirmClear(BuildContext context) async {
-    final confirmed = await _confirmDanger(
+    final confirmed = await showDangerConfirm(
       context,
       title: 'Limpar histórico e hábitos?',
       message: 'Todo o seu progresso acumulado será apagado e não poderá ser recuperado.',
@@ -63,7 +64,7 @@ class SettingsView extends StatelessWidget {
   }
 
   Future<void> _confirmDeleteAccount(BuildContext context) async {
-    final confirmed = await _confirmDanger(
+    final confirmed = await showDangerConfirm(
       context,
       title: 'Excluir sua conta?',
       message:
@@ -75,60 +76,8 @@ class SettingsView extends StatelessWidget {
     if (confirmed) onDeleteAccount();
   }
 
-  Future<bool> _confirmDanger(
-    BuildContext context, {
-    required String title,
-    required String message,
-    required String action,
-    required String keyPrefix,
-  }) async {
-    final colors = context.colors;
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        backgroundColor: colors.surface,
-        title: Text(
-          title,
-          style: AppTextStyles.subtitle.copyWith(color: colors.text),
-        ),
-        content: Text(
-          message,
-          style: AppTextStyles.label.copyWith(color: colors.textMuted),
-        ),
-        actions: [
-          TextButton(
-            key: Key('${keyPrefix}_cancel'),
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(
-              'Cancelar',
-              style: AppTextStyles.labelMedium.copyWith(
-                color: colors.textMuted,
-              ),
-            ),
-          ),
-          TextButton(
-            key: Key('${keyPrefix}_confirm'),
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: Text(
-              action,
-              style: AppTextStyles.labelMedium.copyWith(color: colors.danger),
-            ),
-          ),
-        ],
-      ),
-    );
-    return confirmed ?? false;
-  }
-
-  void _showBackupInfo(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text('Seus dados já são salvos automaticamente na nuvem.'),
-        ),
-      );
-  }
+  void _showBackupInfo(BuildContext context) =>
+      showNotice(context, 'Seus dados já são salvos automaticamente na nuvem.');
 
   @override
   Widget build(BuildContext context) {

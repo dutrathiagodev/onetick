@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/app_clock.dart';
+import '../../../core/widgets/feedback.dart';
 import '../../../main/di/screens/today_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/shell/shell_cubit.dart';
@@ -45,9 +46,7 @@ class TodayPage extends StatelessWidget {
           listener: (context, state) {
             final notice = _noticeOf(state);
             if (notice != null) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(notice)));
+              showNotice(context, notice);
             }
           },
           builder: (context, state) {

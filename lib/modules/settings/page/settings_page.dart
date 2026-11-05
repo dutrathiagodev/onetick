@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/widgets/feedback.dart';
 import '../../../main/di/screens/settings_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/settings/settings_cubit.dart';
@@ -26,9 +27,7 @@ class SettingsPage extends StatelessWidget {
                 previous.noticeId != current.noticeId),
         listener: (context, state) {
           if (state is SettingsLoaded && state.notice != null) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text(state.notice!)));
+            showNotice(context, state.notice!);
           }
         },
         builder: (context, state) {
