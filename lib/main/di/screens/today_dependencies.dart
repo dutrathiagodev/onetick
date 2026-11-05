@@ -39,6 +39,7 @@ void setupTodayDependencies() {
         getIt<CompleteTodayFocusUseCase>(),
         getIt<UncompleteTodayFocusUseCase>(),
         getIt<GetStreakUseCase>(),
+        getIt<AppClock>(),
       ),
     );
   }

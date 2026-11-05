@@ -35,54 +35,89 @@ class TodayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupTodayDependencies();
-    final today = getIt<AppClock>().now();
     return BlocProvider<TodayCubit>(
       create: (_) => getIt<TodayCubit>()..load(),
-      child: BlocConsumer<TodayCubit, TodayState>(
-        listenWhen: (previous, current) =>
-            _noticeOf(current) != null &&
-            _noticeOf(previous) != _noticeOf(current),
-        listener: (context, state) {
-          final notice = _noticeOf(state);
-          if (notice != null) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text(notice)));
-          }
-        },
-        builder: (context, state) {
-          final cubit = context.read<TodayCubit>();
-          return switch (state) {
-            TodayLoading() => const TodayLoadingView(),
-            TodayError(:final message) => TodayErrorView(
-              message: message,
-              onRetry: cubit.load,
-            ),
-            TodayEmpty(:final streak) => TodayEmptyView(
-              today: today,
-              streak: streak,
-              onDefineFocus: () => _openDefineFocus(context),
-            ),
-            TodayPending() => TodayView(
-              today: today,
-              focus: state.focus,
-              streak: state.streak,
-              isCompleting: state.isCompleting,
-              onComplete: cubit.complete,
-              onChangeFocus: () => _openDefineFocus(context),
-            ),
-            TodayCompleted() => TodayCompletedView(
-              today: today,
-              focus: state.focus,
-              streak: state.streak,
-              isUndoing: state.isUndoing,
-              onSeeHistory: () =>
-                  context.read<ShellCubit>().select(HomeTab.history),
-              onUndo: cubit.undoCompletion,
-            ),
-          };
-        },
+      child: _NewDayWatcher(
+        child: BlocConsumer<TodayCubit, TodayState>(
+          listenWhen: (previous, current) =>
+              _noticeOf(current) != null &&
+              _noticeOf(previous) != _noticeOf(current),
+          listener: (context, state) {
+            final notice = _noticeOf(state);
+            if (notice != null) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(notice)));
+            }
+          },
+          builder: (context, state) {
+            final cubit = context.read<TodayCubit>();
+            // Read on every state so the header follows a reload at midnight.
+            final today = getIt<AppClock>().now();
+            return switch (state) {
+              TodayLoading() => const TodayLoadingView(),
+              TodayError(:final message) => TodayErrorView(
+                message: message,
+                onRetry: cubit.load,
+              ),
+              TodayEmpty(:final streak) => TodayEmptyView(
+                today: today,
+                streak: streak,
+                onDefineFocus: () => _openDefineFocus(context),
+              ),
+              TodayPending() => TodayView(
+                today: today,
+                focus: state.focus,
+                streak: state.streak,
+                isCompleting: state.isCompleting,
+                onComplete: cubit.complete,
+                onChangeFocus: () => _openDefineFocus(context),
+              ),
+              TodayCompleted() => TodayCompletedView(
+                today: today,
+                focus: state.focus,
+                streak: state.streak,
+                isUndoing: state.isUndoing,
+                onSeeHistory: () =>
+                    context.read<ShellCubit>().select(HomeTab.history),
+                onUndo: cubit.undoCompletion,
+              ),
+            };
+          },
+        ),
       ),
     );
   }
+}
+
+/// Coming back to the app on a new day (it stayed in the background
+/// overnight) reloads Today instead of showing yesterday's focus.
+class _NewDayWatcher extends StatefulWidget {
+  const _NewDayWatcher({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_NewDayWatcher> createState() => _NewDayWatcherState();
+}
+
+class _NewDayWatcherState extends State<_NewDayWatcher> {
+  late final AppLifecycleListener _lifecycle = AppLifecycleListener(
+    onResume: () => context.read<TodayCubit>().refreshIfNewDay(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _lifecycle;
+  }
+
+  @override
+  void dispose() {
+    _lifecycle.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

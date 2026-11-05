@@ -25,6 +25,16 @@ class FixedClock extends AppClock {
   DateTime now() => value;
 }
 
+/// Clock a test can move forward, e.g. past midnight.
+class MutableClock extends AppClock {
+  MutableClock(this.value);
+
+  DateTime value;
+
+  @override
+  DateTime now() => value;
+}
+
 const testUser = AuthUserModel(
   id: 'user-1',
   email: 'ana@onetick.dev',
@@ -36,6 +46,7 @@ Future<InMemoryFocusAdapter> setUpTestDependencies({
   DateTime? now,
   AuthUserModel? signedInUser,
   Iterable<FocusModel> focus = const [],
+  AppClock? clock,
 }) async {
   await getIt.reset();
   final focusAdapter = InMemoryFocusAdapter(focus);
@@ -44,7 +55,10 @@ Future<InMemoryFocusAdapter> setUpTestDependencies({
   );
   getIt.registerSingleton<FocusRemoteAdapter>(focusAdapter);
   getIt.registerSingleton<ReminderScheduler>(InMemoryReminderScheduler());
-  setupAppDependencies(useFirebase: false, clock: FixedClock(now ?? testNow));
+  setupAppDependencies(
+    useFirebase: false,
+    clock: clock ?? FixedClock(now ?? testNow),
+  );
   return focusAdapter;
 }
 
