@@ -4,10 +4,12 @@ import 'package:onetick/core/theme/app_theme.dart';
 import 'package:onetick/core/utils/app_clock.dart';
 import 'package:onetick/data/auth/models/auth_user_model.dart';
 import 'package:onetick/data/focus/models/focus_model.dart';
+import 'package:onetick/domain/settings/repositories/reminder_scheduler.dart';
 import 'package:onetick/infra/adapters/auth/auth_remote_adapter.dart';
 import 'package:onetick/infra/adapters/auth/in_memory_auth_adapter.dart';
 import 'package:onetick/infra/adapters/focus/focus_remote_adapter.dart';
 import 'package:onetick/infra/adapters/focus/in_memory_focus_adapter.dart';
+import 'package:onetick/infra/adapters/notifications/in_memory_reminder_scheduler.dart';
 import 'package:onetick/main/di/app_dependencies.dart';
 import 'package:onetick/main/di/service_locator.dart';
 
@@ -41,6 +43,7 @@ Future<InMemoryFocusAdapter> setUpTestDependencies({
     InMemoryAuthAdapter(initialUser: signedInUser),
   );
   getIt.registerSingleton<FocusRemoteAdapter>(focusAdapter);
+  getIt.registerSingleton<ReminderScheduler>(InMemoryReminderScheduler());
   setupAppDependencies(useFirebase: false, clock: FixedClock(now ?? testNow));
   return focusAdapter;
 }

@@ -1,9 +1,12 @@
 import '../../../data/settings/repositories/settings_repository_impl.dart';
+import '../../../domain/settings/repositories/reminder_scheduler.dart';
 import '../../../domain/settings/repositories/settings_repository.dart';
 import '../../../domain/settings/usecases/clear_history_use_case.dart';
 import '../../../domain/settings/usecases/get_settings_use_case.dart';
 import '../../../domain/settings/usecases/save_settings_use_case.dart';
+import '../../../domain/settings/usecases/sync_reminder_use_case.dart';
 import '../../../infra/adapters/focus/focus_remote_adapter.dart';
+import '../../../infra/adapters/notifications/local_reminder_scheduler.dart';
 import '../../../infra/adapters/settings/firestore_settings_adapter.dart';
 import '../../../infra/adapters/settings/in_memory_settings_adapter.dart';
 import '../../../infra/adapters/settings/settings_remote_adapter.dart';
@@ -30,6 +33,17 @@ void setupSettingsDependencies() {
       ),
     );
   }
+  if (!getIt.isRegistered<ReminderScheduler>()) {
+    getIt.registerLazySingleton<ReminderScheduler>(LocalReminderScheduler.new);
+  }
+  if (!getIt.isRegistered<SyncReminderUseCase>()) {
+    getIt.registerFactory(
+      () => SyncReminderUseCase(
+        getIt<ReminderScheduler>(),
+        getIt<SettingsRepository>(),
+      ),
+    );
+  }
   if (!getIt.isRegistered<GetSettingsUseCase>()) {
     getIt.registerFactory(
       () => GetSettingsUseCase(getIt<SettingsRepository>()),
@@ -53,6 +67,7 @@ void setupSettingsDependencies() {
         getIt<SaveSettingsUseCase>(),
         getIt<ClearHistoryUseCase>(),
         getIt<AppThemeCubit>(),
+        getIt<SyncReminderUseCase>(),
       ),
     );
   }

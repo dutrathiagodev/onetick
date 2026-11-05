@@ -39,7 +39,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 
 | ID | Demanda | Status |
 | --- | --- | --- |
-| [ OT-0030 ] | Agendar notificação local do lembrete diário (hoje só salva a preferência) | ⬜ |
+| [ OT-0030 ] | Notificação local do lembrete diário com o ícone do OneTick (agenda, reagenda no login e cancela no logout) | ✅ |
 | [ OT-0032 ] | Páginas de Privacidade e Termos (links só texto no design) | ⬜ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |

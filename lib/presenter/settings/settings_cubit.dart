@@ -5,17 +5,24 @@ import '../../domain/settings/entities/app_settings.dart';
 import '../../domain/settings/usecases/clear_history_use_case.dart';
 import '../../domain/settings/usecases/get_settings_use_case.dart';
 import '../../domain/settings/usecases/save_settings_use_case.dart';
+import '../../domain/settings/usecases/sync_reminder_use_case.dart';
 import 'app_theme_cubit.dart';
 import 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  SettingsCubit(this._get, this._save, this._clear, this._themeCubit)
-    : super(const SettingsLoading());
+  SettingsCubit(
+    this._get,
+    this._save,
+    this._clear,
+    this._themeCubit,
+    this._syncReminder,
+  ) : super(const SettingsLoading());
 
   final GetSettingsUseCase _get;
   final SaveSettingsUseCase _save;
   final ClearHistoryUseCase _clear;
   final AppThemeCubit _themeCubit;
+  final SyncReminderUseCase _syncReminder;
 
   Future<void> load() async {
     emit(const SettingsLoading());
@@ -34,10 +41,11 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   Future<void> setReminderEnabled(bool enabled) =>
-      _update((s) => s.copyWith(reminderEnabled: enabled));
+      _changeReminder((s) => s.copyWith(reminderEnabled: enabled));
 
-  Future<void> setReminderTime(int hour, int minute) =>
-      _update((s) => s.copyWith(reminderHour: hour, reminderMinute: minute));
+  Future<void> setReminderTime(int hour, int minute) => _changeReminder(
+    (s) => s.copyWith(reminderHour: hour, reminderMinute: minute),
+  );
 
   Future<void> setTheme(AppThemePreference theme) async {
     final applied = await _update((s) => s.copyWith(theme: theme));
@@ -74,6 +82,32 @@ class SettingsCubit extends Cubit<SettingsState> {
         );
       }
     }
+  }
+
+  /// Schedules the notification first, so a denied permission never leaves
+  /// the switch on without a reminder behind it.
+  Future<void> _changeReminder(AppSettings Function(AppSettings) change) async {
+    final current = state;
+    if (current is! SettingsLoaded) return;
+    try {
+      if (!await _syncReminder(change(current.settings))) {
+        _notify(
+          current,
+          'Permita as notificações do OneTick nas configurações do aparelho '
+          'para receber o lembrete.',
+        );
+        return;
+      }
+    } catch (_) {
+      _notify(current, 'Não foi possível agendar o lembrete.');
+      return;
+    }
+    await _update(change);
+  }
+
+  void _notify(SettingsLoaded current, String message) {
+    if (isClosed) return;
+    emit(current.copyWith(notice: message, noticeId: current.noticeId + 1));
   }
 
   /// Optimistic update; rolls back and reports when saving fails.
