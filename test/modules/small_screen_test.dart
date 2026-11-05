@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onetick/main/app.dart';
 import 'package:onetick/modules/define_focus/page/define_focus_page.dart';
+import 'package:onetick/modules/legal/legal_documents.dart';
+import 'package:onetick/modules/legal/page/legal_page.dart';
 import 'package:onetick/modules/login/page/login_page.dart';
 import 'package:onetick/modules/onboarding/page/onboarding_page.dart';
 import 'package:onetick/modules/register/page/register_page.dart';
@@ -50,6 +52,8 @@ void main() {
     'register': () => RegisterPage(onGoToLogin: () {}),
     'login': () => LoginPage(onGoToRegister: () {}),
     'define focus': () => const DefineFocusPage(),
+    'privacy': () => const LegalPage(document: LegalDocument.privacy),
+    'terms': () => const LegalPage(document: LegalDocument.terms),
     'onboarding': () =>
         OnboardingPage(onSkip: () {}, onFinish: () {}, onLogin: () {}),
   };
