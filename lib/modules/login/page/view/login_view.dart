@@ -9,6 +9,7 @@ import '../../../../core/widgets/auth/auth_footer.dart';
 import '../../../../core/widgets/auth/auth_message.dart';
 import '../../../../core/widgets/auth/auth_text_field.dart';
 import '../../../../core/widgets/auth/google_button.dart';
+import '../../../../core/widgets/auth/terms_notice.dart';
 import '../../../../core/widgets/primary_pill_button.dart';
 import '../../../../presenter/login/login_state.dart';
 import '../../widgets/login_header.dart';
@@ -189,6 +190,10 @@ class _LoginViewState extends State<LoginView> {
                       color: colors.text,
                     ),
                     onPressed: busy ? null : widget.onGoogle,
+                  ),
+                  const SizedBox(height: 14),
+                  const TermsNotice(
+                    lead: 'Ao continuar com o Google, você concorda com os ',
                   ),
                 ],
               ),

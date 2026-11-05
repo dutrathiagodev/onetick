@@ -9,6 +9,7 @@ import '../../../../core/widgets/auth/auth_footer.dart';
 import '../../../../core/widgets/auth/auth_message.dart';
 import '../../../../core/widgets/auth/auth_text_field.dart';
 import '../../../../core/widgets/auth/google_button.dart';
+import '../../../../core/widgets/auth/terms_notice.dart';
 import '../../../../core/widgets/primary_pill_button.dart';
 import '../../../../presenter/register/register_state.dart';
 import '../../widgets/commitment_check.dart';
@@ -251,6 +252,8 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     onPressed: busy ? null : widget.onGoogle,
                   ),
+                  const SizedBox(height: 14),
+                  const TermsNotice(),
                 ],
               ),
             ),
