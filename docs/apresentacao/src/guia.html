@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>OneTick — Guia do Projeto</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  @page cover { margin: 0; }
+  h3, h3 + p { break-after: avoid; }
+  h2 { break-after: avoid; }
+  body { font-size: 10.6px; line-height: 1.55; }
+  h1 { font-size: 22px; color: var(--navy); margin: 0 0 4px; letter-spacing: -0.3px; }
+  h2 { font-size: 14px; color: var(--navy); margin: 18px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--mint); }
+  h3 { font-size: 11.5px; color: var(--ink); margin: 12px 0 4px; }
+  p { margin: 4px 0 6px; }
+  ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+  li { margin: 2px 0; }
+  .section { break-before: page; }
+  .lead { color: var(--muted); font-size: 11.5px; }
+  .tag { display: inline-block; font-size: 8.5px; font-weight: 600; letter-spacing: .6px; color: var(--green); background: #DDFBEF; padding: 2px 8px; border-radius: 99px; text-transform: uppercase; }
+  .box { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 8px 0; break-inside: avoid; }
+  .tip { background: #EAF2FD; border-left: 3px solid var(--blue); border-radius: 6px; padding: 8px 10px; margin: 8px 0; break-inside: avoid; }
+  .tip b { color: var(--blue); }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 10px; break-inside: avoid; }
+  th { text-align: left; background: var(--navy); color: #fff; font-weight: 600; padding: 5px 7px; }
+  td { padding: 5px 7px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #FAFBFC; }
+
+  /* cover */
+  .cover { page: cover; width: 210mm; height: 297mm; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(160deg, #042449 0%, #063a70 60%, #0468D7 100%); color: #fff; padding: 34mm 24mm 26mm; }
+  .cover h1 { color: #fff; font-size: 40px; letter-spacing: -1px; }
+  .cover .sub { font-size: 16px; color: #CFE3FA; max-width: 120mm; }
+  .cover .pill { display: inline-block; background: var(--mint); color: var(--navy); font-weight: 700; font-size: 10px; letter-spacing: 1px; padding: 4px 12px; border-radius: 99px; margin-bottom: 14px; }
+  .cover img.logo { width: 90px; height: 90px; border-radius: 22px; margin-bottom: 22px; }
+  .cover .meta { font-size: 11px; color: #CFE3FA; line-height: 1.7; }
+  .cover .meta b { color: #fff; }
+
+  /* screens */
+  .screens { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin: 8px auto; width: 128mm; }
+  .screens figure { margin: 0; text-align: center; }
+  .screens img { width: 100%; border-radius: 8px; border: 1px solid var(--line); }
+  .screens figcaption { font-size: 8.5px; color: var(--muted); margin-top: 2px; }
+
+  /* layers diagram */
+  .layers { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 10px 0; }
+  .layer { display: grid; grid-template-columns: 34mm 1fr; gap: 10px; align-items: center; border-radius: 9px; padding: 8px 10px; break-inside: avoid; }
+  .layer .name { font-weight: 700; font-size: 11px; }
+  .layer .name small { display: block; font-weight: 500; font-family: "DejaVu Sans Mono", monospace; font-size: 8.5px; opacity: .85; }
+  .l1 { background: #E6F0FC; } .l1 .name { color: var(--blue); }
+  .l2 { background: #E7F8F1; } .l2 .name { color: var(--green); }
+  .l3 { background: #FFF4DE; } .l3 .name { color: #8A5A00; }
+  .l4 { background: #F1ECFB; } .l4 .name { color: #5B3BA6; }
+  .l5 { background: #FDEBEA; } .l5 .name { color: #A1312A; }
+  .arrow { text-align: center; color: var(--muted); font-size: 10px; margin: -2px 0; }
+
+  .flow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 8px 0; font-size: 9.5px; }
+  .flow span.n { background: var(--navy); color: #fff; border-radius: 6px; padding: 4px 7px; font-weight: 600; }
+  .flow span.a { color: var(--muted); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .qa dt { font-weight: 600; margin-top: 6px; }
+  .qa dd { margin: 2px 0 4px 0; color: #33363b; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+  <div>
+    <img class="logo" src="../../images/icone.png" alt="">
+    <div class="pill">DESAFIO FINAL · LIFEADOS ACADEMY</div>
+    <h1>OneTick</h1>
+    <p class="sub">Guia do projeto: o que é, como a arquitetura funciona, o código de cada camada e as dificuldades que resolvemos.</p>
+  </div>
+  <div class="meta">
+    <b>Time:</b> Thiago Dutra (desenvolvimento) e Rennan (design no Google Stitch)<br>
+    <b>Stack:</b> Flutter 3.47 · Dart 3.13 · Cubit · get_it · Firebase Auth + Cloud Firestore<br>
+    <b>Repositório:</b> github.com/dutrathiagodev/onetick<br>
+    <b>Números:</b> 10 telas + Privacidade/Termos · 175 arquivos Dart · 136 testes automatizados
+  </div>
+</div>
+
+<!-- 1 PROJETO -->
+<div class="section">
+<span class="tag">1 · O projeto</span>
+<h1>Um foco essencial por dia</h1>
+<p class="lead">Listas de tarefas crescem até virar fonte de ansiedade. O OneTick faz o contrário: a pessoa escolhe <b>uma única prioridade</b> por dia, toca para concluir e acompanha a constância no histórico.</p>
+
+<h2>Como o usuário usa</h2>
+<ol>
+  <li><b>Onboarding</b> em 3 passos explica a ideia ("Menos ruído, mais foco").</li>
+  <li><b>Cadastro ou login</b> por e-mail/senha ou com o Google. Os Termos e a Privacidade aparecem antes de a conta ser criada.</li>
+  <li><b>Definir Foco</b>: até 60 caracteres, com ideias rápidas (Ler 10 páginas, Caminhar 20 min…).</li>
+  <li><b>Hoje</b>: toca no círculo para concluir; pode desfazer. Mostra a sequência de dias seguidos.</li>
+  <li><b>Histórico</b>: calendário do mês, conclusões, taxa de sucesso e os últimos 7 dias.</li>
+  <li><b>Configurações</b>: lembrete diário (notificação), tema claro/escuro, limpar histórico, Privacidade, Termos e excluir conta.</li>
+</ol>
+
+<h2>As telas (prints gerados pelos testes, 440×890)</h2>
+<div class="screens">
+  <figure><img src="../../../test/goldens/onboarding_1.png"><figcaption>Onboarding</figcaption></figure>
+  <figure><img src="../../../test/goldens/register.png"><figcaption>Cadastro</figcaption></figure>
+  <figure><img src="../../../test/goldens/login.png"><figcaption>Login</figcaption></figure>
+  <figure><img src="../../../test/goldens/define_focus.png"><figcaption>Definir Foco</figcaption></figure>
+  <figure><img src="../../../test/goldens/today_pending.png"><figcaption>Hoje</figcaption></figure>
+  <figure><img src="../../../test/goldens/today_completed.png"><figcaption>Foco concluído</figcaption></figure>
+  <figure><img src="../../../test/goldens/history.png"><figcaption>Histórico</figcaption></figure>
+  <figure><img src="../../../test/goldens/settings.png"><figcaption>Configurações</figcaption></figure>
+  <figure><img src="../../../test/goldens/privacy.png"><figcaption>Privacidade</figcaption></figure>
+  <figure><img src="../../../test/goldens/onboarding_3.png"><figcaption>Onboarding 3</figcaption></figure>
+</div>
+
+<h2>Stack e por quê</h2>
+<table>
+  <tr><th>Ferramenta</th><th>Para que serve no OneTick</th></tr>
+  <tr><td>Flutter / Dart</td><td>Um código só para Android e iOS, com desempenho nativo.</td></tr>
+  <tr><td>flutter_bloc (Cubit)</td><td>Gerência de estado: cada tela tem um Cubit que emite estados (carregando, erro, vazio, sucesso).</td></tr>
+  <tr><td>get_it</td><td>Injeção de dependência: monta as peças de cada tela e permite trocar o Firebase por versões falsas nos testes.</td></tr>
+  <tr><td>Firebase Auth</td><td>Login por e-mail/senha e Google, recuperação de senha, exclusão de conta.</td></tr>
+  <tr><td>Cloud Firestore</td><td>Banco na nuvem (São Paulo) com cache offline; cada usuário só acessa os próprios dados.</td></tr>
+  <tr><td>flutter_local_notifications</td><td>Lembrete diário agendado no próprio aparelho, com o ícone do OneTick.</td></tr>
+  <tr><td>flutter_test, bloc_test, mocktail</td><td>136 testes: regras, repositórios, telas, fluxo completo e prints (goldens).</td></tr>
+</table>
+</div>
+
+<!-- 2 ARQUITETURA -->
+<div class="section">
+<span class="tag">2 · Arquitetura</span>
+<h1>Clean Architecture + Cubit</h1>
+<p class="lead">O código é dividido em camadas com uma regra só: <b>as dependências apontam para dentro</b>. A tela conhece o Cubit, o Cubit conhece o caso de uso, e o caso de uso conhece apenas um <b>contrato</b> (interface). Quem fala com o Firebase fica na borda e pode ser trocado sem mexer na regra de negócio.</p>
+
+<div class="layers">
+  <div class="layer l1"><div class="name">modules<small>lib/modules/&lt;feature&gt;</small></div><div><b>Telas.</b> A <i>page</i> cria o Cubit e decide qual cenário mostrar (carregando, erro, vazio, sucesso). A <i>view</i> só desenha o sucesso. Sem regra de negócio.</div></div>
+  <div class="arrow">▼ chama</div>
+  <div class="layer l2"><div class="name">presenter<small>lib/presenter/&lt;feature&gt;</small></div><div><b>Cubits e estados.</b> Recebem ações da tela, chamam casos de uso e emitem estados imutáveis.</div></div>
+  <div class="arrow">▼ chama</div>
+  <div class="layer l3"><div class="name">domain<small>lib/domain/&lt;feature&gt;</small></div><div><b>O coração.</b> Entidades (FocusEntity), contratos (FocusRepository) e casos de uso (CompleteTodayFocusUseCase). Dart puro: não conhece Flutter nem Firebase.</div></div>
+  <div class="arrow">▲ implementa o contrato</div>
+  <div class="layer l4"><div class="name">data<small>lib/data/&lt;feature&gt;</small></div><div><b>Implementação dos contratos.</b> Models (conversão de/para mapa) e RepositoryImpl, que aplica regras como "não dá para concluir sem foco".</div></div>
+  <div class="arrow">▼ usa</div>
+  <div class="layer l5"><div class="name">infra<small>lib/infra/adapters</small></div><div><b>A borda.</b> Adapters do Firebase (Auth, Firestore), das notificações e as versões em memória usadas nos testes e no modo local.</div></div>
+</div>
+
+<div class="box">
+  <b>Mais duas pastas:</b> <span class="path">lib/core</span> guarda tema (cores e textos), componentes visuais compartilhados e rotas; <span class="path">lib/main</span> guarda o ponto de entrada, o roteamento por sessão e a <b>injeção de dependências</b> (um arquivo por tela em <span class="path">main/di/screens</span>).
+</div>
+
+<div class="tip"><b>Como explicar em uma frase:</b> "Se amanhã trocarmos o Firebase por outra API, só a pasta <i>infra</i> muda; as telas, os Cubits e as regras continuam iguais. E é por isso que conseguimos testar tudo sem internet."</div>
+
+<h2>Uma ação de ponta a ponta: tocar em "Concluir"</h2>
+<p>Seguir uma ação real é a melhor forma de entender as camadas. Este é o caminho do toque no círculo da tela Hoje até o Firestore:</p>
+<div class="flow">
+  <span class="n">TodayView</span><span class="a">→</span>
+  <span class="n">TodayCubit.complete()</span><span class="a">→</span>
+  <span class="n">CompleteTodayFocusUseCase</span><span class="a">→</span>
+  <span class="n">FocusRepository (contrato)</span><span class="a">→</span>
+  <span class="n">FocusRepositoryImpl</span><span class="a">→</span>
+  <span class="n">FirestoreFocusAdapter</span><span class="a">→</span>
+  <span class="n">Firestore</span>
+</div>
+<p>Nas próximas páginas está o código de cada passo, na ordem.</p>
+</div>
+
+<!-- 3 CÓDIGO -->
+<div class="section">
+<span class="tag">3 · O código, camada por camada</span>
+<h1>Do domínio até a tela</h1>
+
+<h3>3.1 Entidade — o que é um "foco" <span class="path">lib/domain/focus/entities/focus_entity.dart</span></h3>
+<p>Um objeto imutável com o dia (<code>dateKey</code> no formato <code>2026-11-05</code>), o texto e se foi concluído. Não sabe nada de banco ou de tela.</p>
+<pre><span class="c">/// The single commitment a user picks for one calendar day.</span>
+<span class="k">class</span> FocusEntity <span class="k">extends</span> Equatable {
+  <span class="k">const</span> FocusEntity({
+    <span class="k">required this</span>.dateKey,
+    <span class="k">required this</span>.title,
+    <span class="k">this</span>.completed = <span class="k">false</span>,
+    <span class="k">this</span>.completedAt,
+  });
+
+  <span class="k">final</span> String dateKey;   <span class="c">// yyyy-MM-dd: um documento por dia</span>
+  <span class="k">final</span> String title;
+  <span class="k">final</span> bool completed;
+  <span class="k">final</span> DateTime? completedAt;
+
+  <span class="k">static const int</span> maxTitleLength = <span class="s">60</span>;
+}</pre>
+
+<h3>3.2 Contrato — o que o domínio precisa <span class="path">lib/domain/focus/repositories/focus_repository.dart</span></h3>
+<p>Uma <b>interface</b>: diz <i>o que</i> precisa existir, não <i>como</i>. O domínio depende disso, nunca do Firebase.</p>
+<pre><span class="k">abstract interface class</span> FocusRepository {
+  Future&lt;FocusEntity?&gt; getToday();
+  Future&lt;FocusEntity&gt; saveToday(String title);
+  Future&lt;FocusEntity&gt; completeToday();
+  Future&lt;FocusEntity&gt; uncompleteToday();
+  Future&lt;List&lt;FocusEntity&gt;&gt; entriesBetween(DateTime start, DateTime end);
+}</pre>
+
+<h3>3.3 Caso de uso — uma ação de negócio <span class="path">lib/domain/focus/usecases/complete_today_focus_use_case.dart</span></h3>
+<p>Cada ação do app vira uma classe pequena com um método <code>call()</code>. Fica fácil de achar, testar e reaproveitar.</p>
+<pre><span class="k">class</span> CompleteTodayFocusUseCase {
+  <span class="k">const</span> CompleteTodayFocusUseCase(<span class="k">this</span>._repository);
+
+  <span class="k">final</span> FocusRepository _repository;   <span class="c">// o contrato, não o Firebase</span>
+
+  Future&lt;FocusEntity&gt; call() =&gt; _repository.completeToday();
+}</pre>
+
+<h3>3.4 Implementação — a regra real <span class="path">lib/data/focus/repositories/focus_repository_impl.dart</span></h3>
+<p>Aqui mora a regra: não dá para concluir sem foco, e concluir duas vezes não muda o horário. Repare que o relógio (<code>_now</code>) é injetado: nos testes usamos uma data fixa.</p>
+<pre><span class="k">class</span> FocusRepositoryImpl <span class="k">implements</span> FocusRepository {
+  <span class="k">const</span> FocusRepositoryImpl(<span class="k">this</span>._adapter, <span class="k">this</span>._now);
+
+  <span class="k">final</span> FocusRemoteAdapter _adapter;     <span class="c">// Firestore ou memória</span>
+  <span class="k">final</span> DateTime Function() _now;      <span class="c">// relógio injetável</span>
+
+  @override
+  Future&lt;FocusEntity&gt; completeToday() <span class="k">async</span> {
+    <span class="k">final</span> key = DateUtilsX.keyOf(_now());
+    <span class="k">final</span> existing = <span class="k">await</span> _adapter.getByKey(key);
+    <span class="k">if</span> (existing == <span class="k">null</span>) {
+      <span class="k">throw const</span> AppFailure(<span class="s">'Defina um foco antes de concluir.'</span>);
+    }
+    <span class="k">if</span> (existing.completed) <span class="k">return</span> existing.toEntity(); <span class="c">// idempotente</span>
+    <span class="k">final</span> model = FocusModel(
+      dateKey: key,
+      title: existing.title,
+      completed: <span class="k">true</span>,
+      completedAt: _now(),
+    );
+    <span class="k">await</span> _adapter.upsert(model);
+    <span class="k">return</span> model.toEntity();
+  }
+}</pre>
+
+<h3>3.5 Model — a tradução para o banco <span class="path">lib/data/focus/models/focus_model.dart</span></h3>
+<p>O Firestore trabalha com mapas (JSON). O model converte entidade ⇄ mapa, para o domínio nunca depender do formato do banco.</p>
+<pre><span class="k">factory</span> FocusModel.fromMap(Map&lt;String, <span class="k">dynamic</span>&gt; map) =&gt; FocusModel(
+  dateKey: map[<span class="s">'dateKey'</span>] <span class="k">as</span> String,
+  title: (map[<span class="s">'title'</span>] <span class="k">as</span> String?) ?? <span class="s">''</span>,
+  completed: (map[<span class="s">'completed'</span>] <span class="k">as</span> bool?) ?? <span class="k">false</span>,
+  completedAt: map[<span class="s">'completedAt'</span>] <span class="k">as</span> DateTime?,
+);
+
+FocusEntity toEntity() =&gt; FocusEntity(dateKey: dateKey, title: title,
+    completed: completed, completedAt: completedAt);</pre>
+</div>
+
+<div class="section">
+<h3>3.6 Adapter — falando com o Firestore <span class="path">lib/infra/adapters/focus/firestore_focus_adapter.dart</span></h3>
+<p>Cada usuário tem uma pasta <code>users/{uid}/focus</code> com um documento por dia. O <code>_commit</code> resolve um problema real: offline, o Firestore só termina a escrita quando o servidor responde. Sem o timeout, a tela ficaria travada.</p>
+<pre><span class="c">/// Stores one document per day at `users/{uid}/focus/{yyyy-MM-dd}`.</span>
+CollectionReference&lt;Map&lt;String, <span class="k">dynamic</span>&gt;&gt; <span class="k">get</span> _collection =&gt;
+    _db.collection(<span class="s">'users'</span>).doc(_uid()).collection(<span class="s">'focus'</span>);
+
+@override
+Future&lt;<span class="k">void</span>&gt; upsert(FocusModel model) {
+  <span class="k">return</span> _guard(() <span class="k">async</span> {
+    <span class="k">final</span> map = model.toMap();
+    <span class="k">final</span> at = model.completedAt;
+    map[<span class="s">'completedAt'</span>] = at == <span class="k">null</span> ? <span class="k">null</span> : Timestamp.fromDate(at);
+    <span class="k">await</span> _commit(_collection.doc(model.dateKey).set(map));
+  });
+}
+
+<span class="c">/// Offline, Firestore applies the write to the local cache at once but only
+/// completes the future after the server acknowledges it. Waiting forever
+/// would freeze the UI, so after a short wait the write is treated as queued.</span>
+Future&lt;<span class="k">void</span>&gt; _commit(Future&lt;<span class="k">void</span>&gt; write) <span class="k">async</span> {
+  <span class="k">try</span> {
+    <span class="k">await</span> write.timeout(_offline ? _offlineWait : _serverWait);
+  } <span class="k">on</span> TimeoutException {
+    _markOffline();   <span class="c">// fica no cache e sincroniza quando a rede voltar</span>
+  }
+}</pre>
+
+<h3>3.7 Cubit — o estado da tela <span class="path">lib/presenter/today/today_cubit.dart</span></h3>
+<p>O Cubit recebe a ação, chama o caso de uso e emite um novo <b>estado</b>. Enquanto conclui, emite <code>isCompleting: true</code> (o botão mostra o carregando); se der erro, volta ao estado anterior com um aviso.</p>
+<pre>Future&lt;<span class="k">void</span>&gt; complete() <span class="k">async</span> {
+  <span class="k">final</span> current = state;
+  <span class="k">if</span> (current <span class="k">is</span>! TodayPending || current.isCompleting) <span class="k">return</span>;
+  emit(TodayPending(focus: current.focus, streak: current.streak,
+      isCompleting: <span class="k">true</span>));
+  <span class="k">try</span> {
+    <span class="k">final</span> done = <span class="k">await</span> _complete();          <span class="c">// o caso de uso</span>
+    <span class="k">final</span> streak = <span class="k">await</span> _getStreak();
+    <span class="k">if</span> (!isClosed) emit(TodayCompleted(focus: done, streak: streak));
+  } <span class="k">on</span> AppFailure <span class="k">catch</span> (e) {
+    <span class="k">if</span> (!isClosed) {
+      emit(TodayPending(focus: current.focus, streak: current.streak,
+          notice: e.message));
+    }
+  }
+}</pre>
+
+<h3>3.8 Estados selados <span class="path">lib/presenter/today/today_state.dart</span></h3>
+<p><code>sealed class</code> obriga a tela a tratar <b>todos</b> os cenários; se esquecermos um, o código nem compila.</p>
+<pre><span class="k">sealed class</span> TodayState <span class="k">extends</span> Equatable { ... }
+<span class="k">class</span> TodayLoading   <span class="k">extends</span> TodayState { ... }
+<span class="k">class</span> TodayEmpty     <span class="k">extends</span> TodayState { ... }  <span class="c">// sem foco hoje</span>
+<span class="k">class</span> TodayError     <span class="k">extends</span> TodayState { ... }
+<span class="k">class</span> TodayPending   <span class="k">extends</span> TodayState { ... }  <span class="c">// definido, não concluído</span>
+<span class="k">class</span> TodayCompleted <span class="k">extends</span> TodayState { ... }</pre>
+
+<h3>3.9 Page — decide o cenário <span class="path">lib/modules/today/page/today_page.dart</span></h3>
+<p>A page cria o Cubit e escolhe a view. Cada view só sabe desenhar o seu caso.</p>
+<pre><span class="k">return switch</span> (state) {
+  TodayLoading() =&gt; <span class="k">const</span> TodayLoadingView(),
+  TodayError(:<span class="k">final</span> message) =&gt; TodayErrorView(message: message, onRetry: cubit.load),
+  TodayEmpty(:<span class="k">final</span> streak) =&gt; TodayEmptyView(today: today, streak: streak, ...),
+  TodayPending() =&gt; TodayView(focus: state.focus, onComplete: cubit.complete, ...),
+  TodayCompleted() =&gt; TodayCompletedView(focus: state.focus, onUndo: cubit.undoCompletion, ...),
+};</pre>
+</div>
+
+<div style="margin-top:18px">
+<span class="tag">4 · Peças que ligam tudo</span>
+<h1>Injeção de dependências, sessão e testes</h1>
+
+<h3>4.1 Injeção de dependências por tela <span class="path">lib/main/di/screens/today_dependencies.dart</span></h3>
+<p>O get_it monta a "árvore" adapter → repositório → casos de uso → Cubit. Cada setup verifica <code>isRegistered</code>: assim os testes registram versões falsas <b>antes</b> e o app usa a falsa no lugar do Firebase.</p>
+<pre><span class="k">void</span> setupTodayDependencies() {
+  setupFocusAdapterDependencies();   <span class="c">// Firestore ou memória</span>
+  <span class="k">if</span> (!getIt.isRegistered&lt;FocusRepository&gt;()) {
+    getIt.registerLazySingleton&lt;FocusRepository&gt;(
+      () =&gt; FocusRepositoryImpl(getIt&lt;FocusRemoteAdapter&gt;(), getIt&lt;AppClock&gt;().now),
+    );
+  }
+  <span class="k">if</span> (!getIt.isRegistered&lt;TodayCubit&gt;()) {
+    getIt.registerFactory(() =&gt; TodayCubit(
+      getIt&lt;GetTodayFocusUseCase&gt;(), getIt&lt;CompleteTodayFocusUseCase&gt;(),
+      getIt&lt;UncompleteTodayFocusUseCase&gt;(), getIt&lt;GetStreakUseCase&gt;(),
+      getIt&lt;AppClock&gt;(),
+    ));
+  }
+}</pre>
+
+<h3>4.2 Quem está logado decide a tela <span class="path">lib/main/session_gate.dart</span></h3>
+<p>O SessionCubit escuta o Firebase Auth. Logado → abas do app; deslogado → onboarding/login. Sair ou excluir a conta volta ao início sozinho.</p>
+<pre>BlocBuilder&lt;SessionCubit, SessionState&gt;(
+  builder: (context, state) =&gt; <span class="k">switch</span> (state) {
+    SessionUnknown() =&gt; <span class="k">const</span> Scaffold(body: LoadingStateView()),
+    SessionUnauthenticated() =&gt; <span class="k">const</span> AuthFlow(),
+    SessionAuthenticated(:<span class="k">final</span> user) =&gt; ShellPage(key: ValueKey(<span class="s">'shell_${user.id}'</span>)),
+  },
+)</pre>
+
+<h3>4.3 Segurança no banco <span class="path">firestore.rules</span></h3>
+<p>Mesmo que alguém altere o app, o servidor só deixa cada pessoa ler e escrever <b>a própria pasta</b>.</p>
+<pre>match /users/{uid}/{document=**} {
+  allow read, write: <span class="k">if</span> request.auth != <span class="k">null</span> &amp;&amp; request.auth.uid == uid;
+}</pre>
+
+<h3>4.4 Teste com relógio e banco falsos <span class="path">test/data/focus_repository_impl_test.dart</span></h3>
+<p>Graças aos contratos, o teste usa o adapter em memória e uma data fixa: roda em milissegundos, sem internet.</p>
+<pre>setUp(() {
+  adapter = InMemoryFocusAdapter();
+  repository = FocusRepositoryImpl(adapter, () =&gt; now);
+});
+
+test(<span class="s">'completeToday is idempotent'</span>, () <span class="k">async</span> {
+  <span class="k">await</span> repository.saveToday(<span class="s">'Meditar'</span>);
+  <span class="k">final</span> first = <span class="k">await</span> repository.completeToday();
+  now = testNow.add(<span class="k">const</span> Duration(hours: <span class="s">2</span>));
+  <span class="k">final</span> second = <span class="k">await</span> repository.completeToday();
+  expect(second.completedAt, first.completedAt);   <span class="c">// não muda o horário</span>
+});</pre>
+
+<table>
+  <tr><th>Tipo de teste</th><th>O que garante</th></tr>
+  <tr><td>Domínio (sequência, validações, histórico)</td><td>As regras de negócio calculam certo.</td></tr>
+  <tr><td>Repositórios</td><td>Salvar, concluir, desfazer e buscar por período.</td></tr>
+  <tr><td>Fluxo completo</td><td>Cadastro → foco → concluir → histórico → configurações → sair / excluir conta.</td></tr>
+  <tr><td>Telas pequenas</td><td>Nenhum overflow em celular pequeno, fonte grande ou teclado aberto.</td></tr>
+  <tr><td>Goldens (prints)</td><td>As 11 telas continuam idênticas ao aprovado; qualquer pixel diferente falha.</td></tr>
+</table>
+</div>
+
+<div class="section">
+<span class="tag">5 · Recursos além do básico</span>
+<h1>O que torna o app profissional</h1>
+
+<h3>5.1 Lembrete diário <span class="path">lib/domain/settings/usecases/sync_reminder_use_case.dart</span></h3>
+<p>O domínio só conhece o contrato <code>ReminderScheduler</code>; quem agenda de verdade é o adapter de notificações. Ligar o lembrete pede permissão; se negar, o switch não fica "mentindo" ligado.</p>
+<pre>Future&lt;bool&gt; call(AppSettings settings) <span class="k">async</span> {
+  <span class="k">if</span> (!settings.reminderEnabled) {
+    <span class="k">await</span> _scheduler.cancel();
+    <span class="k">return true</span>;
+  }
+  <span class="k">if</span> (!<span class="k">await</span> _scheduler.requestPermission()) <span class="k">return false</span>;
+  <span class="k">await</span> _scheduler.scheduleDaily(
+    hour: settings.reminderHour, minute: settings.reminderMinute);
+  <span class="k">return true</span>;
+}</pre>
+
+<h3>5.2 Excluir conta com ordem segura <span class="path">lib/domain/settings/usecases/delete_account_use_case.dart</span></h3>
+<p>Exigência da Google Play e da Apple. O Firebase só exclui a conta com login recente, então verificamos isso <b>antes</b> de apagar qualquer dado.</p>
+<pre>Future&lt;<span class="k">void</span>&gt; call() <span class="k">async</span> {
+  <span class="c">// Checked first so a refused deletion never leaves the account empty.</span>
+  <span class="k">await</span> _auth.ensureCanDeleteAccount();
+  <span class="k">await</span> _settings.clearHistory();
+  <span class="k">await</span> _settings.deletePreferences();
+  <span class="k">await</span> _auth.deleteAccount();
+}</pre>
+
+<h3>5.3 Virada do dia <span class="path">lib/presenter/today/today_cubit.dart</span></h3>
+<p>Se o app fica aberto à meia-noite, um timer recarrega a tela; ao voltar do segundo plano num novo dia, também.</p>
+<pre><span class="k">void</span> _scheduleMidnight() {
+  _midnight?.cancel();
+  <span class="k">final</span> now = _clock.now();
+  <span class="k">final</span> next = DateTime(now.year, now.month, now.day + <span class="s">1</span>);
+  _midnight = Timer(next.difference(now) + <span class="k">const</span> Duration(seconds: <span class="s">1</span>),
+      refreshIfNewDay);
+}</pre>
+
+<h3>5.4 Componentes compartilhados <span class="path">lib/core/widgets</span></h3>
+<p>O que se repetia virou componente: <code>HeaderBar</code> (topo translúcido), <code>BackTitleBar</code>, <code>AuthHeader</code>, <code>AuthCard</code>, <code>AppCard</code>, <code>PrimaryPillButton</code>, <code>showNotice</code>, <code>showDangerConfirm</code>. Cores e textos vêm de <code>AppColors</code> e <code>AppTextStyles</code> — por isso o tema escuro troca o app inteiro.</p>
+
+<h3>5.5 Outros cuidados</h3>
+<ul>
+  <li><b>Offline:</b> o app abre, conclui e desfaz sem internet; sincroniza quando a rede volta.</li>
+  <li><b>Foto do Google</b> no avatar, com ícone padrão quando não há foto ou internet.</li>
+  <li><b>Termos e Privacidade (LGPD)</b> antes de criar a conta e sempre acessíveis em Configurações.</li>
+  <li><b>Inconsistências do design corrigidas</b> (ex.: Hoje mostrava 100% sem concluir; números do Histórico não batiam). Tudo registrado em <span class="path">docs/design-review.md</span>.</li>
+  <li><b>Acessibilidade:</b> áreas de toque maiores, rótulos para leitor de tela e contraste medido no tema escuro.</li>
+</ul>
+</div>
+
+<div class="section">
+<span class="tag">6 · Dificuldades</span>
+<h1>O que deu trabalho e como resolvemos</h1>
+<table>
+  <tr><th style="width:30%">Problema</th><th>Causa</th><th>Solução</th></tr>
+  <tr><td>Telas sem detalhe do Figma</td><td>O plano gratuito do Figma bloqueou a leitura de um frame.</td><td>Conferimos direto no Stitch e comparamos as 10 telas lado a lado com os prints dos testes.</td></tr>
+  <tr><td>Design com números inconsistentes</td><td>O mock mostrava 100% sem concluir e um histórico que não batia.</td><td>Tudo calculado a partir dos dados reais; decisões registradas.</td></tr>
+  <tr><td>Login com Google falhando no emulador</td><td>Emulador sem Play Store, sem conta Google e com Play Services antigo.</td><td>Emulador com Play Store, conta adicionada, SHA-1 cadastrado no Firebase e mensagem de erro clara.</td></tr>
+  <tr><td>Tela travando sem internet</td><td>O Firestore só conclui a escrita com resposta do servidor.</td><td>Timeout: a escrita fica na fila do cache e sincroniza depois.</td></tr>
+  <tr><td>Leituras offline demorando ~10 s</td><td>O Firestore espera o servidor antes de usar o cache.</td><td>Após 3 s vai ao cache e "lembra" que está offline por 30 s.</td></tr>
+  <tr><td>Lembrete chegando até 1 h atrasado</td><td>Alarme inexato do Android.</td><td>Horário exato quando o aparelho permite; inexato como reserva.</td></tr>
+  <tr><td>Tela Hoje mostrando ontem</td><td>A data era calculada uma vez só.</td><td>Timer à meia-noite e checagem ao voltar do segundo plano.</td></tr>
+  <tr><td>Excluir conta poderia apagar dados e falhar</td><td>Firebase exige login recente para excluir.</td><td>Verificação antes de apagar qualquer dado.</td></tr>
+  <tr><td>Overflow em telas pequenas</td><td>Teclado aberto e fonte grande.</td><td>Rolagem ancorada e testes de regressão em vários tamanhos.</td></tr>
+</table>
+</div>
+
+<div class="section">
+<span class="tag">7 · Apresentação</span>
+<h1>Roteiro de fala (~10 min)</h1>
+<table>
+  <tr><th style="width:16%">Tempo</th><th style="width:14%">Quem</th><th>O que falar / mostrar</th></tr>
+  <tr><td>0:00–1:00</td><td>Rennan</td><td>O problema (listas infinitas) e a ideia do OneTick. Abrir o Stitch e mostrar o fluxo das telas.</td></tr>
+  <tr><td>1:00–2:30</td><td>Rennan</td><td>Decisões de design: um foco por dia, linguagem calma, paleta navy/menta, por que sem notificações invasivas.</td></tr>
+  <tr><td>2:30–5:00</td><td>Thiago</td><td>Demo no celular: cadastro (Termos visíveis), definir foco, concluir, desfazer, Histórico, Configurações (tema escuro, lembrete).</td></tr>
+  <tr><td>5:00–7:30</td><td>Thiago</td><td>Arquitetura: diagrama de camadas e a ação "Concluir" de ponta a ponta (seção 2 e 3 deste guia).</td></tr>
+  <tr><td>7:30–9:00</td><td>Thiago</td><td>Firebase: login, regras de segurança, offline. Mostrar o console com os dados chegando.</td></tr>
+  <tr><td>9:00–10:00</td><td>Os dois</td><td>Dificuldades (seção 6), testes (136) e próximos passos.</td></tr>
+</table>
+
+<h2>Perguntas prováveis</h2>
+<dl class="qa">
+  <dt>Por que Clean Architecture num app pequeno?</dt>
+  <dd>Separar regra de negócio da tela e do Firebase permitiu testar tudo sem internet e trocar o Firebase por versões em memória. Também deixa claro onde cada coisa mora.</dd>
+  <dt>Por que Cubit e não setState ou Provider?</dt>
+  <dd>Cubit dá estados explícitos e imutáveis (carregando, erro, vazio, sucesso), fáceis de testar com bloc_test, e mantém a lógica fora dos widgets.</dd>
+  <dt>E se alguém tentar ler os dados de outro usuário?</dt>
+  <dd>As regras do Firestore só permitem acesso a <code>users/{uid}</code> quando o uid é o do usuário logado. O bloqueio é no servidor.</dd>
+  <dt>Funciona sem internet?</dt>
+  <dd>Sim. O Firestore mantém cache local; o app lê dele e enfileira as escritas, que sincronizam quando a rede volta.</dd>
+  <dt>Por que não push pelo servidor?</dt>
+  <dd>O lembrete é local, agendado no aparelho: funciona offline e não tem custo. Push pelo servidor exigiria Cloud Functions (plano pago).</dd>
+  <dt>Como garantem que o visual não quebra?</dt>
+  <dd>Testes golden: cada tela é renderizada e comparada pixel a pixel com o print aprovado.</dd>
+</dl>
+
+<div class="tip"><b>Dica:</b> deixe o Stitch aberto numa aba e o emulador ou celular espelhado na outra. Na demo, use uma conta de teste já criada e com alguns dias no histórico.</div>
+</div>
+
+</body>
+</html>

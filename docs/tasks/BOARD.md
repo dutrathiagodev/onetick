@@ -19,6 +19,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0011 ] | Testes: helpers, domínio, dados, widgets, fluxo completo, goldens | ✅ |
 | [ OT-0012 ] | Repositório GitHub `dutrathiagodev/onetick` | ✅ |
 | [ OT-0035 ] | Logo OneTick, ícone do app (Android, iOS, web) e favicon.ico | ✅ |
+| [ OT-0042 ] | Material da apresentação: guia do projeto com o código explicado e pitch em PDF (`docs/apresentacao`) | ✅ |
 
 ## Telas (uma por frame do Figma)
 

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>OneTick — Pitch</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  @page { size: 297mm 167mm; margin: 0; }
+  .slide { width: 297mm; height: 167mm; position: relative; overflow: hidden; break-after: page; padding: 16mm 18mm; background: #F7F9FB; }
+  .slide:last-child { break-after: auto; }
+  .dark { background: linear-gradient(150deg, #042449 0%, #06376b 65%, #0468D7 100%); color: #fff; }
+  .kicker { font-size: 10px; font-weight: 700; letter-spacing: 1.6px; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+  .dark .kicker { color: var(--mint); }
+  h1 { font-size: 34px; line-height: 1.12; letter-spacing: -0.8px; margin: 0 0 10px; color: var(--navy); }
+  .dark h1 { color: #fff; }
+  p.big { font-size: 15px; line-height: 1.5; color: var(--muted); max-width: 150mm; margin: 0; }
+  .dark p.big { color: #CFE3FA; }
+  .num { position: absolute; right: 18mm; bottom: 9mm; font-size: 9px; color: #9aa3ad; }
+  .brand { position: absolute; left: 18mm; bottom: 9mm; font-size: 9px; font-weight: 600; color: #9aa3ad; letter-spacing: .5px; }
+  .dark .num, .dark .brand { color: #8fb2d9; }
+
+  .cols { display: grid; gap: 10mm; margin-top: 10mm; }
+  .c3 { grid-template-columns: repeat(3, 1fr); }
+  .c2 { grid-template-columns: 1fr 1fr; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 7mm; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; color: var(--navy); }
+  .card p { margin: 0; font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+  .badge { width: 34px; height: 34px; border-radius: 50%; background: #DDFBEF; color: var(--green); font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .phones { position: absolute; right: 14mm; top: 12mm; display: flex; gap: 6mm; }
+  .phones img { height: 140mm; border-radius: 16px; box-shadow: 0 10px 30px rgba(4,36,73,.28); }
+  .stat { font-size: 40px; font-weight: 700; color: var(--mint); letter-spacing: -1px; line-height: 1; }
+  .statlbl { font-size: 11.5px; color: #CFE3FA; margin-top: 4px; }
+  ul.clean { list-style: none; padding: 0; margin: 8mm 0 0; }
+  ul.clean li { font-size: 14px; margin: 0 0 9px; padding-left: 22px; position: relative; color: var(--ink); }
+  ul.clean li::before { content: ""; position: absolute; left: 0; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--mint); box-shadow: inset 0 0 0 3px #00b383; }
+  .dark ul.clean li { color: #fff; }
+  .logo { width: 70px; height: 70px; border-radius: 18px; }
+  .road { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: 10mm; }
+  .road .card h3 span { display: block; font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide dark">
+  <img class="logo" src="../../images/icone.png" alt="">
+  <div style="margin-top: 14mm">
+    <div class="kicker">Pitch · Lifeados Academy</div>
+    <h1 style="font-size: 54px">OneTick</h1>
+    <p class="big" style="font-size: 20px; max-width: 120mm">Um foco essencial por dia.<br>Menos ruído, mais progresso.</p>
+  </div>
+  <div class="phones" style="top: 14mm">
+    <img src="../../../test/goldens/today_pending.png" alt="">
+    <img src="../../../test/goldens/today_completed.png" alt="">
+  </div>
+  <div class="brand">THIAGO DUTRA · RENNAN</div><div class="num">1</div>
+</section>
+
+<!-- 2 problema -->
+<section class="slide">
+  <div class="kicker">O problema</div>
+  <h1>Listas de tarefas viram<br>listas de culpa</h1>
+  <p class="big">Apps de produtividade incentivam dezenas de tarefas por dia. No fim, quase nada é concluído e a sensação é de fracasso.</p>
+  <div class="cols c3">
+    <div class="card"><div class="badge">1</div><h3>Excesso</h3><p>Listas de 30, 50 itens dispersam a atenção e escondem o que realmente importa.</p></div>
+    <div class="card"><div class="badge">2</div><h3>Ruído</h3><p>Notificações e cobranças constantes geram ansiedade em vez de foco.</p></div>
+    <div class="card"><div class="badge">3</div><h3>Abandono</h3><p>Sem sensação de progresso, o hábito some em poucos dias.</p></div>
+  </div>
+  <div class="brand">ONETICK</div><div class="num">2</div>
+</section>
+
+<!-- 3 solução -->
+<section class="slide">
+  <div class="kicker">A solução</div>
+  <h1>Escolha uma coisa.<br>Faça. Celebre.</h1>
+  <p class="big" style="max-width: 105mm">O OneTick pede só uma prioridade por dia. Um toque conclui. O histórico mostra a constância, sem cobrança.</p>
+  <ul class="clean" style="max-width: 108mm">
+    <li>Um único foco por dia, com até 60 caracteres</li>
+    <li>Um toque para concluir — e desfazer, se precisar</li>
+    <li>Sequência de dias e calendário de constância</li>
+    <li>Um lembrete suave por dia, no horário escolhido</li>
+  </ul>
+  <div class="phones">
+    <img src="../../../test/goldens/define_focus.png" alt="">
+    <img src="../../../test/goldens/history.png" alt="">
+  </div>
+  <div class="brand">ONETICK</div><div class="num">3</div>
+</section>
+
+<!-- 4 como funciona -->
+<section class="slide">
+  <div class="kicker">Como funciona</div>
+  <h1>Três passos, todos os dias</h1>
+  <div class="cols c3">
+    <div class="card"><div class="badge">1</div><h3>Defina</h3><p>De manhã, escolha o compromisso essencial do dia ou use uma ideia pronta: ler 10 páginas, caminhar 20 minutos, meditar 5 minutos.</p></div>
+    <div class="card"><div class="badge">2</div><h3>Conclua</h3><p>Fez? Um toque no círculo e o dia está ganho. Sem cobranças adicionais: o resto do dia é livre.</p></div>
+    <div class="card"><div class="badge">3</div><h3>Acompanhe</h3><p>O histórico mostra os dias concluídos, a taxa de sucesso e a sequência. A constância vira motivação.</p></div>
+  </div>
+  <div class="brand">ONETICK</div><div class="num">4</div>
+</section>
+
+<!-- 5 diferenciais -->
+<section class="slide">
+  <div class="kicker">Diferenciais</div>
+  <h1>Simples por fora,<br>cuidadoso por dentro</h1>
+  <div class="cols c2" style="max-width: 175mm">
+    <div class="card"><h3>Funciona sem internet</h3><p>Abre, conclui e desfaz offline. Sincroniza sozinho quando a conexão volta.</p></div>
+    <div class="card"><h3>Privacidade em primeiro lugar</h3><p>Sem anúncios. Termos visíveis antes do cadastro e exclusão da conta pelo próprio app (LGPD).</p></div>
+    <div class="card"><h3>Login em um toque</h3><p>E-mail e senha ou conta Google, com a foto do perfil no app.</p></div>
+    <div class="card"><h3>Claro ou escuro</h3><p>Tema escuro com contraste medido para leitura confortável à noite.</p></div>
+  </div>
+  <div class="phones" style="right: 16mm">
+    <img src="../../../test/goldens/settings.png" alt="">
+  </div>
+  <div class="brand">ONETICK</div><div class="num">5</div>
+</section>
+
+<!-- 6 tecnologia -->
+<section class="slide dark">
+  <div class="kicker">Tecnologia e qualidade</div>
+  <h1>Feito para crescer</h1>
+  <p class="big">Flutter para Android e iOS, Firebase como back-end seguro e Clean Architecture para manter cada parte independente e testável.</p>
+  <div class="cols c3" style="margin-top: 14mm">
+    <div><div class="stat">136</div><div class="statlbl">testes automatizados, incluindo comparação pixel a pixel das telas</div></div>
+    <div><div class="stat">5</div><div class="statlbl">camadas: telas, estado, regras, dados e integrações</div></div>
+    <div><div class="stat">100%</div><div class="statlbl">dos dados isolados por usuário pelas regras do Firestore</div></div>
+  </div>
+  <div class="brand">ONETICK</div><div class="num">6</div>
+</section>
+
+<!-- 7 roadmap -->
+<section class="slide">
+  <div class="kicker">Próximos passos</div>
+  <h1>Para onde o OneTick vai</h1>
+  <div class="road">
+    <div class="card"><h3><span>Agora</span>Lançamento</h3><p>Publicação na Google Play e App Store, com testes no iOS e validação final do tema escuro.</p></div>
+    <div class="card"><h3><span>Depois</span>Engajamento</h3><p>Widget na tela inicial, conquistas por sequência e resumo semanal da constância.</p></div>
+    <div class="card"><h3><span>Futuro</span>Escala</h3><p>Versão web, lembretes inteligentes por horário de uso e foco compartilhado com amigos.</p></div>
+  </div>
+  <div class="brand">ONETICK</div><div class="num">7</div>
+</section>
+
+<!-- 8 time -->
+<section class="slide dark">
+  <img class="logo" src="../../images/icone.png" alt="">
+  <div style="margin-top: 12mm">
+    <div class="kicker">Time</div>
+    <h1>Obrigado!</h1>
+    <ul class="clean" style="margin-top: 6mm">
+      <li><b>Thiago Dutra</b> — desenvolvimento, arquitetura e back-end</li>
+      <li><b>Rennan</b> — design de produto no Google Stitch</li>
+    </ul>
+    <p class="big" style="margin-top: 8mm">github.com/dutrathiagodev/onetick</p>
+  </div>
+  <div class="phones">
+    <img src="../../../test/goldens/onboarding_1.png" alt="">
+  </div>
+  <div class="brand">ONETICK</div><div class="num">8</div>
+</section>
+
+</body>
+</html>

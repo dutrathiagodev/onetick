@@ -1,0 +1,53 @@
+@font-face { font-family: Inter; src: url(../../../assets/fonts/Inter-Regular.ttf); font-weight: 400; }
+@font-face { font-family: Inter; src: url(../../../assets/fonts/Inter-Medium.ttf); font-weight: 500; }
+@font-face { font-family: Inter; src: url(../../../assets/fonts/Inter-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: Inter; src: url(../../../assets/fonts/Inter-Bold.ttf); font-weight: 700; }
+
+:root {
+  --navy: #042449;
+  --blue: #0468D7;
+  --mint: #0DFFC3;
+  --green: #006C4A;
+  --ink: #1A1C1E;
+  --muted: #5B5D63;
+  --line: #E3E5E8;
+  --soft: #F4F6F8;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, sans-serif;
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+code, pre { font-family: "DejaVu Sans Mono", "Liberation Mono", monospace; }
+
+pre {
+  background: #0E1B2C;
+  color: #E6EDF6;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 9.6px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 8px 0 10px;
+  break-inside: avoid;
+}
+pre .c { color: #7FD8B6; }   /* comment */
+pre .k { color: #8CB8FF; }   /* keyword */
+pre .s { color: #FFD58A; }   /* string */
+pre .f { color: var(--mint); font-weight: 600; } /* highlight */
+
+.path {
+  display: inline-block;
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 9px;
+  color: var(--blue);
+  background: #EAF2FD;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
