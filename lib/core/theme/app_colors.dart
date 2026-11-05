@@ -89,7 +89,8 @@ class AppColors extends ThemeExtension<AppColors> {
     text: Color(0xFFE8EAEC),
     textMuted: Color(0xFFB0B1B6),
     textFaint: Color(0xFF8E8F93),
-    placeholder: Color(0xFF7C8088),
+    // Lighter than the derived tone so field hints reach 4.5:1 (WCAG AA).
+    placeholder: Color(0xFF9094A0),
     outline: Color(0xFF4A4B50),
     border: Color(0xFF34363A),
     brand: Color(0xFF4EDEA3),

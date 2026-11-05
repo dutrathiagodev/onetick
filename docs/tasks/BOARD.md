@@ -48,6 +48,6 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0040 ] | Excluir conta no app (Configurações > Excluir conta), apagando histórico, preferências e a conta | ✅ |
 | [ OT-0041 ] | Componentizar código repetido: cabeçalho (`HeaderBar`, `BackTitleBar`, `AppBackButton`), `AuthHeader`, `AuthCard`, `showNotice` e `showDangerConfirm` em `lib/core/widgets` | ✅ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
-| [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |
+| [ OT-0034 ] | Validar a paleta do tema escuro com o designer (paleta derivada, não existe no Figma/Stitch; contraste medido e texto de exemplo dos campos ajustado para 4,5:1) | 🟡 |
 
 Achados do design: [`../design-review.md`](../design-review.md).

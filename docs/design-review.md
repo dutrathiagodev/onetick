@@ -30,3 +30,7 @@ Referências: política de exclusão de conta da Google Play, diretriz 5.1.1(v) 
 - **Termos antes da conta existir**: Cadastro mostra "Ao criar sua conta ou continuar com o Google, você concorda com os Termos de Uso e a Política de Privacidade", com links. O Login mostra o mesmo aviso para o Google, que também cria conta.
 - **Privacidade e Termos com a conta aberta**: Configurações > Sobre tem os dois links (antes só existiam no rodapé de quem não estava logado).
 - **Excluir conta**: Configurações > Conta > Excluir conta, com confirmação. Apaga histórico, preferências e a conta. Se o login for antigo, o Firebase recusa a exclusão; o app avisa antes de apagar qualquer dado e pede para entrar de novo.
+
+## Contraste do tema escuro (OT-0034)
+
+O tema escuro não existe no Stitch nem no Figma: a paleta (`AppColors.dark`) foi derivada da clara e da marca. Contraste medido (WCAG, mínimo 4,5:1 para texto): texto principal 15,4; secundário 7,9; fraco 5,2; verde da marca 10,9; selo menta 7,4; vermelho 10,0. O texto de exemplo dos campos estava em 3,8 e foi clareado para `#9094A0` (5,0 no campo). No tema claro esse texto (`#9CA3AF`, 2,3 a 2,5) vem do Stitch e foi mantido pela fidelidade ao design. Falta o designer aprovar a paleta escura.
