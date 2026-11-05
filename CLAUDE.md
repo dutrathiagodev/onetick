@@ -47,26 +47,22 @@ Features: onboarding, login, register, today (Hoje + Foco Concluído), define_fo
 flutter pub get
 flutter run -t lib/main/main.dart        # emulador "bigz_pixel" (Android) já existe na máquina
 flutter analyze                          # deve ficar sem avisos
-flutter test                             # 102 testes
+flutter test                             # 131 testes
 flutter test --update-goldens test/goldens   # regenera os prints das telas (440x890)
 python3 tool/generate_brand_assets.py    # regenera ícones/marca
 ```
 
 ## Estado atual
 
-Feito (ver `docs/tasks/BOARD.md`): as 10 telas, DI, Firebase (código), tema claro/escuro, logo e ícone do app (Android/iOS/web), README, testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens). A tela "Foco Concluído" foi conferida com o Stitch e inclui **Desfazer conclusão** e **Ver no Histórico**.
+Feito (ver `docs/tasks/BOARD.md`): as 10 telas (todas conferidas com o Stitch, ver `docs/design-review.md`), Firebase real (projeto `onetick-1d336`, `docs/setup/firebase.md`), login com Google, modo offline do Firestore, lembrete diário por notificação local, foto de perfil do Google, páginas de Privacidade e Termos, tema claro/escuro, logo e ícone, README e testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens).
 
-Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa vermelha em debug). Em **release** sem Firebase mostra tela de erro de propósito.
+Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa vermelha em debug). Em **release** sem Firebase mostra tela de erro de propósito. Push via servidor (FCM) e e-mail foram descartados (exigem o plano Blaze).
 
 ## Pendências (por impacto na nota)
 
-1. **Configurar o Firebase real** (OT-0009): `flutterfire configure --out=lib/main/firebase_options.dart`, habilitar Auth (e-mail/senha e Google, SHA-1 no Android), `firebase deploy --only firestore:rules`. Passo a passo em `docs/setup/firebase.md`. Exige o login do dono. O arquivo `lib/main/firebase_options.dart` hoje é um placeholder.
-2. **Riscos de bug a corrigir**: escrita no Firestore sem internet pode travar (usar timeout/escrita local); Tela Hoje não atualiza na virada do dia; esconder/configurar o botão do Google.
-3. **Lembrete diário só salva a preferência**, não notifica (OT-0030).
-4. Telas de Privacidade e Termos (OT-0032).
-5. Testar em aparelho/emulador com Firebase real (OT-0033); validar paleta do tema escuro com o designer (OT-0034).
-6. Comparar as outras 9 telas com o Stitch (só "Foco Concluído" foi conferida).
-7. Ensaiar a apresentação (os dois integrantes, Stitch aberto, explicar arquitetura e dificuldades).
+1. Risco de bug: a tela Hoje não atualiza sozinha na virada do dia (app aberto à meia-noite).
+2. Testar no iOS (OT-0033, precisa de Mac/Xcode); validar paleta do tema escuro com o designer (OT-0034).
+3. Ensaiar a apresentação (os dois integrantes, Stitch aberto, explicar arquitetura e dificuldades).
 
 ## Convenções do dono (siga)
 

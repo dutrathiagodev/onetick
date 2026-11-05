@@ -41,7 +41,8 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | --- | --- | --- |
 | [ OT-0030 ] | Notificação local do lembrete diário com o ícone do OneTick (agenda, reagenda no login e cancela no logout) | ✅ |
 | [ OT-0036 ] | Foto de perfil do Google no avatar do cabeçalho (ícone padrão sem foto/offline) | ✅ |
-| [ OT-0032 ] | Páginas de Privacidade e Termos (links só texto no design) | ⬜ |
+| [ OT-0032 ] | Páginas de Privacidade e Termos, abertas pelo rodapé do Login e do Cadastro | ✅ |
+| [ OT-0037 ] | Conferir as 10 telas com o Stitch e corrigir diferenças (`docs/design-review.md`) | ✅ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |
 

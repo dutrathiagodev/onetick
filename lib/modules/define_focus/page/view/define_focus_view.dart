@@ -110,10 +110,11 @@ class _DefineFocusViewState extends State<DefineFocusView> {
           ),
           const SizedBox(height: 12),
           FocusSuggestions(onSelected: _applySuggestion),
-        ],
-        bottom: [
+          // Stitch keeps the tip right below the ideas, not pinned down.
           const SizedBox(height: 24),
           const FocusTipTile(),
+        ],
+        bottom: [
           const SizedBox(height: 24),
           ValueListenableBuilder<TextEditingValue>(
             valueListenable: _controller,
