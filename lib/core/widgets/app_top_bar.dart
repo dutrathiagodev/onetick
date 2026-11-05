@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'header_bar.dart';
 import 'onetick_mark.dart';
 
 import '../app_assets.dart';
@@ -74,73 +75,52 @@ class AppTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.background.withValues(alpha: 0.85),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x08000000),
-            blurRadius: 8,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        bottom: false,
-        child: SizedBox(
-          height: 64,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 12),
-            child: Row(
+    return HeaderBar(
+      padding: const EdgeInsets.only(left: 20, right: 12),
+      child: Row(
+        children: [
+          const OneTickMark(size: 32),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const OneTickMark(size: 32),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'OneTick',
-                        style: AppTextStyles.subtitle.copyWith(
-                          color: colors.text,
-                          height: 1,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Row(
-                        children: [
-                          Container(
-                            width: 6,
-                            height: 6,
-                            decoration: BoxDecoration(
-                              color: colors.brand,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Flexible(
-                            child: Text(
-                              section,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.caption.copyWith(
-                                color: colors.textMuted,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                Text(
+                  'OneTick',
+                  style: AppTextStyles.subtitle.copyWith(
+                    color: colors.text,
+                    height: 1,
                   ),
                 ),
-                UserAvatarButton(
-                  onPressed: onAvatarPressed,
-                  photoUrl: photoUrl,
+                const SizedBox(height: 2),
+                Row(
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: colors.brand,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        section,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.caption.copyWith(
+                          color: colors.textMuted,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-        ),
+          UserAvatarButton(onPressed: onAvatarPressed, photoUrl: photoUrl),
+        ],
       ),
     );
   }

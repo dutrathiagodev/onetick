@@ -208,7 +208,9 @@ void main() {
     await settle(tester);
     expect(find.byKey(const Key('terms_notice')), findsOneWidget);
     await tester.ensureVisible(find.byKey(const Key('terms_notice')));
-    await tester.tapOnText(find.textRange.ofSubstring('Termos de Uso'));
+    await tester.tapOnText(
+      find.textRange.ofSubstring('Termos\u00A0de\u00A0Uso'),
+    );
     await settle(tester);
     expect(find.textContaining('Atualizado em'), findsOneWidget);
   });
