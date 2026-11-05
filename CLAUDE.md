@@ -47,7 +47,7 @@ Features: onboarding, login, register, today (Hoje + Foco Concluído), define_fo
 flutter pub get
 flutter run -t lib/main/main.dart        # emulador "bigz_pixel" (Android) já existe na máquina
 flutter analyze                          # deve ficar sem avisos
-flutter test                             # 131 testes
+flutter test                             # 133 testes
 flutter test --update-goldens test/goldens   # regenera os prints das telas (440x890)
 python3 tool/generate_brand_assets.py    # regenera ícones/marca
 ```
@@ -60,9 +60,8 @@ Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa 
 
 ## Pendências (por impacto na nota)
 
-1. Risco de bug: a tela Hoje não atualiza sozinha na virada do dia (app aberto à meia-noite).
-2. Testar no iOS (OT-0033, precisa de Mac/Xcode); validar paleta do tema escuro com o designer (OT-0034).
-3. Ensaiar a apresentação (os dois integrantes, Stitch aberto, explicar arquitetura e dificuldades).
+1. Testar no iOS (OT-0033, precisa de Mac/Xcode); validar paleta do tema escuro com o designer (OT-0034).
+2. Ensaiar a apresentação (os dois integrantes, Stitch aberto, explicar arquitetura e dificuldades).
 
 ## Convenções do dono (siga)
 

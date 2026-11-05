@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
+import '../../core/utils/app_clock.dart';
 import '../../domain/focus/usecases/complete_today_focus_use_case.dart';
 import '../../domain/focus/usecases/get_streak_use_case.dart';
 import '../../domain/focus/usecases/get_today_focus_use_case.dart';
@@ -8,15 +11,34 @@ import '../../domain/focus/usecases/uncomplete_today_focus_use_case.dart';
 import 'today_state.dart';
 
 class TodayCubit extends Cubit<TodayState> {
-  TodayCubit(this._getToday, this._complete, this._uncomplete, this._getStreak)
-    : super(const TodayLoading());
+  TodayCubit(
+    this._getToday,
+    this._complete,
+    this._uncomplete,
+    this._getStreak,
+    this._clock,
+  ) : super(const TodayLoading());
 
   final GetTodayFocusUseCase _getToday;
   final CompleteTodayFocusUseCase _complete;
   final UncompleteTodayFocusUseCase _uncomplete;
   final GetStreakUseCase _getStreak;
+  final AppClock _clock;
+
+  /// Day the screen is showing; compared with the clock to catch midnight.
+  DateTime? _loadedDay;
+  Timer? _midnight;
+
+  /// Reloads when the date changed since the last load, e.g. the app was left
+  /// open overnight or brought back from the background on a new day.
+  Future<void> refreshIfNewDay() async {
+    final loaded = _loadedDay;
+    if (loaded != null && !_isSameDay(loaded, _clock.now())) await load();
+  }
 
   Future<void> load() async {
+    _loadedDay = _clock.now();
+    _scheduleMidnight();
     emit(const TodayLoading());
     try {
       final focus = await _getToday();
@@ -73,6 +95,26 @@ class TodayCubit extends Cubit<TodayState> {
         );
       }
     }
+  }
+
+  void _scheduleMidnight() {
+    _midnight?.cancel();
+    final now = _clock.now();
+    final next = DateTime(now.year, now.month, now.day + 1);
+    // A second of margin so "now" is surely on the new day when it fires.
+    _midnight = Timer(
+      next.difference(now) + const Duration(seconds: 1),
+      refreshIfNewDay,
+    );
+  }
+
+  static bool _isSameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
+
+  @override
+  Future<void> close() {
+    _midnight?.cancel();
+    return super.close();
   }
 
   /// "Desfazer conclusão": goes back to the pending state of today's focus.
