@@ -97,6 +97,38 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
     }
   }
 
+  /// Firebase only deletes an account signed in a few minutes ago.
+  static const _recentLogin = Duration(minutes: 5);
+
+  @override
+  Future<void> ensureCanDeleteAccount() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw const AppFailure('Sua sessão expirou. Entre novamente.');
+    }
+    final lastSignIn = user.metadata.lastSignInTime;
+    if (lastSignIn == null ||
+        DateTime.now().difference(lastSignIn) > _recentLogin) {
+      throw const AppFailure(
+        'Por segurança, saia e entre de novo na sua conta e então exclua.',
+      );
+    }
+  }
+
+  @override
+  Future<void> deleteAccount() {
+    return _guard(() async {
+      final user = _auth.currentUser;
+      if (user == null) return;
+      await user.delete();
+      try {
+        await _google.signOut();
+      } catch (_) {
+        // No Google session to clear.
+      }
+    });
+  }
+
   AuthUserModel? _map(User? user) {
     if (user == null) return null;
     return AuthUserModel(
@@ -161,6 +193,8 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
         return 'Escolha uma senha mais forte (mínimo 8 caracteres).';
       case 'network-request-failed':
         return 'Sem conexão. Verifique sua internet.';
+      case 'requires-recent-login':
+        return 'Por segurança, saia e entre de novo na sua conta e então exclua.';
       case 'too-many-requests':
         return 'Muitas tentativas. Aguarde um instante e tente de novo.';
       default:

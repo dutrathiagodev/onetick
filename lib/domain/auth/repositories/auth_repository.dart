@@ -18,4 +18,11 @@ abstract interface class AuthRepository {
   Future<void> sendPasswordReset({required String email});
 
   Future<void> signOut();
+
+  /// Throws when the provider would refuse to delete the account (sign-in too
+  /// old), so nothing is erased before the account itself can go.
+  Future<void> ensureCanDeleteAccount();
+
+  /// Permanently deletes the signed in account.
+  Future<void> deleteAccount();
 }

@@ -5,6 +5,7 @@ import '../../../main/di/screens/settings_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/settings/settings_cubit.dart';
 import '../../../presenter/settings/settings_state.dart';
+import '../../legal/page/legal_page.dart';
 import 'view/settings_error_view.dart';
 import 'view/settings_loading_view.dart';
 import 'view/settings_view.dart';
@@ -45,6 +46,12 @@ class SettingsPage extends StatelessWidget {
               onReminderTimeChanged: cubit.setReminderTime,
               onThemeChanged: cubit.setTheme,
               onClearHistory: cubit.clearHistory,
+              onDeleteAccount: cubit.deleteAccount,
+              onOpenLegal: (document) => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => LegalPage(document: document),
+                ),
+              ),
             ),
           };
         },

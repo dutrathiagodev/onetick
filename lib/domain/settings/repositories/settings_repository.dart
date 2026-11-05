@@ -7,4 +7,7 @@ abstract interface class SettingsRepository {
 
   /// Removes every focus entry of the signed in user.
   Future<void> clearHistory();
+
+  /// Removes the saved preferences (used when deleting the account).
+  Future<void> deletePreferences();
 }

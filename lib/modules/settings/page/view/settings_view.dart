@@ -5,6 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_icon.dart';
 import '../../../../domain/settings/entities/app_settings.dart';
+import '../../../legal/legal_documents.dart';
 import '../../widgets/about_card.dart';
 import '../../widgets/settings_banner.dart';
 import '../../widgets/settings_group.dart';
@@ -23,6 +24,8 @@ class SettingsView extends StatelessWidget {
     required this.onReminderTimeChanged,
     required this.onThemeChanged,
     required this.onClearHistory,
+    required this.onDeleteAccount,
+    required this.onOpenLegal,
   });
 
   final AppSettings settings;
@@ -31,6 +34,8 @@ class SettingsView extends StatelessWidget {
   final void Function(int hour, int minute) onReminderTimeChanged;
   final ValueChanged<AppThemePreference> onThemeChanged;
   final VoidCallback onClearHistory;
+  final VoidCallback onDeleteAccount;
+  final ValueChanged<LegalDocument> onOpenLegal;
 
   Future<void> _pickTime(BuildContext context) async {
     final picked = await showTimePicker(
@@ -47,22 +52,52 @@ class SettingsView extends StatelessWidget {
   }
 
   Future<void> _confirmClear(BuildContext context) async {
+    final confirmed = await _confirmDanger(
+      context,
+      title: 'Limpar histórico e hábitos?',
+      message: 'Todo o seu progresso acumulado será apagado e não poderá ser recuperado.',
+      action: 'Apagar',
+      keyPrefix: 'clear',
+    );
+    if (confirmed) onClearHistory();
+  }
+
+  Future<void> _confirmDeleteAccount(BuildContext context) async {
+    final confirmed = await _confirmDanger(
+      context,
+      title: 'Excluir sua conta?',
+      message:
+          'Sua conta, seu histórico de focos e suas preferências serão apagados '
+          'para sempre. Isso não pode ser desfeito.',
+      action: 'Excluir conta',
+      keyPrefix: 'delete_account',
+    );
+    if (confirmed) onDeleteAccount();
+  }
+
+  Future<bool> _confirmDanger(
+    BuildContext context, {
+    required String title,
+    required String message,
+    required String action,
+    required String keyPrefix,
+  }) async {
     final colors = context.colors;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: colors.surface,
         title: Text(
-          'Limpar histórico e hábitos?',
+          title,
           style: AppTextStyles.subtitle.copyWith(color: colors.text),
         ),
         content: Text(
-          'Todo o seu progresso acumulado será apagado e não poderá ser recuperado.',
+          message,
           style: AppTextStyles.label.copyWith(color: colors.textMuted),
         ),
         actions: [
           TextButton(
-            key: const Key('clear_cancel'),
+            key: Key('${keyPrefix}_cancel'),
             onPressed: () => Navigator.of(dialogContext).pop(false),
             child: Text(
               'Cancelar',
@@ -72,17 +107,17 @@ class SettingsView extends StatelessWidget {
             ),
           ),
           TextButton(
-            key: const Key('clear_confirm'),
+            key: Key('${keyPrefix}_confirm'),
             onPressed: () => Navigator.of(dialogContext).pop(true),
             child: Text(
-              'Apagar',
+              action,
               style: AppTextStyles.labelMedium.copyWith(color: colors.danger),
             ),
           ),
         ],
       ),
     );
-    if (confirmed == true) onClearHistory();
+    return confirmed ?? false;
   }
 
   void _showBackupInfo(BuildContext context) {
@@ -170,6 +205,42 @@ class SettingsView extends StatelessWidget {
           const SettingsSectionLabel(title: 'SOBRE'),
           const SizedBox(height: 8),
           const AboutCard(),
+          const SizedBox(height: 12),
+          SettingsGroup(
+            children: [
+              SettingsRow(
+                key: const Key('settings_privacy_row'),
+                iconAsset: AppAssets.lockLogin,
+                title: 'Política de Privacidade',
+                chevronAsset: AppAssets.chevronRight,
+                onTap: () => onOpenLegal(LegalDocument.privacy),
+              ),
+              SettingsRow(
+                key: const Key('settings_terms_row'),
+                iconAsset: AppAssets.ideaBook,
+                title: 'Termos de Uso',
+                chevronAsset: AppAssets.chevronRight,
+                onTap: () => onOpenLegal(LegalDocument.terms),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          const SettingsSectionLabel(title: 'CONTA'),
+          const SizedBox(height: 8),
+          SettingsGroup(
+            children: [
+              SettingsRow(
+                key: const Key('settings_delete_account_row'),
+                iconAsset: AppAssets.trashRed,
+                iconBackground: colors.dangerContainer.withValues(alpha: 0.3),
+                title: 'Excluir conta',
+                titleColor: colors.danger,
+                subtitle: 'Apaga a conta e todos os seus dados',
+                chevronAsset: AppAssets.chevronRightRed,
+                onTap: isBusy ? null : () => _confirmDeleteAccount(context),
+              ),
+            ],
+          ),
         ],
       ),
     );
