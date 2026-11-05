@@ -57,7 +57,12 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
       );
       final user = _require(cred.user);
       await cred.user!.updateDisplayName(name);
-      return AuthUserModel(id: user.id, email: user.email, name: name);
+      return AuthUserModel(
+        id: user.id,
+        email: user.email,
+        name: name,
+        photoUrl: user.photoUrl,
+      );
     });
   }
 
@@ -98,6 +103,7 @@ class FirebaseAuthAdapter implements AuthRemoteAdapter {
       id: user.uid,
       email: user.email ?? '',
       name: user.displayName,
+      photoUrl: user.photoURL,
     );
   }
 

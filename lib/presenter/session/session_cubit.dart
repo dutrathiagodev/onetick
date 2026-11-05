@@ -8,6 +8,12 @@ import 'session_state.dart';
 
 /// App-wide authentication session (drives the auth gate).
 class SessionCubit extends Cubit<SessionState> {
+  /// Profile picture of the signed in user, for the header avatar.
+  String? get photoUrl => switch (state) {
+    SessionAuthenticated(:final user) => user.photoUrl,
+    _ => null,
+  };
+
   SessionCubit(this._watchAuthState, this._signOut)
     : super(const SessionUnknown()) {
     _subscription = _watchAuthState().listen(

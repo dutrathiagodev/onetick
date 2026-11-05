@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/app_bottom_nav.dart';
 import '../../../core/widgets/app_top_bar.dart';
+import '../../../main/di/service_locator.dart';
+import '../../../presenter/session/session_cubit.dart';
 import '../../../presenter/shell/shell_cubit.dart';
 import '../../history/page/history_page.dart';
 import '../../settings/page/settings_page.dart';
@@ -32,6 +34,7 @@ class ShellPage extends StatelessWidget {
                 AppTopBar(
                   section: _sections[tab]!,
                   onAvatarPressed: () => showAccountSheet(context),
+                  photoUrl: getIt<SessionCubit>().photoUrl,
                 ),
                 Expanded(
                   child: switch (tab) {
