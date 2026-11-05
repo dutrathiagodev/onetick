@@ -7,15 +7,19 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import 'app_icon.dart';
 
-/// Black round user button shown at the right of every header.
+/// Round user button shown at the right of every header: the profile picture
+/// when there is one, otherwise the black user icon.
 class UserAvatarButton extends StatelessWidget {
-  const UserAvatarButton({super.key, required this.onPressed});
+  const UserAvatarButton({super.key, required this.onPressed, this.photoUrl});
 
   final VoidCallback onPressed;
+  final String? photoUrl;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    final icon = AppIcon(AppAssets.userWhite, tint: colors.onInverse);
+    final url = photoUrl;
     return Semantics(
       button: true,
       label: 'Conta',
@@ -34,7 +38,17 @@ class UserAvatarButton extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
-              child: AppIcon(AppAssets.userWhite, tint: colors.onInverse),
+              clipBehavior: Clip.antiAlias,
+              child: url == null
+                  ? icon
+                  : Image.network(
+                      url,
+                      width: 32,
+                      height: 32,
+                      fit: BoxFit.cover,
+                      // Offline or broken link: keep the default icon.
+                      errorBuilder: (_, _, _) => icon,
+                    ),
             ),
           ),
         ),
@@ -50,10 +64,12 @@ class AppTopBar extends StatelessWidget {
     super.key,
     required this.section,
     required this.onAvatarPressed,
+    this.photoUrl,
   });
 
   final String section;
   final VoidCallback onAvatarPressed;
+  final String? photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +133,10 @@ class AppTopBar extends StatelessWidget {
                     ],
                   ),
                 ),
-                UserAvatarButton(onPressed: onAvatarPressed),
+                UserAvatarButton(
+                  onPressed: onAvatarPressed,
+                  photoUrl: photoUrl,
+                ),
               ],
             ),
           ),

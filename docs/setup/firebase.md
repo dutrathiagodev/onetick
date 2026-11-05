@@ -4,30 +4,26 @@ O app usa **Firebase Auth** (e-mail/senha + Google) e **Cloud Firestore**.
 Sem Firebase configurado, o app roda em **modo local** (dados em memória) apenas em debug/profile;
 em release ele mostra uma tela de erro de configuração.
 
-## 1. Criar e ligar o projeto
+## Projeto configurado
+
+- Projeto: **`onetick-1d336`** (conta do dono), ligado em `.firebaserc`.
+- Apps: Android e iOS com o ID `dev.dutrathiago.onetick`.
+- Authentication: **E-mail/senha** e **Google** ativados.
+- Firestore: banco `(default)` em `southamerica-east1` (São Paulo), modo produção, regras de `firestore.rules` publicadas.
+- `lib/main/firebase_options.dart` já tem as opções reais e o `googleServerClientId` usado pelo Google Sign-In.
+- iOS: `REVERSED_CLIENT_ID` registrado como URL scheme em `ios/Runner/Info.plist`.
+- Android: SHA-1/SHA-256 do keystore de **debug** desta máquina cadastrados. Para outra máquina ou para o keystore de release, cadastre o novo SHA (comando abaixo).
+
+A CLI roda via `npx`, sem instalar nada global:
 
 ```bash
-npm i -g firebase-tools
-firebase login
-dart pub global activate flutterfire_cli
-flutterfire configure --out=lib/main/firebase_options.dart --platforms=android,ios
+npx firebase-tools@15.35.0 login
+npx firebase-tools@15.35.0 deploy --only firestore:rules
+npx firebase-tools@15.35.0 apps:android:sha:create 1:820418629636:android:06357393d51a35efd1e551 <SHA>
 ```
 
-Isso sobrescreve o placeholder `lib/main/firebase_options.dart` e baixa
-`android/app/google-services.json` / `ios/Runner/GoogleService-Info.plist`.
-
-## 2. Habilitar no console
-
-- Authentication → Sign-in method: **E-mail/senha** e **Google**.
-  - Android: cadastrar o SHA-1/SHA-256 do keystore.
-  - iOS: adicionar o `REVERSED_CLIENT_ID` em `Info.plist` (URL scheme).
-- Firestore Database → criar em modo produção.
-
-## 3. Publicar as regras
-
-```bash
-firebase deploy --only firestore:rules
-```
+`android/app/google-services.json` e `ios/Runner/GoogleService-Info.plist` ficam fora do git.
+Para baixá-los de novo: `npx firebase-tools@15.35.0 apps:sdkconfig ANDROID|IOS <appId> -o <arquivo>`.
 
 ## Modelo de dados
 

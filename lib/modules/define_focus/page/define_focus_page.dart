@@ -5,6 +5,7 @@ import '../../../main/di/screens/define_focus_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/define_focus/define_focus_cubit.dart';
 import '../../../presenter/define_focus/define_focus_state.dart';
+import '../../../presenter/session/session_cubit.dart';
 import '../../shell/widgets/account_sheet.dart';
 import '../widgets/define_focus_header.dart';
 import 'view/define_focus_error_view.dart';
@@ -32,6 +33,7 @@ class DefineFocusPage extends StatelessWidget {
             appBar: DefineFocusHeader(
               onBack: () => Navigator.of(context).maybePop(),
               onAvatar: () => showAccountSheet(context),
+              photoUrl: getIt<SessionCubit>().photoUrl,
             ),
             body: switch (state) {
               DefineFocusLoading() ||

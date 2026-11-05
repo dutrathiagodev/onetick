@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/theme/app_theme.dart';
+import '../domain/settings/usecases/sync_reminder_use_case.dart';
 import '../presenter/session/session_cubit.dart';
 import '../presenter/session/session_state.dart';
 import '../presenter/settings/app_theme_cubit.dart';
@@ -26,10 +27,13 @@ class OneTickApp extends StatelessWidget {
       child: BlocListener<SessionCubit, SessionState>(
         listener: (context, state) {
           final theme = context.read<AppThemeCubit>();
+          final reminder = getIt<SyncReminderUseCase>();
           if (state is SessionAuthenticated) {
             theme.restore();
+            reminder.restore().ignore();
           } else if (state is SessionUnauthenticated) {
             theme.reset();
+            reminder.cancel().ignore();
           }
         },
         child: BlocBuilder<AppThemeCubit, ThemeMode>(

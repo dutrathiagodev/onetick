@@ -14,7 +14,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0006 ] | DI com get_it por tela + injeção de adapters (Firebase ou em memória) | ✅ |
 | [ OT-0007 ] | Componentes compartilhados (botão pill, cards, pills, top bar, bottom nav, estados) | ✅ |
 | [ OT-0008 ] | Firebase: Auth (e-mail + Google) e Firestore (adapters + regras `firestore.rules`) | ✅ código |
-| [ OT-0009 ] | Firebase: `flutterfire configure`, habilitar provedores, publicar regras (`docs/setup/firebase.md`) | 🟡 |
+| [ OT-0009 ] | Firebase: `flutterfire configure`, habilitar provedores, publicar regras (`docs/setup/firebase.md`) | ✅ |
 | [ OT-0010 ] | Sessão/rotas: gate de autenticação, fluxo onboarding → cadastro/login → shell | ✅ |
 | [ OT-0011 ] | Testes: helpers, domínio, dados, widgets, fluxo completo, goldens | ✅ |
 | [ OT-0012 ] | Repositório GitHub `dutrathiagodev/onetick` | ✅ |
@@ -39,7 +39,8 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 
 | ID | Demanda | Status |
 | --- | --- | --- |
-| [ OT-0030 ] | Agendar notificação local do lembrete diário (hoje só salva a preferência) | ⬜ |
+| [ OT-0030 ] | Notificação local do lembrete diário com o ícone do OneTick (agenda, reagenda no login e cancela no logout) | ✅ |
+| [ OT-0036 ] | Foto de perfil do Google no avatar do cabeçalho (ícone padrão sem foto/offline) | ✅ |
 | [ OT-0032 ] | Páginas de Privacidade e Termos (links só texto no design) | ⬜ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (tema já implementado; paleta derivada, não existe no Figma) | 🟡 |

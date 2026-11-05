@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/failures.dart';
@@ -21,7 +23,8 @@ class FirestoreFocusAdapter implements FocusRemoteAdapter {
   @override
   Future<FocusModel?> getByKey(String dateKey) {
     return _guard(() async {
-      final snap = await _collection.doc(dateKey).get();
+      final doc = _collection.doc(dateKey);
+      final snap = await _read(doc.get, () => doc.get(_cacheOnly));
       final data = snap.data();
       return data == null ? null : _fromDoc(data);
     });
@@ -33,17 +36,59 @@ class FirestoreFocusAdapter implements FocusRemoteAdapter {
       final map = model.toMap();
       final at = model.completedAt;
       map['completedAt'] = at == null ? null : Timestamp.fromDate(at);
-      await _collection.doc(model.dateKey).set(map);
+      await _commit(_collection.doc(model.dateKey).set(map));
     });
+  }
+
+  /// Offline, Firestore applies the write to the local cache at once but only
+  /// completes the future after the server acknowledges it. Waiting forever
+  /// would freeze the UI, so after a short wait the write is treated as queued.
+  Future<void> _commit(Future<void> write) async {
+    try {
+      await write.timeout(_offline ? _offlineWait : _serverWait);
+    } on TimeoutException {
+      // Kept in the local cache and synced when the connection returns.
+      _markOffline();
+    }
+  }
+
+  static const _serverWait = Duration(seconds: 3);
+  static const _offlineWait = Duration(milliseconds: 300);
+
+  /// After a timeout, skip the server for a while so each tap doesn't pay
+  /// the full wait again.
+  DateTime? _offlineUntil;
+  bool get _offline =>
+      _offlineUntil != null && DateTime.now().isBefore(_offlineUntil!);
+  void _markOffline() =>
+      _offlineUntil = DateTime.now().add(const Duration(seconds: 30));
+
+  static const _cacheOnly = GetOptions(source: Source.cache);
+
+  /// Offline, a default read waits ~10s for the server before using the
+  /// cache, leaving the screen on a spinner. Fall back to the cache sooner.
+  Future<S> _read<S>(
+    Future<S> Function() server,
+    Future<S> Function() cache,
+  ) async {
+    if (_offline) return cache();
+    try {
+      final result = await server().timeout(_serverWait);
+      _offlineUntil = null;
+      return result;
+    } on TimeoutException {
+      _markOffline();
+      return cache();
+    }
   }
 
   @override
   Future<List<FocusModel>> range(String startKey, String endKey) {
     return _guard(() async {
-      final snap = await _collection
+      final query = _collection
           .where('dateKey', isGreaterThanOrEqualTo: startKey)
-          .where('dateKey', isLessThanOrEqualTo: endKey)
-          .get();
+          .where('dateKey', isLessThanOrEqualTo: endKey);
+      final snap = await _read(query.get, () => query.get(_cacheOnly));
       return snap.docs.map((d) => _fromDoc(d.data())).toList();
     });
   }

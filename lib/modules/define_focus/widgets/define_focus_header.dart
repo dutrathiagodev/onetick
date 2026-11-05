@@ -14,10 +14,12 @@ class DefineFocusHeader extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.onBack,
     required this.onAvatar,
+    this.photoUrl,
   });
 
   final VoidCallback onBack;
   final VoidCallback onAvatar;
+  final String? photoUrl;
 
   @override
   Size get preferredSize => const Size.fromHeight(64);
@@ -69,7 +71,7 @@ class DefineFocusHeader extends StatelessWidget implements PreferredSizeWidget {
                     style: AppTextStyles.subtitle.copyWith(color: colors.text),
                   ),
                 ),
-                UserAvatarButton(onPressed: onAvatar),
+                UserAvatarButton(onPressed: onAvatar, photoUrl: photoUrl),
               ],
             ),
           ),

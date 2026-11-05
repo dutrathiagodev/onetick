@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/failures.dart';
@@ -21,17 +23,30 @@ class FirestoreSettingsAdapter implements SettingsRemoteAdapter {
   @override
   Future<SettingsModel?> read() async {
     try {
-      final data = (await _doc.get()).data();
+      final data = (await _readSnapshot()).data();
       return data == null ? null : SettingsModel.fromMap(data);
     } on FirebaseException {
       throw const AppFailure('Não foi possível carregar suas configurações.');
     }
   }
 
+  /// Offline, a default read waits ~10s for the server; use the cache sooner.
+  Future<DocumentSnapshot<Map<String, dynamic>>> _readSnapshot() async {
+    try {
+      return await _doc.get().timeout(const Duration(seconds: 3));
+    } on TimeoutException {
+      return _doc.get(const GetOptions(source: Source.cache));
+    }
+  }
+
   @override
   Future<void> write(SettingsModel model) async {
     try {
-      await _doc.set(model.toMap());
+      // Offline writes only complete on server ack; the local cache already
+      // has the value, so a timeout means "queued", not "failed".
+      await _doc.set(model.toMap()).timeout(const Duration(seconds: 4));
+    } on TimeoutException {
+      // Synced when the connection returns.
     } on FirebaseException {
       throw const AppFailure('Não foi possível salvar suas configurações.');
     }
