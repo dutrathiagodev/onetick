@@ -27,6 +27,9 @@ abstract final class AppAssets {
   static const eyeRegister = '$_i/eye_register.svg';
   static const mailLogin = '$_i/mail_login.svg';
   static const lockLogin = '$_i/lock_login.svg';
+
+  /// Same lock as login, cropped to the glyph so it centers in a 32px tile.
+  static const lockSettings = '$_i/lock_settings.svg';
   static const eyeLogin = '$_i/eye_login.svg';
   static const google16 = '$_i/google_16.svg';
   static const google20 = '$_i/google_20.svg';

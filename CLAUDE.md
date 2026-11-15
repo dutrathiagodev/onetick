@@ -37,7 +37,7 @@ lib/
   modules/<feature>/    page (BlocProvider + decide loading/erro/vazio/sucesso), page/view, widgets
 ```
 
-Regras: fluxo `modules → presenter → domain`; `data`/`infra` implementam contratos; a **page** decide o estado e a **view** só renderiza o sucesso; DI por tela em `lib/main/di/screens/<feature>_dependencies.dart` (setups idempotentes; testes pré-registram fakes); nunca criar entrypoint fora de `lib/main/main.dart`. Rode sempre com `-t lib/main/main.dart`.
+Regras: fluxo `modules → presenter → domain`; `data`/`infra` implementam contratos; a **page** decide o estado e a **view** só renderiza o sucesso; DI por tela em `lib/main/di/screens/<feature>_dependencies.dart` (setups idempotentes; testes pré-registram fakes); o entrypoint real é `lib/main/main.dart` (o `lib/main.dart` só reexporta o `main()`, sem lógica); `flutter run -t lib/main/main.dart` também funciona.
 
 Features: onboarding, login, register, today (Hoje + Foco Concluído), define_focus, history, settings, shell (abas).
 

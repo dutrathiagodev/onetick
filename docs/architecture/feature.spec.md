@@ -47,7 +47,7 @@ Este spec define como qualquer nova feature deve ser estruturada em termos de ca
 
 - cada feature deve ter arquivo proprio em main/di/screens/<feature>\_dependencies.dart
 - setup global chama setup de cada feature em main/di/app_dependencies.dart
-- o app inicia em lib/main/main.dart
+- o app inicia em lib/main/main.dart (lib/main.dart apenas reexporta o `main()` de la, para `flutter run` funcionar sem `-t`)
 
 7. Convencoes de arquivo
 
@@ -93,7 +93,7 @@ lib/modules/<feature>/widgets/...
 - Criar state view como classe privada dentro da page
 - Instanciar dependencias manualmente dentro da view
 - Manter logica de dominio dentro de widget
-- Criar novo entrypoint fora de lib/main/main.dart
+- Criar novo entrypoint fora de lib/main/main.dart (o lib/main.dart de atalho nao tem logica, so reexporta)
 
 ## Processo de evolucao
 

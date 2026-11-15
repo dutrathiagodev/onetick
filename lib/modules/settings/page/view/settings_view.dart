@@ -158,7 +158,7 @@ class SettingsView extends StatelessWidget {
             children: [
               SettingsRow(
                 key: const Key('settings_privacy_row'),
-                iconAsset: AppAssets.lockLogin,
+                iconAsset: AppAssets.lockSettings,
                 title: 'Política de Privacidade',
                 chevronAsset: AppAssets.chevronRight,
                 onTap: () => onOpenLegal(LegalDocument.privacy),
