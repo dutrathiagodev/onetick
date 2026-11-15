@@ -52,5 +52,6 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0043 ] | Componentes nativos no iOS (interruptor, confirmação e horário) e onboarding sem o contador "1 DE 3" | ✅ |
 | [ OT-0044 ] | Cadeado centralizado em Configurações e `lib/main.dart` de atalho para `flutter run` | ✅ |
 | [ OT-0045 ] | Reorganizar a arquitetura: mesmo nome de feature em todas as camadas (focus→today, auth→login, notifications→settings) e DI separada por tela (login, register, session, shell) | ✅ |
+| [ OT-0046 ] | APK na release v1.0.0 do GitHub, README com link e time só do Thiago, docs enxutos (arquitetura, setup, tarefas) e PDFs da apresentação com os prints do emulador | ✅ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (paleta derivada, não existe no Figma/Stitch; contraste medido e texto de exemplo dos campos ajustado para 4,5:1) | 🟡 |

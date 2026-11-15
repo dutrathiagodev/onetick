@@ -90,10 +90,10 @@
 </ol>
 
 <div class="screens">
-  <figure><img src="../../../test/goldens/login.png"><figcaption>Login</figcaption></figure>
-  <figure><img src="../../../test/goldens/define_focus.png"><figcaption>Definir foco</figcaption></figure>
-  <figure><img src="../../../test/goldens/today_pending.png"><figcaption>Hoje</figcaption></figure>
-  <figure><img src="../../../test/goldens/history.png"><figcaption>Histórico</figcaption></figure>
+  <figure><img src="../../../.github/images/emulador/05_login.png"><figcaption>Login</figcaption></figure>
+  <figure><img src="../../../.github/images/emulador/06_define.png"><figcaption>Definir foco</figcaption></figure>
+  <figure><img src="../../../.github/images/emulador/07_hoje.png"><figcaption>Hoje</figcaption></figure>
+  <figure><img src="../../../.github/images/emulador/09_historico.png"><figcaption>Histórico</figcaption></figure>
 </div>
 
 <h2>Onde os dados ficam</h2>
@@ -137,7 +137,9 @@
   <div class="layer l5"><div class="name">infra<small>lib/infra</small></div><div><b>A borda.</b> Único lugar que fala com o Firebase e com as notificações.</div></div>
 </div>
 
-<p>Duas pastas de apoio: <code>lib/core</code> (tema e componentes visuais) e <code>lib/main</code> (ponto de entrada e injeção de dependências).</p>
+<p>Duas pastas de apoio: <code>lib/core</code> (tema e componentes visuais) e <code>lib/main</code> (aplicativo e injeção de dependências). O ponto de entrada é o <code>lib/main.dart</code> padrão do Flutter.</p>
+
+<p>Cada feature tem <b>o mesmo nome em todas as camadas</b> (por exemplo <code>today</code> em domain, data, presenter e modules). O que várias telas compartilham fica com a feature dona: <code>today</code> (foco do dia), <code>login</code> (autenticação) e <code>settings</code> (lembrete).</p>
 
 <div class="tip"><b>Em uma frase:</b> "Se amanhã trocarmos o Firebase por outra API, só a pasta <i>infra</i> muda. Telas, Cubits e regras continuam iguais."</div>
 
@@ -190,7 +192,7 @@ emit(TodayCompleted(focus: done, streak: streak));</pre>
   <tr><td>Tela travava sem internet</td><td>Timeout: a escrita fica no cache do aparelho e sincroniza depois.</td></tr>
   <tr><td>Login com Google falhava no emulador</td><td>Emulador com Play Store e SHA-1 cadastrado no Firebase.</td></tr>
   <tr><td>Tela Hoje mostrava o dia anterior</td><td>Recarrega à meia-noite e ao voltar do segundo plano.</td></tr>
-  <tr><td>Design com números inconsistentes</td><td>Tudo calculado a partir dos dados reais.</td></tr>
+  <tr><td>Números de exemplo no protótipo</td><td>Tudo calculado a partir dos dados reais.</td></tr>
   <tr><td>Overflow em telas pequenas</td><td>Rolagem ajustada e testes em vários tamanhos.</td></tr>
 </table>
 </div>
