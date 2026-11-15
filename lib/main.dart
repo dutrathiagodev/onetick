@@ -1,4 +1,30 @@
-// Atalho para `flutter run` sem `-t`. O entrypoint real continua sendo
-// lib/main/main.dart (veja docs/architecture/feature.spec.md); aqui só se
-// reexporta o `main()` de lá, sem lógica nenhuma.
-export 'main/main.dart' show main;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import 'main/app.dart';
+import 'main/di/app_dependencies.dart';
+import 'main/firebase_config_error_app.dart';
+import 'main/firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  var useFirebase = true;
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (error) {
+    if (kReleaseMode) {
+      // Never silently run a release build without its backend.
+      runApp(FirebaseConfigErrorApp(error: error));
+      return;
+    }
+    useFirebase = false;
+    debugPrint('Firebase indisponível, usando modo local (em memória): $error');
+  }
+
+  setupAppDependencies(useFirebase: useFirebase);
+  runApp(const OneTickApp());
+}

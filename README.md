@@ -63,7 +63,7 @@ Pré-requisitos: Flutter 3.47+ e um emulador ou aparelho.
 
 ```bash
 flutter pub get
-flutter run -t lib/main/main.dart   # sobe o app
+flutter run                      # sobe o app
 flutter analyze                     # análise estática
 flutter test                        # unitários, widgets, fluxo completo e goldens
 ```

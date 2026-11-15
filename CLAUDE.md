@@ -28,7 +28,7 @@ Clean Architecture + Cubit, conforme `docs/architecture/feature.spec.md`, `featu
 
 ```
 lib/
-  main/                 entrypoint (lib/main/main.dart), app, session_gate, auth_flow, di/
+  main/                 app, session_gate, auth_flow, di/
   core/                 theme (AppColors/AppTextStyles), widgets compartilhados, utils, routes
   domain/<feature>/     entities, repositories (contratos), usecases
   data/<feature>/       models e repository_impl
@@ -37,7 +37,7 @@ lib/
   modules/<feature>/    page (BlocProvider + decide loading/erro/vazio/sucesso), page/view, widgets
 ```
 
-Regras: fluxo `modules → presenter → domain`; `data`/`infra` implementam contratos; a **page** decide o estado e a **view** só renderiza o sucesso; DI por tela em `lib/main/di/screens/<feature>_dependencies.dart` (setups idempotentes; testes pré-registram fakes); o entrypoint real é `lib/main/main.dart` (o `lib/main.dart` só reexporta o `main()`, sem lógica); `flutter run -t lib/main/main.dart` também funciona.
+Regras: fluxo `modules → presenter → domain`; `data`/`infra` implementam contratos; a **page** decide o estado e a **view** só renderiza o sucesso; DI por tela em `lib/main/di/screens/<feature>_dependencies.dart` (setups idempotentes; testes pré-registram fakes); o entrypoint é o `lib/main.dart` padrão do Flutter (`flutter run` sem `-t`); ele só inicializa o Firebase, monta a DI e chama `runApp`.
 
 Features: onboarding, login, register, session, today (Hoje + Foco Concluído), define_focus, history, settings, shell (abas), legal.
 
@@ -47,7 +47,7 @@ O nome da feature é o mesmo em todas as camadas. Domínios compartilhados ficam
 
 ```bash
 flutter pub get
-flutter run -t lib/main/main.dart        # emulador "bigz_pixel" (Android) já existe na máquina
+flutter run                              # emulador "bigz_pixel" (Android) já existe na máquina
 flutter analyze                          # deve ficar sem avisos
 flutter test                             # 139 testes
 flutter test --update-goldens test/goldens   # regenera os prints das telas (440x890)
