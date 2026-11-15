@@ -167,7 +167,11 @@
   <span class="k">if</span> (existing == <span class="k">null</span>) {
     <span class="k">throw const</span> AppFailure(<span class="s">'Defina um foco antes de concluir.'</span>);
   }
-  <span class="k">await</span> _adapter.upsert(existing.copyWith(completed: <span class="k">true</span>));
+  <span class="k">final</span> model = FocusModel(
+    dateKey: key, title: existing.title,
+    completed: <span class="k">true</span>, completedAt: _now(),
+  );
+  <span class="k">await</span> _adapter.upsert(model);
   ...
 }</pre>
 

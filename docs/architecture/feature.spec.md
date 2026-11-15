@@ -1,6 +1,6 @@
 # Feature Spec - Arquitetura Padrao
 
-Documento normativo para novas features no mcpix_app.
+Documento normativo para novas features no OneTick.
 
 ## Escopo
 
@@ -99,7 +99,7 @@ lib/modules/<feature>/widgets/...
 
 Ao criar uma nova feature:
 
-1. Copiar a estrutura do modulo inventory
+1. Copiar a estrutura do modulo today
 2. Adaptar nomes e regras de negocio
 3. Registrar DI da nova tela
 4. Adicionar testes minimos

@@ -15,7 +15,7 @@ Garantir consistencia entre features com separacao clara de responsabilidades:
 
 ## Estrutura base por feature
 
-Use o nome da feature em ingles, singular ou plural de forma consistente (ex.: inventory).
+Use o nome da feature em ingles, singular ou plural de forma consistente (ex.: today).
 
 ```text
 lib/
