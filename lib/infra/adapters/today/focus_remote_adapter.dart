@@ -1,4 +1,4 @@
-import '../../../data/focus/models/focus_model.dart';
+import '../../../data/today/models/focus_model.dart';
 
 abstract interface class FocusRemoteAdapter {
   Future<FocusModel?> getByKey(String dateKey);

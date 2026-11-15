@@ -1,7 +1,7 @@
 import '../../../core/utils/date_utils.dart';
-import '../../../domain/focus/entities/focus_entity.dart';
+import '../../../domain/today/entities/focus_entity.dart';
 import '../../../domain/history/repositories/history_repository.dart';
-import '../../../infra/adapters/focus/focus_remote_adapter.dart';
+import '../../../infra/adapters/today/focus_remote_adapter.dart';
 
 class HistoryRepositoryImpl implements HistoryRepository {
   const HistoryRepositoryImpl(this._adapter);

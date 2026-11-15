@@ -6,7 +6,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/app_icon.dart';
-import '../../../domain/focus/entities/focus_entity.dart';
+import '../../../domain/today/entities/focus_entity.dart';
 
 /// Main card of "Hoje (Concluído)" from the Stitch design: celebration badge,
 /// done check, struck-through task, a closing note and the two actions.

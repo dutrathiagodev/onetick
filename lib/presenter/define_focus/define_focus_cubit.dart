@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
-import '../../domain/focus/usecases/get_today_focus_use_case.dart';
-import '../../domain/focus/usecases/save_today_focus_use_case.dart';
+import '../../domain/today/usecases/get_today_focus_use_case.dart';
+import '../../domain/today/usecases/save_today_focus_use_case.dart';
 import 'define_focus_state.dart';
 
 class DefineFocusCubit extends Cubit<DefineFocusState> {

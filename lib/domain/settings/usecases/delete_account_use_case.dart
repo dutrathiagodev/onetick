@@ -1,4 +1,4 @@
-import '../../auth/repositories/auth_repository.dart';
+import '../../login/repositories/auth_repository.dart';
 import '../repositories/settings_repository.dart';
 
 /// "Excluir conta": erases the user's data and then the account itself.

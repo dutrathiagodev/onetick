@@ -3,7 +3,7 @@ import 'package:onetick/domain/settings/entities/app_settings_entity.dart';
 import 'package:onetick/domain/settings/repositories/reminder_scheduler.dart';
 import 'package:onetick/domain/settings/repositories/settings_repository.dart';
 import 'package:onetick/domain/settings/usecases/sync_reminder_use_case.dart';
-import 'package:onetick/infra/adapters/notifications/in_memory_reminder_scheduler.dart';
+import 'package:onetick/infra/adapters/settings/in_memory_reminder_scheduler.dart';
 import 'package:onetick/main/di/service_locator.dart';
 import 'package:onetick/presenter/settings/settings_cubit.dart';
 import 'package:onetick/presenter/settings/settings_state.dart';

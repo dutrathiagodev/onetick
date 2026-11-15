@@ -1,20 +1,18 @@
 import 'package:flutter/foundation.dart';
 
 import '../../../core/failures.dart';
-import '../../../data/auth/repositories/auth_repository_impl.dart';
-import '../../../domain/auth/repositories/auth_repository.dart';
-import '../../../domain/auth/usecases/send_password_reset_use_case.dart';
-import '../../../domain/auth/usecases/sign_in_use_case.dart';
-import '../../../domain/auth/usecases/sign_in_with_google_use_case.dart';
-import '../../../domain/auth/usecases/sign_out_use_case.dart';
-import '../../../domain/auth/usecases/sign_up_use_case.dart';
-import '../../../domain/auth/usecases/watch_auth_state_use_case.dart';
-import '../../../infra/adapters/auth/auth_remote_adapter.dart';
-import '../../../infra/adapters/auth/firebase_auth_adapter.dart';
-import '../../../infra/adapters/auth/in_memory_auth_adapter.dart';
+import '../../../data/login/repositories/auth_repository_impl.dart';
+import '../../../domain/login/repositories/auth_repository.dart';
+import '../../../domain/login/usecases/send_password_reset_use_case.dart';
+import '../../../domain/login/usecases/sign_in_use_case.dart';
+import '../../../domain/login/usecases/sign_in_with_google_use_case.dart';
+import '../../../domain/login/usecases/sign_out_use_case.dart';
+import '../../../domain/login/usecases/sign_up_use_case.dart';
+import '../../../domain/login/usecases/watch_auth_state_use_case.dart';
+import '../../../infra/adapters/login/auth_remote_adapter.dart';
+import '../../../infra/adapters/login/firebase_auth_adapter.dart';
+import '../../../infra/adapters/login/in_memory_auth_adapter.dart';
 import '../../../presenter/login/login_cubit.dart';
-import '../../../presenter/register/register_cubit.dart';
-import '../../../presenter/session/session_cubit.dart';
 import '../../firebase_options.dart';
 import '../service_locator.dart';
 
@@ -27,7 +25,8 @@ String currentUserId() {
   return user.id;
 }
 
-void setupAuthDependencies() {
+/// Shared by login, register and session: adapter, repository and use cases.
+void setupLoginDependencies() {
   if (!getIt.isRegistered<AuthRemoteAdapter>()) {
     getIt.registerLazySingleton<AuthRemoteAdapter>(
       () => getIt<AppConfig>().useFirebase
@@ -57,26 +56,12 @@ void setupAuthDependencies() {
     );
     getIt.registerFactory(() => WatchAuthStateUseCase(getIt<AuthRepository>()));
   }
-  if (!getIt.isRegistered<SessionCubit>()) {
-    getIt.registerLazySingleton(
-      () =>
-          SessionCubit(getIt<WatchAuthStateUseCase>(), getIt<SignOutUseCase>()),
-    );
-  }
   if (!getIt.isRegistered<LoginCubit>()) {
     getIt.registerFactory(
       () => LoginCubit(
         getIt<SignInUseCase>(),
         getIt<SignInWithGoogleUseCase>(),
         getIt<SendPasswordResetUseCase>(),
-      ),
-    );
-  }
-  if (!getIt.isRegistered<RegisterCubit>()) {
-    getIt.registerFactory(
-      () => RegisterCubit(
-        getIt<SignUpUseCase>(),
-        getIt<SignInWithGoogleUseCase>(),
       ),
     );
   }

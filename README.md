@@ -86,7 +86,7 @@ lib/
   core/                 tema, assets, widgets compartilhados e utilitários
   domain/<feature>/     entidades, contratos de repositório e casos de uso
   data/<feature>/       modelos e implementações dos repositórios
-  infra/adapters/       Firebase (Auth e Firestore) e versões em memória
+  infra/adapters/<feature>/  Firebase (Auth e Firestore), notificações e versões em memória
   presenter/<feature>/  cubits e states
   modules/<feature>/    page (decide o estado), view e widgets
 assets/                 ícones SVG, imagens e fontes
@@ -95,7 +95,7 @@ test/                   domínio, dados, widgets, fluxo completo e goldens
 tool/                   gerador do ícone do app
 ```
 
-A arquitetura segue [`docs/architecture`](docs/architecture): **Clean Architecture + Cubit**, com fluxo `modules → presenter → domain` e `data`/`infra` implementando os contratos. A *page* decide carregando, erro, vazio e sucesso; a *view* só renderiza o sucesso. Isso permite trocar o Firebase por fakes nos testes sem mexer em nenhuma tela.
+A arquitetura segue [`docs/architecture`](docs/architecture): **Clean Architecture + Cubit**, com fluxo `modules → presenter → domain` e `data`/`infra` implementando os contratos. A *page* decide carregando, erro, vazio e sucesso; a *view* só renderiza o sucesso. Isso permite trocar o Firebase por fakes nos testes sem mexer em nenhuma tela. O nome da feature é o mesmo em todas as camadas; o que várias telas compartilham (foco do dia, autenticação, lembrete) fica com a feature dona (`today`, `login`, `settings`).
 
 ## Qualidade
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/focus/entities/focus_entity.dart';
+import '../../../../domain/today/entities/focus_entity.dart';
 import '../../widgets/focus_card.dart';
 import '../../widgets/rhythm_card.dart';
 import '../../widgets/today_status_bar.dart';

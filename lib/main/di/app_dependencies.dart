@@ -1,9 +1,12 @@
 import '../../core/utils/app_clock.dart';
-import 'screens/auth_dependencies.dart';
 import 'screens/define_focus_dependencies.dart';
 import 'screens/history_dependencies.dart';
+import 'screens/login_dependencies.dart';
 import 'screens/onboarding_dependencies.dart';
+import 'screens/register_dependencies.dart';
+import 'screens/session_dependencies.dart';
 import 'screens/settings_dependencies.dart';
+import 'screens/shell_dependencies.dart';
 import 'screens/today_dependencies.dart';
 import 'service_locator.dart';
 
@@ -19,7 +22,10 @@ void setupAppDependencies({
   if (!getIt.isRegistered<AppClock>()) {
     getIt.registerSingleton<AppClock>(clock);
   }
-  setupAuthDependencies();
+  setupLoginDependencies();
+  setupRegisterDependencies();
+  setupSessionDependencies();
+  setupShellDependencies();
   setupOnboardingDependencies();
   setupTodayDependencies();
   setupDefineFocusDependencies();

@@ -1,7 +1,7 @@
 import '../../../core/utils/date_utils.dart';
-import '../../focus/entities/focus_entity.dart';
-import '../../focus/usecases/get_streak_use_case.dart';
-import '../../focus/usecases/streak_calculator.dart';
+import '../../today/entities/focus_entity.dart';
+import '../../today/usecases/get_streak_use_case.dart';
+import '../../today/usecases/streak_calculator.dart';
 import '../entities/history_day_entity.dart';
 import '../entities/history_overview_entity.dart';
 import '../repositories/history_repository.dart';

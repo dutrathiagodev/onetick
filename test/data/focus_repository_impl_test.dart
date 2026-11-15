@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onetick/core/failures.dart';
-import 'package:onetick/data/focus/repositories/focus_repository_impl.dart';
-import 'package:onetick/infra/adapters/focus/in_memory_focus_adapter.dart';
+import 'package:onetick/data/today/repositories/focus_repository_impl.dart';
+import 'package:onetick/infra/adapters/today/in_memory_focus_adapter.dart';
 
 import '../helpers/test_setup.dart';
 

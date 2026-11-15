@@ -1,4 +1,4 @@
-import '../../../domain/auth/entities/auth_user_entity.dart';
+import '../../../domain/login/entities/auth_user_entity.dart';
 
 class AuthUserModel {
   const AuthUserModel({

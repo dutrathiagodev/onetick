@@ -59,6 +59,22 @@ Este spec define como qualquer nova feature deve ser estruturada em termos de ca
 - <feature>\_page.dart
 - <feature>\_view.dart
 
+## Nome da feature igual em todas as camadas
+
+Cada feature usa o mesmo nome em `domain`, `data`, `infra/adapters`, `presenter`, `modules` e `main/di/screens`.
+
+Quando varias telas usam a mesma regra, a **feature dona** guarda o dominio e as outras apenas importam dela:
+
+| Dominio compartilhado | Feature dona | Quem reaproveita |
+| --- | --- | --- |
+| foco do dia (`FocusRepository`, adapter do Firestore) | `today` | `define_focus`, `history`, `settings` |
+| autenticacao (`AuthRepository`, casos de uso de login) | `login` | `register`, `session`, `settings` |
+| lembrete (`ReminderScheduler`, notificacao local) | `settings` | - |
+
+A DI segue a dona: `register` e `session` chamam `setupLoginDependencies()`; `define_focus`, `history` e `settings` chamam `setupFocusAdapterDependencies()` (em `today_dependencies.dart`).
+
+Telas de formulario (login, cadastro) e a pagina estatica `legal` nao tem view de vazio nem de carregamento; `shell` so controla as abas.
+
 ## Estrutura obrigatoria de arquivos
 
 ```text

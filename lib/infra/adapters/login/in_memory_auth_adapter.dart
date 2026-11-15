@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import '../../../core/failures.dart';
-import '../../../data/auth/models/auth_user_model.dart';
+import '../../../data/login/models/auth_user_model.dart';
 import 'auth_remote_adapter.dart';
 
 /// Offline/dev adapter used by tests and when Firebase is not configured.

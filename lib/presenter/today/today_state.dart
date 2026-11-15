@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/focus/entities/focus_entity.dart';
+import '../../domain/today/entities/focus_entity.dart';
 
 sealed class TodayState extends Equatable {
   const TodayState();

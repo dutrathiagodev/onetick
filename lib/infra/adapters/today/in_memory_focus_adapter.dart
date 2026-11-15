@@ -1,4 +1,4 @@
-import '../../../data/focus/models/focus_model.dart';
+import '../../../data/today/models/focus_model.dart';
 import 'focus_remote_adapter.dart';
 
 class InMemoryFocusAdapter implements FocusRemoteAdapter {

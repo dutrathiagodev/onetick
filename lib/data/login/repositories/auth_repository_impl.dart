@@ -1,6 +1,6 @@
-import '../../../domain/auth/entities/auth_user_entity.dart';
-import '../../../domain/auth/repositories/auth_repository.dart';
-import '../../../infra/adapters/auth/auth_remote_adapter.dart';
+import '../../../domain/login/entities/auth_user_entity.dart';
+import '../../../domain/login/repositories/auth_repository.dart';
+import '../../../infra/adapters/login/auth_remote_adapter.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this._adapter);

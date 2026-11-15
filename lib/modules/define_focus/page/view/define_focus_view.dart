@@ -7,7 +7,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_icon.dart';
 import '../../../../core/widgets/dot_pill.dart';
 import '../../../../core/widgets/primary_pill_button.dart';
-import '../../../../domain/focus/entities/focus_entity.dart';
+import '../../../../domain/today/entities/focus_entity.dart';
 import '../../widgets/focus_input_card.dart';
 import '../../widgets/focus_suggestions.dart';
 import '../../widgets/focus_tip_tile.dart';

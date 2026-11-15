@@ -39,7 +39,9 @@ lib/
 
 Regras: fluxo `modules → presenter → domain`; `data`/`infra` implementam contratos; a **page** decide o estado e a **view** só renderiza o sucesso; DI por tela em `lib/main/di/screens/<feature>_dependencies.dart` (setups idempotentes; testes pré-registram fakes); o entrypoint real é `lib/main/main.dart` (o `lib/main.dart` só reexporta o `main()`, sem lógica); `flutter run -t lib/main/main.dart` também funciona.
 
-Features: onboarding, login, register, today (Hoje + Foco Concluído), define_focus, history, settings, shell (abas).
+Features: onboarding, login, register, session, today (Hoje + Foco Concluído), define_focus, history, settings, shell (abas), legal.
+
+O nome da feature é o mesmo em todas as camadas. Domínios compartilhados ficam com a feature **dona**: `today` (foco do dia, usado por define_focus, history e settings), `login` (autenticação, usada por register, session e settings) e `settings` (lembrete/notificação). Detalhes em `docs/architecture/feature.spec.md`.
 
 ## Comandos
 
@@ -47,7 +49,7 @@ Features: onboarding, login, register, today (Hoje + Foco Concluído), define_fo
 flutter pub get
 flutter run -t lib/main/main.dart        # emulador "bigz_pixel" (Android) já existe na máquina
 flutter analyze                          # deve ficar sem avisos
-flutter test                             # 136 testes
+flutter test                             # 139 testes
 flutter test --update-goldens test/goldens   # regenera os prints das telas (440x890)
 python3 tool/generate_brand_assets.py    # regenera ícones/marca
 ```

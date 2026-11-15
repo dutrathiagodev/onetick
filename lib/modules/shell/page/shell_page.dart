@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/app_bottom_nav.dart';
 import '../../../core/widgets/app_top_bar.dart';
+import '../../../main/di/screens/shell_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/session/session_cubit.dart';
 import '../../../presenter/shell/shell_cubit.dart';
@@ -24,8 +25,9 @@ class ShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setupShellDependencies();
     return BlocProvider<ShellCubit>(
-      create: (_) => ShellCubit(),
+      create: (_) => getIt<ShellCubit>(),
       child: BlocBuilder<ShellCubit, HomeTab>(
         builder: (context, tab) {
           return Scaffold(

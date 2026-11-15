@@ -48,6 +48,10 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0039 ] | Termos visíveis antes de criar a conta (Cadastro e Google no Login) e Privacidade/Termos em Configurações | ✅ |
 | [ OT-0040 ] | Excluir conta no app (Configurações > Excluir conta), apagando histórico, preferências e a conta | ✅ |
 | [ OT-0041 ] | Componentizar código repetido: cabeçalho (`HeaderBar`, `BackTitleBar`, `AppBackButton`), `AuthHeader`, `AuthCard`, `showNotice` e `showDangerConfirm` em `lib/core/widgets` | ✅ |
+| [ OT-0042 ] | Guia do projeto e pitch em PDF para a apresentação (versão simplificada, só créditos do Thiago) | ✅ |
+| [ OT-0043 ] | Componentes nativos no iOS (interruptor, confirmação e horário) e onboarding sem o contador "1 DE 3" | ✅ |
+| [ OT-0044 ] | Cadeado centralizado em Configurações e `lib/main.dart` de atalho para `flutter run` | ✅ |
+| [ OT-0045 ] | Reorganizar a arquitetura: mesmo nome de feature em todas as camadas (focus→today, auth→login, notifications→settings) e DI separada por tela (login, register, session, shell) | ✅ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (paleta derivada, não existe no Figma/Stitch; contraste medido e texto de exemplo dos campos ajustado para 4,5:1) | 🟡 |
 

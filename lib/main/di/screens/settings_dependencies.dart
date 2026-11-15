@@ -1,5 +1,5 @@
 import '../../../data/settings/repositories/settings_repository_impl.dart';
-import '../../../domain/auth/repositories/auth_repository.dart';
+import '../../../domain/login/repositories/auth_repository.dart';
 import '../../../domain/settings/repositories/reminder_scheduler.dart';
 import '../../../domain/settings/repositories/settings_repository.dart';
 import '../../../domain/settings/usecases/clear_history_use_case.dart';
@@ -7,16 +7,16 @@ import '../../../domain/settings/usecases/delete_account_use_case.dart';
 import '../../../domain/settings/usecases/get_settings_use_case.dart';
 import '../../../domain/settings/usecases/save_settings_use_case.dart';
 import '../../../domain/settings/usecases/sync_reminder_use_case.dart';
-import '../../../infra/adapters/focus/focus_remote_adapter.dart';
-import '../../../infra/adapters/notifications/local_reminder_scheduler.dart';
+import '../../../infra/adapters/today/focus_remote_adapter.dart';
+import '../../../infra/adapters/settings/local_reminder_scheduler.dart';
 import '../../../infra/adapters/settings/firestore_settings_adapter.dart';
 import '../../../infra/adapters/settings/in_memory_settings_adapter.dart';
 import '../../../infra/adapters/settings/settings_remote_adapter.dart';
 import '../../../presenter/settings/app_theme_cubit.dart';
 import '../../../presenter/settings/settings_cubit.dart';
 import '../service_locator.dart';
-import 'auth_dependencies.dart';
-import 'focus_adapter_dependencies.dart';
+import 'login_dependencies.dart';
+import 'today_dependencies.dart';
 
 void setupSettingsDependencies() {
   setupFocusAdapterDependencies();

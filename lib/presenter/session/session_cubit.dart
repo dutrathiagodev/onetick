@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/auth/usecases/sign_out_use_case.dart';
-import '../../domain/auth/usecases/watch_auth_state_use_case.dart';
+import '../../domain/login/usecases/sign_out_use_case.dart';
+import '../../domain/login/usecases/watch_auth_state_use_case.dart';
 import 'session_state.dart';
 
 /// App-wide authentication session (drives the auth gate).

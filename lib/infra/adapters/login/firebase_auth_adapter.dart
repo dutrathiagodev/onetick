@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/failures.dart';
-import '../../../data/auth/models/auth_user_model.dart';
+import '../../../data/login/models/auth_user_model.dart';
 import 'auth_remote_adapter.dart';
 
 class FirebaseAuthAdapter implements AuthRemoteAdapter {

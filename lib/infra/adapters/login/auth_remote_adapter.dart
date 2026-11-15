@@ -1,4 +1,4 @@
-import '../../../data/auth/models/auth_user_model.dart';
+import '../../../data/login/models/auth_user_model.dart';
 
 abstract interface class AuthRemoteAdapter {
   AuthUserModel? get currentUser;

@@ -1,4 +1,4 @@
-import '../../../domain/focus/entities/focus_entity.dart';
+import '../../../domain/today/entities/focus_entity.dart';
 
 class FocusModel {
   const FocusModel({

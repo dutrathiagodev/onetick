@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:onetick/domain/focus/entities/focus_entity.dart';
-import 'package:onetick/domain/focus/usecases/streak_calculator.dart';
+import 'package:onetick/domain/today/entities/focus_entity.dart';
+import 'package:onetick/domain/today/usecases/streak_calculator.dart';
 
 FocusEntity done(String key) =>
     FocusEntity(dateKey: key, title: 't', completed: true);

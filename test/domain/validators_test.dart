@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onetick/core/failures.dart';
-import 'package:onetick/domain/auth/usecases/auth_validators.dart';
-import 'package:onetick/domain/focus/usecases/focus_title_validator.dart';
+import 'package:onetick/domain/login/usecases/auth_validators.dart';
+import 'package:onetick/domain/today/usecases/focus_title_validator.dart';
 
 void main() {
   group('AuthValidators', () {

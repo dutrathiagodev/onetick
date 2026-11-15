@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../focus/entities/focus_entity.dart';
+import '../../today/entities/focus_entity.dart';
 
 class HistoryDay extends Equatable {
   const HistoryDay({required this.date, this.entry});

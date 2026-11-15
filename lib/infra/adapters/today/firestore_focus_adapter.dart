@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/failures.dart';
-import '../../../data/focus/models/focus_model.dart';
+import '../../../data/today/models/focus_model.dart';
 import 'focus_remote_adapter.dart';
 
 /// Stores one document per day at `users/{uid}/focus/{yyyy-MM-dd}`.

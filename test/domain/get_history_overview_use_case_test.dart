@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onetick/data/history/repositories/history_repository_impl.dart';
 import 'package:onetick/domain/history/usecases/get_history_overview_use_case.dart';
-import 'package:onetick/infra/adapters/focus/in_memory_focus_adapter.dart';
+import 'package:onetick/infra/adapters/today/in_memory_focus_adapter.dart';
 
 import '../helpers/test_setup.dart';
 

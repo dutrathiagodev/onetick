@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../main/di/screens/auth_dependencies.dart';
+import '../../../main/di/screens/register_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/register/register_cubit.dart';
 import '../../../presenter/register/register_state.dart';
@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setupAuthDependencies();
+    setupRegisterDependencies();
     return BlocProvider<RegisterCubit>(
       create: (_) => getIt<RegisterCubit>(),
       child: Scaffold(

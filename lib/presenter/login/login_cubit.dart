@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
-import '../../domain/auth/usecases/send_password_reset_use_case.dart';
-import '../../domain/auth/usecases/sign_in_use_case.dart';
-import '../../domain/auth/usecases/sign_in_with_google_use_case.dart';
+import '../../domain/login/usecases/send_password_reset_use_case.dart';
+import '../../domain/login/usecases/sign_in_use_case.dart';
+import '../../domain/login/usecases/sign_in_with_google_use_case.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

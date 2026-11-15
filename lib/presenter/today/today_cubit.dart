@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
 import '../../core/utils/app_clock.dart';
-import '../../domain/focus/usecases/complete_today_focus_use_case.dart';
-import '../../domain/focus/usecases/get_streak_use_case.dart';
-import '../../domain/focus/usecases/get_today_focus_use_case.dart';
-import '../../domain/focus/usecases/uncomplete_today_focus_use_case.dart';
+import '../../domain/today/usecases/complete_today_focus_use_case.dart';
+import '../../domain/today/usecases/get_streak_use_case.dart';
+import '../../domain/today/usecases/get_today_focus_use_case.dart';
+import '../../domain/today/usecases/uncomplete_today_focus_use_case.dart';
 import 'today_state.dart';
 
 class TodayCubit extends Cubit<TodayState> {

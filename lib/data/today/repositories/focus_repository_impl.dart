@@ -1,8 +1,8 @@
 import '../../../core/utils/date_utils.dart';
-import '../../../domain/focus/entities/focus_entity.dart';
-import '../../../domain/focus/repositories/focus_repository.dart';
+import '../../../domain/today/entities/focus_entity.dart';
+import '../../../domain/today/repositories/focus_repository.dart';
 import '../../../core/failures.dart';
-import '../../../infra/adapters/focus/focus_remote_adapter.dart';
+import '../../../infra/adapters/today/focus_remote_adapter.dart';
 import '../models/focus_model.dart';
 
 class FocusRepositoryImpl implements FocusRepository {

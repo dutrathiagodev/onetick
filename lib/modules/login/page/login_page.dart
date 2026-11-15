@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../main/di/screens/auth_dependencies.dart';
+import '../../../main/di/screens/login_dependencies.dart';
 import '../../../main/di/service_locator.dart';
 import '../../../presenter/login/login_cubit.dart';
 import '../../../presenter/login/login_state.dart';
@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setupAuthDependencies();
+    setupLoginDependencies();
     return BlocProvider<LoginCubit>(
       create: (_) => getIt<LoginCubit>(),
       child: Scaffold(

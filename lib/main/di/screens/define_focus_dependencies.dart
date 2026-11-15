@@ -1,6 +1,6 @@
-import '../../../domain/focus/usecases/get_today_focus_use_case.dart';
-import '../../../domain/focus/usecases/save_today_focus_use_case.dart';
-import '../../../domain/focus/repositories/focus_repository.dart';
+import '../../../domain/today/usecases/get_today_focus_use_case.dart';
+import '../../../domain/today/usecases/save_today_focus_use_case.dart';
+import '../../../domain/today/repositories/focus_repository.dart';
 import '../../../presenter/define_focus/define_focus_cubit.dart';
 import '../service_locator.dart';
 import 'today_dependencies.dart';

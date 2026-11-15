@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
-import '../../domain/auth/usecases/sign_in_with_google_use_case.dart';
-import '../../domain/auth/usecases/sign_up_use_case.dart';
+import '../../domain/login/usecases/sign_in_with_google_use_case.dart';
+import '../../domain/login/usecases/sign_up_use_case.dart';
 import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
