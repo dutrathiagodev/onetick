@@ -56,7 +56,7 @@ python3 tool/generate_brand_assets.py    # regenera ícones/marca
 
 ## Estado atual
 
-Feito (ver `docs/tasks/BOARD.md`): as 10 telas (todas conferidas com o Stitch, ver `docs/design-review.md`), Firebase real (projeto `onetick-1d336`, `docs/setup/firebase.md`), login com Google, modo offline do Firestore, lembrete diário por notificação local, foto de perfil do Google, páginas de Privacidade e Termos (aviso no cadastro e links em Configurações), excluir conta no app (exigência da Google Play e da Apple), tema claro/escuro, logo e ícone, README e testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens).
+Feito (ver `docs/tasks/BOARD.md`): as 10 telas (conferidas com o app no emulador), Firebase real (projeto `onetick-1d336`, `docs/setup/firebase.md`), login com Google, modo offline do Firestore, lembrete diário por notificação local, foto de perfil do Google, páginas de Privacidade e Termos (aviso no cadastro e links em Configurações), excluir conta no app (exigência da Google Play e da Apple), tema claro/escuro, logo e ícone, README e testes (domínio, dados, widgets, fluxo completo, telas pequenas sem overflow, goldens).
 
 Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa vermelha em debug). Em **release** sem Firebase mostra tela de erro de propósito. Push via servidor (FCM) e e-mail foram descartados (exigem o plano Blaze).
 
@@ -76,7 +76,7 @@ Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa 
 
 ## Decisões de design (não desfazer sem avisar)
 
-- O Figma/Stitch tem inconsistências; o app corrige: percentual da tela Hoje é 0% pendente / 100% concluído; números do Histórico vêm dos dados; texto "anúncios" corrigido; "Mínimo 8 caracteres" padronizado. Detalhes em `docs/design-review.md`.
+- O Figma/Stitch tem inconsistências; o app corrige: percentual da tela Hoje é 0% pendente / 100% concluído; números do Histórico vêm dos dados; texto "anúncios" corrigido; "Mínimo 8 caracteres" padronizado.
 - "Salvar Foco" fica desabilitado com campo vazio.
 - O tema escuro é derivado (não existe no Figma/Stitch).
 - Formulários e abas usam `BottomAnchoredScroll`/`SingleChildScrollView` para nunca estourar (overflow) em tela pequena, teclado aberto ou fonte grande; há testes de regressão em `test/modules/small_screen_test.dart`.

@@ -43,7 +43,7 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0030 ] | Notificação local do lembrete diário com o ícone do OneTick (agenda, reagenda no login e cancela no logout) | ✅ |
 | [ OT-0036 ] | Foto de perfil do Google no avatar do cabeçalho (ícone padrão sem foto/offline) | ✅ |
 | [ OT-0032 ] | Páginas de Privacidade e Termos, abertas pelo rodapé do Login e do Cadastro | ✅ |
-| [ OT-0037 ] | Conferir as 10 telas com o Stitch e corrigir diferenças (`docs/design-review.md`) | ✅ |
+| [ OT-0037 ] | Conferir as 10 telas com o Stitch e corrigir diferenças | ✅ |
 | [ OT-0038 ] | Tela Hoje recarrega na virada do dia (meia-noite com o app aberto ou ao voltar do segundo plano) | ✅ |
 | [ OT-0039 ] | Termos visíveis antes de criar a conta (Cadastro e Google no Login) e Privacidade/Termos em Configurações | ✅ |
 | [ OT-0040 ] | Excluir conta no app (Configurações > Excluir conta), apagando histórico, preferências e a conta | ✅ |
@@ -54,5 +54,3 @@ Legenda: ✅ feito · 🟡 depende de ação externa · ⬜ pendente
 | [ OT-0045 ] | Reorganizar a arquitetura: mesmo nome de feature em todas as camadas (focus→today, auth→login, notifications→settings) e DI separada por tela (login, register, session, shell) | ✅ |
 | [ OT-0033 ] | Testar em aparelho/emulador Android e iOS com Firebase real | 🟡 |
 | [ OT-0034 ] | Validar a paleta do tema escuro com o designer (paleta derivada, não existe no Figma/Stitch; contraste medido e texto de exemplo dos campos ajustado para 4,5:1) | 🟡 |
-
-Achados do design: [`../design-review.md`](../design-review.md).

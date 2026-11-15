@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/icone.png" alt="Ícone do OneTick" width="120" />
+<img src=".github/images/icone.png" alt="Ícone do OneTick" width="120" />
 
 # OneTick
 
@@ -18,7 +18,7 @@
 ![Cubit](https://img.shields.io/badge/Estado-Cubit-0468D7)
 ![Testes](https://img.shields.io/badge/testes-139_passando-17B26A)
 
-![Telas do aplicativo](docs/images/telas.png)
+![Telas do aplicativo](.github/images/telas.png)
 
 </div>
 
@@ -35,7 +35,6 @@ Aplicativo de foco diário. Em vez de listas intermináveis, o usuário define *
 | Design no Google Stitch | [OneTick — Stitch](https://stitch.withgoogle.com/projects/3290547221674662054) |
 | Design no Figma (levado do Stitch) | [onetick](https://www.figma.com/design/VkOOGKJqZLH9TUwbwAQUUE/onetick) |
 | Tarefas | [`docs/tasks/BOARD.md`](docs/tasks/BOARD.md) |
-| Revisão do design | [`docs/design-review.md`](docs/design-review.md) |
 | Configurar o Firebase | [`docs/setup/firebase.md`](docs/setup/firebase.md) |
 
 ## O que tem no app
