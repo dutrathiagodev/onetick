@@ -9,6 +9,7 @@ import '../../../presenter/shell/shell_cubit.dart';
 import '../../../presenter/today/today_cubit.dart';
 import '../../../presenter/today/today_state.dart';
 import '../../define_focus/page/define_focus_page.dart';
+import '../widgets/new_day_watcher.dart';
 import 'view/today_completed_view.dart';
 import 'view/today_empty_view.dart';
 import 'view/today_error_view.dart';
@@ -38,7 +39,7 @@ class TodayPage extends StatelessWidget {
     setupTodayDependencies();
     return BlocProvider<TodayCubit>(
       create: (_) => getIt<TodayCubit>()..load(),
-      child: _NewDayWatcher(
+      child: NewDayWatcher(
         child: BlocConsumer<TodayCubit, TodayState>(
           listenWhen: (previous, current) =>
               _noticeOf(current) != null &&
@@ -87,36 +88,4 @@ class TodayPage extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Coming back to the app on a new day (it stayed in the background
-/// overnight) reloads Today instead of showing yesterday's focus.
-class _NewDayWatcher extends StatefulWidget {
-  const _NewDayWatcher({required this.child});
-
-  final Widget child;
-
-  @override
-  State<_NewDayWatcher> createState() => _NewDayWatcherState();
-}
-
-class _NewDayWatcherState extends State<_NewDayWatcher> {
-  late final AppLifecycleListener _lifecycle = AppLifecycleListener(
-    onResume: () => context.read<TodayCubit>().refreshIfNewDay(),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _lifecycle;
-  }
-
-  @override
-  void dispose() {
-    _lifecycle.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => widget.child;
 }

@@ -34,3 +34,13 @@ Referências: política de exclusão de conta da Google Play, diretriz 5.1.1(v) 
 ## Contraste do tema escuro (OT-0034)
 
 O tema escuro não existe no Stitch nem no Figma: a paleta (`AppColors.dark`) foi derivada da clara e da marca. Contraste medido (WCAG, mínimo 4,5:1 para texto): texto principal 15,4; secundário 7,9; fraco 5,2; verde da marca 10,9; selo menta 7,4; vermelho 10,0. O texto de exemplo dos campos estava em 3,8 e foi clareado para `#9094A0` (5,0 no campo). No tema claro esse texto (`#9CA3AF`, 2,3 a 2,5) vem do Stitch e foi mantido pela fidelidade ao design. Falta o designer aprovar a paleta escura.
+
+## Onboarding e componentes nativos no iOS (OT-0043)
+
+- **Contador "1 DE 3" removido do Onboarding.** Repetia o que os pontos acima do botão já mostram (o ponto largo é o passo atual). O passo continua acessível para leitor de tela ("Passo 2 de 3").
+- **No iOS o app usa o componente nativo** em três lugares; no Android continua igual ao Stitch:
+  - Interruptor do lembrete: `CupertinoSwitch` (no Android, a pílula do design).
+  - Confirmações (limpar histórico, excluir conta): `CupertinoAlertDialog`.
+  - Horário do lembrete: roda de horas do iOS em vez do relógio do Material.
+- **Ainda pendente para publicar no iOS:** "Entrar com a Apple" (diretriz 4.8 da App Store, porque há login com Google) e teste em aparelho/simulador, que exige Mac.
+

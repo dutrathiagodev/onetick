@@ -1,4 +1,4 @@
-import '../../../domain/onboarding/entities/onboarding_slide.dart';
+import '../../../domain/onboarding/entities/onboarding_slide_entity.dart';
 import '../../../domain/onboarding/repositories/onboarding_repository.dart';
 import '../../../infra/adapters/onboarding/onboarding_local_adapter.dart';
 

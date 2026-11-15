@@ -2,8 +2,8 @@ import '../../../core/utils/date_utils.dart';
 import '../../focus/entities/focus_entity.dart';
 import '../../focus/usecases/get_streak_use_case.dart';
 import '../../focus/usecases/streak_calculator.dart';
-import '../entities/history_day.dart';
-import '../entities/history_overview.dart';
+import '../entities/history_day_entity.dart';
+import '../entities/history_overview_entity.dart';
 import '../repositories/history_repository.dart';
 
 class GetHistoryOverviewUseCase {

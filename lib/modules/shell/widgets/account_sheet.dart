@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../presenter/session/session_cubit.dart';
 import '../../../presenter/session/session_state.dart';
 
 /// Bottom sheet opened by the avatar button: who is signed in + sign out.
-Future<void> showAccountSheet(BuildContext context) {
-  final session = context.read<SessionCubit>();
+Future<void> showAccountSheet(
+  BuildContext context, {
+  required SessionState state,
+  required Future<void> Function() onSignOut,
+}) {
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
     backgroundColor: context.colors.surface,
     builder: (sheetContext) => _AccountSheet(
-      state: session.state,
+      state: state,
       onSignOut: () async {
         Navigator.of(sheetContext).pop();
-        await session.signOut();
+        await onSignOut();
       },
     ),
   );

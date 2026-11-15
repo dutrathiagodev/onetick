@@ -1,4 +1,4 @@
-import '../../../domain/onboarding/entities/onboarding_slide.dart';
+import '../../../domain/onboarding/entities/onboarding_slide_entity.dart';
 
 class OnboardingSlideModel {
   const OnboardingSlideModel({

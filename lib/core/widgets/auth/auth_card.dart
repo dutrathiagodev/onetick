@@ -24,7 +24,7 @@ class AuthCard extends StatelessWidget {
             : Border.all(color: colors.inverse.withValues(alpha: 0.05)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0D000000),
+            color: AppColors.shadow,
             blurRadius: 1,
             offset: Offset(0, 1),
           ),

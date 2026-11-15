@@ -43,13 +43,13 @@ class CompleteButton extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x1A000000),
+                    color: AppColors.shadowStrong,
                     blurRadius: 6,
                     offset: Offset(0, 4),
                     spreadRadius: -1,
                   ),
                   BoxShadow(
-                    color: Color(0x1A000000),
+                    color: AppColors.shadowStrong,
                     blurRadius: 4,
                     offset: Offset(0, 2),
                     spreadRadius: -2,

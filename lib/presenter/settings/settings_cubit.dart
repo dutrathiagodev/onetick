@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/failures.dart';
-import '../../domain/settings/entities/app_settings.dart';
+import '../../domain/settings/entities/app_settings_entity.dart';
 import '../../domain/settings/usecases/clear_history_use_case.dart';
 import '../../domain/settings/usecases/delete_account_use_case.dart';
 import '../../domain/settings/usecases/get_settings_use_case.dart';

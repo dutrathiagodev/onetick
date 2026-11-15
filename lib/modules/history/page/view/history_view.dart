@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../domain/history/entities/history_overview.dart';
+import '../../../../domain/history/entities/history_overview_entity.dart';
 import '../../widgets/history_calendar_card.dart';
 import '../../widgets/history_header.dart';
 import '../../widgets/history_note_tile.dart';

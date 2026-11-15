@@ -112,6 +112,6 @@ A logo (anel + tick) e o ícone do app para Android, iOS e web são gerados por 
 | | |
 |---|---|
 | [@dutrathiagodev](https://github.com/dutrathiagodev) | Projeto, arquitetura, telas em Flutter, Firebase, testes e documentação |
-| [@rarydex](https://github.com/rarydex) | Design das telas no Google Stitch, levado para o Figma |
+| | Design das telas no Google Stitch e no Figma |
 
 O trabalho segue o design criado no Stitch e levado ao Figma e está dividido em demandas `OT-xxxx`, listadas em [`docs/tasks/BOARD.md`](docs/tasks/BOARD.md).

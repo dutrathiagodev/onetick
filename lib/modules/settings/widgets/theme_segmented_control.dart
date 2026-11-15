@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../domain/settings/entities/app_settings.dart';
+import '../../../domain/settings/entities/app_settings_entity.dart';
 
 /// "Claro | Escuro" pill segmented control.
 class ThemeSegmentedControl extends StatelessWidget {
@@ -77,7 +77,7 @@ class _Segment extends StatelessWidget {
             boxShadow: selected
                 ? const [
                     BoxShadow(
-                      color: Color(0x0D000000),
+                      color: AppColors.shadow,
                       blurRadius: 1,
                       offset: Offset(0, 1),
                     ),

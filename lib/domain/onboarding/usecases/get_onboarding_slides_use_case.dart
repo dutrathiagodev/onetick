@@ -1,4 +1,4 @@
-import '../entities/onboarding_slide.dart';
+import '../entities/onboarding_slide_entity.dart';
 import '../repositories/onboarding_repository.dart';
 
 class GetOnboardingSlidesUseCase {

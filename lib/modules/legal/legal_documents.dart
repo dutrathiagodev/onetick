@@ -6,7 +6,7 @@ enum LegalDocument {
     sections: [
       (
         'Quem somos',
-        'O OneTick é um app de foco diário criado por Thiago Dutra e Rennan '
+        'O OneTick é um app de foco diário criado por Thiago Dutra '
             'como projeto da Lifeados Academy. Esta política explica quais '
             'dados o app usa e por quê, conforme a Lei Geral de Proteção de '
             'Dados (Lei 13.709/2018).',

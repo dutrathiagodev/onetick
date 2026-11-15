@@ -41,7 +41,7 @@ class HistoryHeader extends StatelessWidget {
             shape: const StadiumBorder(),
             shadows: const [
               BoxShadow(
-                color: Color(0x0D000000),
+                color: AppColors.shadow,
                 blurRadius: 1,
                 offset: Offset(0, 1),
               ),

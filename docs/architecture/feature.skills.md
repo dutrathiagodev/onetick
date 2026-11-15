@@ -118,14 +118,6 @@ lib/
 - Sem erro no flutter analyze
 - Testes passando
 
-## Scaffold automatico
+## Checklist de nova feature
 
-Para gerar uma base padrao de nova feature:
-
-```bash
-scripts/create_feature.sh <feature_name_em_snake_case>
-```
-
-Documentacao detalhada:
-
-- [Template de scaffold](feature.template.md)
+- [Template (checklist)](feature.template.md)

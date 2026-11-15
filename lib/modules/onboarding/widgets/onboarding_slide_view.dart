@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../domain/onboarding/entities/onboarding_slide.dart';
+import '../../../domain/onboarding/entities/onboarding_slide_entity.dart';
 import 'onboarding_art_celebrate.dart';
 import 'onboarding_art_less_noise.dart';
 import 'onboarding_art_one_priority.dart';

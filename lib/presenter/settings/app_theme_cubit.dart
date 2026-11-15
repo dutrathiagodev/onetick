@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/settings/entities/app_settings.dart';
+import '../../domain/settings/entities/app_settings_entity.dart';
 import '../../domain/settings/usecases/get_settings_use_case.dart';
 
 /// App-wide [ThemeMode], restored from the user's saved preferences.

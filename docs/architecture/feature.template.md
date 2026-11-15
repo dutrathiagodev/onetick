@@ -1,41 +1,26 @@
-# Feature Template (Scaffold)
+# Feature Template (Checklist)
 
-Use este scaffold para gerar uma nova feature no padrao Clean Arch + Cubit.
+Use esta lista para criar uma nova feature no padrao Clean Arch + Cubit. A feature `today` e a referencia: copie a estrutura dela e adapte os nomes.
 
-## Comando
+## O que criar
 
-No root do projeto:
-
-```bash
-scripts/create_feature.sh <feature_name_em_snake_case>
-```
-
-Exemplo:
-
-```bash
-scripts/create_feature.sh customers
-```
-
-## O que o script cria
-
-- domain/<feature> (entity, repository, usecase)
-- data/<feature> (model, repository_impl)
-- infra/adapters/<feature> (mock adapter)
+- domain/<feature> (entities, repositories, usecases)
+- data/<feature> (models, repositories com `_repository_impl`)
+- infra/adapters/<feature> (adapter remoto + versao em memoria)
 - presenter/<feature> (cubit + state)
 - modules/<feature>/page + modules/<feature>/page/view
 - modules/<feature>/widgets
 - main/di/screens/<feature>\_dependencies.dart
 
-## Passos obrigatorios apos gerar
+## Passos obrigatorios
 
 1. Registrar o setup da feature em lib/main/di/app_dependencies.dart
-2. Conectar a page na navegacao/rota desejada
-3. Adaptar entidades e regras para o dominio real
+2. Fazer a page chamar `setup<Feature>Dependencies()`
+3. Conectar a page na navegacao/rota desejada
 4. Criar/ajustar testes da feature
 5. Rodar flutter analyze e flutter test
 
 ## Observacoes
 
-- O scaffold gera uma base funcional, mas propositalmente simples.
-- Ajuste naming e contratos conforme o contexto da feature.
 - Mantenha page como orquestradora de estados e view como renderizacao de sucesso.
+- Telas de formulario (login, cadastro) nao precisam de view de vazio.

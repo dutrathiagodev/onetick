@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/dot_pill.dart';
 
+/// Top row of the onboarding: only the "Pular" link. The step is shown by the
+/// dots above the CTA, so a "1 DE 3" badge would repeat the same information.
 class OnboardingHeader extends StatelessWidget {
-  const OnboardingHeader({
-    super.key,
-    required this.current,
-    required this.total,
-    required this.onSkip,
-  });
+  const OnboardingHeader({super.key, required this.onSkip});
 
-  final int current;
-  final int total;
   final VoidCallback onSkip;
 
   @override
@@ -21,32 +15,20 @@ class OnboardingHeader extends StatelessWidget {
     final colors = context.colors;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          DotPill(
-            label: '$current DE $total',
-            background: colors.surfaceMuted,
-            textStyle: AppTextStyles.caption.copyWith(
-              color: colors.text,
-              letterSpacing: 1.1,
-            ),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: TextButton(
+          onPressed: onSkip,
+          style: TextButton.styleFrom(
+            minimumSize: const Size(48, 40),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            shape: const StadiumBorder(),
           ),
-          TextButton(
-            onPressed: onSkip,
-            style: TextButton.styleFrom(
-              minimumSize: const Size(48, 40),
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              shape: const StadiumBorder(),
-            ),
-            child: Text(
-              'Pular',
-              style: AppTextStyles.labelMedium.copyWith(
-                color: colors.textMuted,
-              ),
-            ),
+          child: Text(
+            'Pular',
+            style: AppTextStyles.labelMedium.copyWith(color: colors.textMuted),
           ),
-        ],
+        ),
       ),
     );
   }

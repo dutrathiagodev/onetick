@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'history_day.dart';
+import 'history_day_entity.dart';
 
 class HistoryOverview extends Equatable {
   const HistoryOverview({

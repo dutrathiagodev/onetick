@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/history/entities/history_overview.dart';
+import '../../domain/history/entities/history_overview_entity.dart';
 
 sealed class HistoryState extends Equatable {
   const HistoryState();

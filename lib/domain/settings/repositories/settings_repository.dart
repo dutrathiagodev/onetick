@@ -1,4 +1,4 @@
-import '../entities/app_settings.dart';
+import '../entities/app_settings_entity.dart';
 
 abstract interface class SettingsRepository {
   Future<AppSettings> load();

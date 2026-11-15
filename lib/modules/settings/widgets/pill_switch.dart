@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart' show CupertinoSwitch;
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -18,6 +20,18 @@ class PillSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    // On iOS the native switch (UISwitch look) is used; Android keeps the
+    // pill from the design.
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return Semantics(
+        label: semanticsLabel,
+        child: CupertinoSwitch(
+          value: value,
+          onChanged: onChanged,
+          activeTrackColor: colors.brand,
+        ),
+      );
+    }
     return Semantics(
       toggled: value,
       label: semanticsLabel,
@@ -43,7 +57,7 @@ class PillSwitch extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x0D000000),
+                  color: AppColors.shadow,
                   blurRadius: 2,
                   offset: Offset(0, 1),
                 ),

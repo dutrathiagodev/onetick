@@ -1,4 +1,4 @@
-import '../../../domain/settings/entities/app_settings.dart';
+import '../../../domain/settings/entities/app_settings_entity.dart';
 import '../../../domain/settings/repositories/settings_repository.dart';
 import '../../../infra/adapters/focus/focus_remote_adapter.dart';
 import '../../../infra/adapters/settings/settings_remote_adapter.dart';

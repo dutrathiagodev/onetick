@@ -32,7 +32,11 @@ class DefineFocusPage extends StatelessWidget {
           return Scaffold(
             appBar: DefineFocusHeader(
               onBack: () => Navigator.of(context).maybePop(),
-              onAvatar: () => showAccountSheet(context),
+              onAvatar: () => showAccountSheet(
+                context,
+                state: getIt<SessionCubit>().state,
+                onSignOut: getIt<SessionCubit>().signOut,
+              ),
               photoUrl: getIt<SessionCubit>().photoUrl,
             ),
             body: switch (state) {

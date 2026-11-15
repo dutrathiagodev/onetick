@@ -29,22 +29,27 @@ class OnboardingFooter extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (var i = 0; i < count; i++)
-                AnimatedContainer(
-                  key: Key('onboarding_dot_$i'),
-                  duration: const Duration(milliseconds: 200),
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: i == index ? 28 : 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: i == index ? colors.inverse : colors.surfaceStronger,
-                    borderRadius: BorderRadius.circular(9999),
+          Semantics(
+            label: 'Passo ${index + 1} de $count',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (var i = 0; i < count; i++)
+                  AnimatedContainer(
+                    key: Key('onboarding_dot_$i'),
+                    duration: const Duration(milliseconds: 200),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: i == index ? 28 : 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: i == index
+                          ? colors.inverse
+                          : colors.surfaceStronger,
+                      borderRadius: BorderRadius.circular(9999),
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           PrimaryPillButton(

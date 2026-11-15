@@ -6,6 +6,12 @@ import 'package:flutter/material.dart';
 /// has no dark frames) and keep the same semantic roles.
 @immutable
 class AppColors extends ThemeExtension<AppColors> {
+  /// Soft card shadow, the same in light and dark.
+  static const Color shadow = Color(0x0D000000);
+
+  /// Stronger shadow used by the complete button and onboarding art.
+  static const Color shadowStrong = Color(0x1A000000);
+
   const AppColors({
     required this.background,
     required this.surface,

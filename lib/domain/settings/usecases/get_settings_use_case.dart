@@ -1,4 +1,4 @@
-import '../entities/app_settings.dart';
+import '../entities/app_settings_entity.dart';
 import '../repositories/settings_repository.dart';
 
 class GetSettingsUseCase {

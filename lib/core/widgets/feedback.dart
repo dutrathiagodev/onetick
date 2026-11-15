@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart'
+    show CupertinoAlertDialog, CupertinoDialogAction;
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
@@ -20,6 +23,30 @@ Future<bool> showDangerConfirm(
   required String keyPrefix,
 }) async {
   final colors = context.colors;
+  if (defaultTargetPlatform == TargetPlatform.iOS) {
+    // Native iOS alert: stacked actions, destructive one in red.
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          CupertinoDialogAction(
+            key: Key('${keyPrefix}_cancel'),
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Cancelar'),
+          ),
+          CupertinoDialogAction(
+            key: Key('${keyPrefix}_confirm'),
+            isDestructiveAction: true,
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(action),
+          ),
+        ],
+      ),
+    );
+    return confirmed ?? false;
+  }
   final confirmed = await showDialog<bool>(
     context: context,
     builder: (dialogContext) => AlertDialog(

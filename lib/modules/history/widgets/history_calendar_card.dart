@@ -6,7 +6,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/app_icon.dart';
-import '../../../domain/history/entities/history_overview.dart';
+import '../../../domain/history/entities/history_overview_entity.dart';
 
 /// Month calendar with completed days highlighted and month navigation.
 class HistoryCalendarCard extends StatelessWidget {
@@ -168,7 +168,7 @@ class _DayCell extends StatelessWidget {
           boxShadow: [
             if (completed)
               const BoxShadow(
-                color: Color(0x0D000000),
+                color: AppColors.shadow,
                 blurRadius: 1,
                 offset: Offset(0, 1),
               ),

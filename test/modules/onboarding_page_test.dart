@@ -26,22 +26,29 @@ void main() {
     await settle(tester);
   }
 
+  /// The active dot is the wide one (28 px); the others are 8 px.
+  int activeDot(WidgetTester tester) => [
+    for (var i = 0; i < 3; i++)
+      if (tester.getSize(find.byKey(Key('onboarding_dot_$i'))).width > 20) i,
+  ].single;
+
   testWidgets('walks through the 3 slides and finishes on the last CTA', (
     tester,
   ) async {
     await pumpPage(tester);
-    expect(find.text('1 DE 3'), findsOneWidget);
+    expect(activeDot(tester), 0);
     expect(find.text('Menos ruído, mais foco'), findsOneWidget);
     expect(find.text('Avançar'), findsOneWidget);
 
     await tester.tap(find.text('Avançar'));
     await settle(tester);
-    expect(find.text('2 DE 3'), findsOneWidget);
+    expect(activeDot(tester), 1);
     expect(find.text('Apenas uma prioridade'), findsOneWidget);
 
     await tester.tap(find.text('Avançar'));
     await settle(tester);
-    expect(find.text('3 DE 3'), findsOneWidget);
+    expect(activeDot(tester), 2);
+    expect(find.text('1 DE 3'), findsNothing);
     expect(find.text('Celebre o dia concluído'), findsOneWidget);
     expect(find.text('Começar agora'), findsOneWidget);
     expect(calls, isEmpty);
@@ -50,11 +57,11 @@ void main() {
     expect(calls, ['finish']);
   });
 
-  testWidgets('swiping updates the counter', (tester) async {
+  testWidgets('swiping moves the active dot', (tester) async {
     await pumpPage(tester);
     await tester.drag(find.byType(PageView), const Offset(-300, 0));
     await settle(tester);
-    expect(find.text('2 DE 3'), findsOneWidget);
+    expect(activeDot(tester), 1);
   });
 
   testWidgets('skip and login links call back', (tester) async {

@@ -33,7 +33,11 @@ class ShellPage extends StatelessWidget {
               children: [
                 AppTopBar(
                   section: _sections[tab]!,
-                  onAvatarPressed: () => showAccountSheet(context),
+                  onAvatarPressed: () => showAccountSheet(
+                    context,
+                    state: getIt<SessionCubit>().state,
+                    onSignOut: getIt<SessionCubit>().signOut,
+                  ),
                   photoUrl: getIt<SessionCubit>().photoUrl,
                 ),
                 Expanded(

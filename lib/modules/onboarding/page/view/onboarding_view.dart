@@ -55,11 +55,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            OnboardingHeader(
-              current: state.index + 1,
-              total: state.slides.length,
-              onSkip: widget.onSkip,
-            ),
+            OnboardingHeader(onSkip: widget.onSkip),
             Expanded(
               child: PageView.builder(
                 controller: _controller,

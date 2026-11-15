@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/settings/entities/app_settings.dart';
+import '../../domain/settings/entities/app_settings_entity.dart';
 
 sealed class SettingsState extends Equatable {
   const SettingsState();

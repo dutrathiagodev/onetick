@@ -1,4 +1,4 @@
-import '../../../domain/settings/entities/app_settings.dart';
+import '../../../domain/settings/entities/app_settings_entity.dart';
 
 class SettingsModel {
   const SettingsModel({

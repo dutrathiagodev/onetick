@@ -6,7 +6,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/widgets/app_card.dart';
 import '../../../core/widgets/app_icon.dart';
-import '../../../domain/history/entities/history_overview.dart';
+import '../../../domain/history/entities/history_overview_entity.dart';
 
 /// "Conclusões" and "Taxa de Sucesso" cards.
 class HistoryStatsRow extends StatelessWidget {

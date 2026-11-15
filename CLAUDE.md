@@ -11,7 +11,7 @@ Leia este arquivo primeiro. Ele resume o que o projeto é, como está organizado
 ## Pessoas e links
 
 - Dono: **Thiago Dutra**, GitHub `dutrathiagodev` (e-mail do git: thiagodutrasap@gmail.com).
-- Dupla: **Rennan**, GitHub `rarydex` (convite de colaborador pendente). Fez o design no **Google Stitch** e levou para o Figma.
+- O design no **Google Stitch** e no Figma também é do dono; o Rennan (`rarydex`) não participou, então os créditos são só do Thiago.
 - Repositório (público): https://github.com/dutrathiagodev/onetick
 - Stitch: https://stitch.withgoogle.com/projects/3290547221674662054 (referência de avaliação)
 - Figma: https://www.figma.com/design/VkOOGKJqZLH9TUwbwAQUUE/onetick
@@ -61,7 +61,7 @@ Sem Firebase configurado o app roda em **modo local** (dados em memória; faixa 
 ## Pendências (por impacto na nota)
 
 1. Testar no iOS (OT-0033, precisa de Mac/Xcode); validar paleta do tema escuro com o designer (OT-0034).
-2. Ensaiar a apresentação (os dois integrantes, Stitch aberto, explicar arquitetura e dificuldades).
+2. Ensaiar a apresentação (Stitch aberto, explicar arquitetura e dificuldades).
 
 ## Convenções do dono (siga)
 

@@ -5,7 +5,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_icon.dart';
 import '../../../../core/widgets/feedback.dart';
-import '../../../../domain/settings/entities/app_settings.dart';
+import '../../../../core/widgets/reminder_time_picker.dart';
+import '../../../../domain/settings/entities/app_settings_entity.dart';
 import '../../../legal/legal_documents.dart';
 import '../../widgets/about_card.dart';
 import '../../widgets/settings_banner.dart';
@@ -39,15 +40,13 @@ class SettingsView extends StatelessWidget {
   final ValueChanged<LegalDocument> onOpenLegal;
 
   Future<void> _pickTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay(
+    final picked = await pickTimeOfDay(
+      context,
+      initial: TimeOfDay(
         hour: settings.reminderHour,
         minute: settings.reminderMinute,
       ),
-      helpText: 'Horário preferido',
-      cancelText: 'Cancelar',
-      confirmText: 'Confirmar',
+      title: 'Horário preferido',
     );
     if (picked != null) onReminderTimeChanged(picked.hour, picked.minute);
   }

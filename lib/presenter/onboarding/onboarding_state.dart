@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/onboarding/entities/onboarding_slide.dart';
+import '../../domain/onboarding/entities/onboarding_slide_entity.dart';
 
 sealed class OnboardingState extends Equatable {
   const OnboardingState();

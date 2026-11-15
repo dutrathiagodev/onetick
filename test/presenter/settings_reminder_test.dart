@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:onetick/domain/settings/entities/app_settings.dart';
+import 'package:onetick/domain/settings/entities/app_settings_entity.dart';
 import 'package:onetick/domain/settings/repositories/reminder_scheduler.dart';
 import 'package:onetick/domain/settings/repositories/settings_repository.dart';
 import 'package:onetick/domain/settings/usecases/sync_reminder_use_case.dart';

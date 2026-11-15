@@ -41,7 +41,7 @@ class PrimaryPillButton extends StatelessWidget {
           color: colors.inverse,
           shape: const StadiumBorder(),
           elevation: 1,
-          shadowColor: const Color(0x0D000000),
+          shadowColor: AppColors.shadow,
           child: InkWell(
             customBorder: const StadiumBorder(),
             onTap: enabled ? onPressed : null,
