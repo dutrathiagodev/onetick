@@ -6,6 +6,7 @@
 
 **Um foco essencial por dia: escolha uma única tarefa, conclua com calma e acompanhe sua constância.**
 
+[![Baixar APK](https://img.shields.io/badge/Android-baixar_APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/dutrathiagodev/onetick/releases/latest/download/OneTick-v1.0.0.apk)
 ![Google Play](https://img.shields.io/badge/Google_Play-em_breve-000000?style=for-the-badge&logo=googleplay&logoColor=white)
 ![App Store](https://img.shields.io/badge/App_Store-em_breve-000000?style=for-the-badge&logo=apple&logoColor=white)
 
@@ -15,7 +16,7 @@
 ![Dart](https://img.shields.io/badge/Dart-3.13-0175C2?logo=dart&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-Auth_%2B_Firestore-FFCA28?logo=firebase&logoColor=black)
 ![Cubit](https://img.shields.io/badge/Estado-Cubit-0468D7)
-![Testes](https://img.shields.io/badge/testes-100_passando-17B26A)
+![Testes](https://img.shields.io/badge/testes-139_passando-17B26A)
 
 ![Telas do aplicativo](docs/images/telas.png)
 
@@ -29,7 +30,7 @@ Aplicativo de foco diário. Em vez de listas intermináveis, o usuário define *
 
 | | |
 |---|---|
-| Android | Google Play — em breve (por enquanto, rodar via `flutter run`) |
+| Android | [Baixar o APK (v1.0.0)](https://github.com/dutrathiagodev/onetick/releases/latest/download/OneTick-v1.0.0.apk) · [todas as versões](https://github.com/dutrathiagodev/onetick/releases) · Google Play em breve |
 | iOS | App Store — em breve (por enquanto, rodar via `flutter run`) |
 | Design no Google Stitch | [OneTick — Stitch](https://stitch.withgoogle.com/projects/3290547221674662054) |
 | Design no Figma (levado do Stitch) | [onetick](https://www.figma.com/design/VkOOGKJqZLH9TUwbwAQUUE/onetick) |
@@ -111,7 +112,6 @@ A logo (anel + tick) e o ícone do app para Android, iOS e web são gerados por 
 
 | | |
 |---|---|
-| [@dutrathiagodev](https://github.com/dutrathiagodev) | Projeto, arquitetura, telas em Flutter, Firebase, testes e documentação |
-| | Design das telas no Google Stitch e no Figma |
+| [@dutrathiagodev](https://github.com/dutrathiagodev) | Projeto completo: design das telas no Google Stitch e no Figma, arquitetura, telas em Flutter, Firebase, testes e documentação |
 
 O trabalho segue o design criado no Stitch e levado ao Figma e está dividido em demandas `OT-xxxx`, listadas em [`docs/tasks/BOARD.md`](docs/tasks/BOARD.md).
